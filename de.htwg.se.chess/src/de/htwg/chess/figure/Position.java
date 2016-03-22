@@ -1,19 +1,20 @@
 package de.htwg.chess.figure;
 
 public final class Position {
-	char x;
-	int y;
+	private char x;
+	private int y;
 	
 	public Position(char x, int y) {
 		setPosition(x, y);
 	}
 	
-	public void setPosition(char x, int y) {
+	public boolean setPosition(char x, int y) {
 		if (x < 'A' || x > 'H' || y < 1 || y > 8) {
-			throw new IllegalArgumentException(x + y + " is not a valid position.");
+			return false;
 		}
 		this.x = x;
 		this.y = y;
+		return true;
 	}
 	
 	public Position getPosition() {
@@ -24,16 +25,16 @@ public final class Position {
 		return x;
 	}
 
-	public void setX(char x) {
-		this.x = x;
+	public boolean setX(char x) {
+		return setPosition(x, this.y);
 	}
 
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public boolean setY(int y) {
+		return setPosition(this.x, y);
 	}
 	
 	@Override 
