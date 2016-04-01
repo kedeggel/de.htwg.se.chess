@@ -6,6 +6,8 @@ public final class Position {
 	private Chesspiece cp;
 
 	public Position(char x, int y) {
+		if (!setPosition(x, y))
+			throw new IllegalArgumentException(x + y + " is not a valid Position");
 		setPosition(x, y);
 	}
 
@@ -16,10 +18,6 @@ public final class Position {
 		this.x = x;
 		this.y = y;
 		return true;
-	}
-
-	public Position getPosition() {
-		return this;
 	}
 
 	public char getX() {

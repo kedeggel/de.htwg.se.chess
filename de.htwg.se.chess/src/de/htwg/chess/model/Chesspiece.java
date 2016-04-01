@@ -24,7 +24,7 @@ public abstract class Chesspiece {
 				break;
 			}
 		}
-	};
+	}
 
 	public void setPosition(Position pos) {
 		if (player == pos.getChesspiece().getPlayer())
