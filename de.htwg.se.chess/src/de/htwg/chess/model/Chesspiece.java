@@ -5,13 +5,13 @@ import java.util.List;
 public abstract class Chesspiece {
 
 	protected String name;
-	protected String color;
+	protected Player player;
 	protected Position position;
 	protected int drawCount;
 
-	public Chesspiece(String name, String color, Position position) {
+	public Chesspiece(String name, Player player, Position position) {
 		this.name = name;
-		this.color = color;
+		this.player = player;
 		this.position = position;
 		this.drawCount = 0;
 	}
@@ -27,14 +27,18 @@ public abstract class Chesspiece {
 	};
 
 	public void setPosition(Position pos) {
-		if (color.equals(pos.getChesspiece().getColor()))
+		if (player == pos.getChesspiece().getPlayer())
 			return; // field is occupied by a other-colored piece
 		this.position = pos;
 		pos.setChesspiece(this);
 	}
 
 	public String getColor() {
-		return color;
+		return player.getColor();
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 	public Position getPosition() {
@@ -44,6 +48,6 @@ public abstract class Chesspiece {
 	public abstract List<Position> possibleMoves();
 
 	public String toString() {
-		return name + " " + color + " " + position + " " + "DrawCount: " + drawCount;
+		return name + " " + getColor() + " " + position + " " + "DrawCount: " + drawCount;
 	}
 }
