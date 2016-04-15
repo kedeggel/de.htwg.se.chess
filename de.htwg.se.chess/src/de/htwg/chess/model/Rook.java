@@ -3,11 +3,13 @@ package de.htwg.chess.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.htwg.chess.Chess;
+
 public final class Rook extends Chesspiece {
 	private MoveChecker checker;
 
-	public Rook(String name, Player player, Position position) {
-		super(name, player, position);
+	public Rook(String name, Player player, Position position, Chess chess) {
+		super(name, player, position, chess);
 	}
 
 	@Override

@@ -5,26 +5,29 @@ import static de.htwg.chess.model.FieldConstants.*;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.htwg.chess.Chess;
+
+
 public class Player {
 	private String color;
-	private Position[][] board;
+	private Chess chess;
 	private List<Chesspiece> pieceList;
 
-	public Player(String color, Chessboard chessboard) {
+	public Player(String color, Chess chess) {
 		this.color = color;
-		this.board = chessboard.getChessboard();
+		Position[][] board_matrix = chess.getChessboard();
 		pieceList = new LinkedList<>();
 		if (color.equals("white")) {
-			Chesspiece pawn_w_1 = new Pawn("Pawn1", this, board[A][TWO]);
-			Chesspiece pawn_w_2 = new Pawn("Pawn2", this, board[B][TWO]);
-			Chesspiece pawn_w_3 = new Pawn("Pawn3", this, board[C][TWO]);
-			Chesspiece pawn_w_4 = new Pawn("Pawn4", this, board[D][TWO]);
-			Chesspiece pawn_w_5 = new Pawn("Pawn5", this, board[E][TWO]);
-			Chesspiece pawn_w_6 = new Pawn("Pawn6", this, board[F][TWO]);
-			Chesspiece pawn_w_7 = new Pawn("Pawn7", this, board[G][TWO]);
-			Chesspiece pawn_w_8 = new Pawn("Pawn8", this, board[H][TWO]);
-			Chesspiece rook_w_1 = new Rook("Rook1", this, board[A][ONE]);
-			Chesspiece rook_w_2 = new Rook("Rook2", this, board[H][ONE]);
+			Chesspiece pawn_w_1 = new Pawn("Pawn1", this, board_matrix[A][TWO], chess);
+			Chesspiece pawn_w_2 = new Pawn("Pawn2", this, board_matrix[B][TWO], chess);
+			Chesspiece pawn_w_3 = new Pawn("Pawn3", this, board_matrix[C][TWO], chess);
+			Chesspiece pawn_w_4 = new Pawn("Pawn4", this, board_matrix[D][TWO], chess);
+			Chesspiece pawn_w_5 = new Pawn("Pawn5", this, board_matrix[E][TWO], chess);
+			Chesspiece pawn_w_6 = new Pawn("Pawn6", this, board_matrix[F][TWO], chess);
+			Chesspiece pawn_w_7 = new Pawn("Pawn7", this, board_matrix[G][TWO], chess);
+			Chesspiece pawn_w_8 = new Pawn("Pawn8", this, board_matrix[H][TWO], chess);
+			Chesspiece rook_w_1 = new Rook("Rook1", this, board_matrix[A][ONE], chess);
+			Chesspiece rook_w_2 = new Rook("Rook2", this, board_matrix[H][ONE], chess);
 
 			pieceList.add(pawn_w_1);
 			pieceList.add(pawn_w_2);
@@ -37,17 +40,17 @@ public class Player {
 			pieceList.add(rook_w_1);
 			pieceList.add(rook_w_2);
 		} else if (color.equals("black")) {
-			Chesspiece pawn_b_1 = new Pawn("Pawn1", this, board[A][SEVEN]);
-			Chesspiece pawn_b_2 = new Pawn("Pawn2", this, board[B][SEVEN]);
-			Chesspiece pawn_b_3 = new Pawn("Pawn3", this, board[C][SEVEN]);
-			Chesspiece pawn_b_4 = new Pawn("Pawn4", this, board[D][SEVEN]);
-			Chesspiece pawn_b_5 = new Pawn("Pawn5", this, board[E][SEVEN]);
-			Chesspiece pawn_b_6 = new Pawn("Pawn6", this, board[F][SEVEN]);
-			Chesspiece pawn_b_7 = new Pawn("Pawn7", this, board[G][SEVEN]);
-			Chesspiece pawn_b_8 = new Pawn("Pawn8", this, board[H][SEVEN]);
-			Chesspiece rook_b_1 = new Rook("Rook1", this, board[A][EIGHT]);
-			Chesspiece rook_b_2 = new Rook("Rook2", this, board[H][EIGHT]);
-			
+			Chesspiece pawn_b_1 = new Pawn("Pawn1", this, board_matrix[A][SEVEN], chess);
+			Chesspiece pawn_b_2 = new Pawn("Pawn2", this, board_matrix[B][SEVEN], chess);
+			Chesspiece pawn_b_3 = new Pawn("Pawn3", this, board_matrix[C][SEVEN], chess);
+			Chesspiece pawn_b_4 = new Pawn("Pawn4", this, board_matrix[D][SEVEN], chess);
+			Chesspiece pawn_b_5 = new Pawn("Pawn5", this, board_matrix[E][SEVEN], chess);
+			Chesspiece pawn_b_6 = new Pawn("Pawn6", this, board_matrix[F][SEVEN], chess);
+			Chesspiece pawn_b_7 = new Pawn("Pawn7", this, board_matrix[G][SEVEN], chess);
+			Chesspiece pawn_b_8 = new Pawn("Pawn8", this, board_matrix[H][SEVEN], chess);
+			Chesspiece rook_b_1 = new Rook("Rook1", this, board_matrix[A][EIGHT], chess);
+			Chesspiece rook_b_2 = new Rook("Rook2", this, board_matrix[H][EIGHT], chess);
+
 			pieceList.add(pawn_b_1);
 			pieceList.add(pawn_b_2);
 			pieceList.add(pawn_b_3);

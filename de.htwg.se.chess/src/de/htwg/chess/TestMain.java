@@ -1,17 +1,26 @@
-package de.htwg.chess.model;
+package de.htwg.chess;
+
+import static de.htwg.chess.model.FieldConstants.D;
+import static de.htwg.chess.model.FieldConstants.FIVE;
+
+import de.htwg.chess.model.Chesspiece;
+import de.htwg.chess.model.Position;
+import de.htwg.chess.model.Rook;
 
 public class TestMain {
 
 	public static void main(String[] args) {
-		Chessboard board = new Chessboard();
-		Player white = new Player("white", board);
-		Player black = new Player("black", board);
+		Chess chess = new Chess();
+		Chesspiece rook_test = new Rook("Rook_test", chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
+		System.out.println(rook_test);
+		for (Position pos : rook_test.possibleMoves())
+			System.out.println(pos);
 
-		for (int i = 0; i < 8; i++)
-			for (int j = 0; j < 8; j++)
-				System.out.println(board.getChessboard()[i][j]);
-		System.out.println(board);
-		System.out.println(white.getPieceList());
+		// for (int i = 0; i < 8; i++)
+		// for (int j = 0; j < 8; j++)
+		// System.out.println(board.getChessboard()[i][j]);
+		// System.out.println(board);
+		// System.out.println(white.getPieceList());
 
 		/*
 		 * Pawn pawn_w_1 = new Pawn("Pawn1", white,
