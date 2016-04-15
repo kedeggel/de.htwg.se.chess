@@ -3,7 +3,7 @@ package de.htwg.chess.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Pawn extends Chesspiece {
+public final class Pawn extends Chesspiece {
 
 	public Pawn(String name, Player player, Position position) {
 		super(name, player, position);

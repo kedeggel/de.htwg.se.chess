@@ -2,7 +2,7 @@ package de.htwg.chess.model;
 
 public class Chessboard {
 	private Position[][] chessboard;
-
+	
 	public Chessboard() {
 		chessboard = new Position[8][8];
 		for (char x = 'A'; x <= 'H'; x++) {

@@ -12,7 +12,7 @@ public abstract class Chesspiece {
 	public Chesspiece(String name, Player player, Position position) {
 		this.name = name;
 		this.player = player;
-		this.position = position;
+		this.setPosition(position);
 		this.drawCount = 0;
 	}
 
@@ -27,7 +27,7 @@ public abstract class Chesspiece {
 	}
 
 	public void setPosition(Position pos) {
-		if (player == pos.getChesspiece().getPlayer())
+		if (pos.getChesspiece() != null && player.equals(pos.getChesspiece().getPlayer()))
 			return; // field is occupied by a other-colored piece
 		this.position = pos;
 		pos.setChesspiece(this);
@@ -48,6 +48,6 @@ public abstract class Chesspiece {
 	public abstract List<Position> possibleMoves();
 
 	public String toString() {
-		return name + " " + getColor() + " " + position + " " + "DrawCount: " + drawCount;
+		return name + " " + getColor() + " " + position;
 	}
 }

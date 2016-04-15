@@ -4,22 +4,40 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		Chessboard board = new Chessboard();
-		Player white = new Player("white");
-		Player black = new Player("black");
-		Pawn pawn_w_1 = new Pawn("Pawn1", white, board.getChessboard()[0][0]);
+		Player white = new Player("white", board);
+		Player black = new Player("black", board);
 
-		// for (int i = 0; i < 8; i++)
-		// for (int j = 0; j < 8; j++)
-		// System.out.println(board.getChessboard()[i][j]);
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++)
+				System.out.println(board.getChessboard()[i][j]);
 		System.out.println(board);
+		System.out.println(white.getPieceList());
 
-		System.out.println(pawn_w_1);
-		pawn_w_1.move(new Position('A', 3)); // move ändert noch keine Werte an
-												// den Objekten
-		System.out.println(pawn_w_1);
+		/*
+		 * Pawn pawn_w_1 = new Pawn("Pawn1", white,
+		 * board.getChessboard()[A][ONE]);
+		 * 
+		 * for (int i = 0; i < 8; i++) for (int j = 0; j < 8; j++)
+		 * System.out.println(board.getChessboard()[i][j]);
+		 * System.out.println(board);
+		 * 
+		 * System.out.println(pawn_w_1); pawn_w_1.move(new Position('A', 3)); //
+		 * move ändert noch keine Werte an // den Objekten
+		 * System.out.println(pawn_w_1);
+		 * 
+		 * pawn_w_1.move(new Position('A', 2)); System.out.println(pawn_w_1);
+		 * 
+		 * private final static int A = 0; private final static int B = 1;
+		 * private final static int C = 2; private final static int D = 3;
+		 * private final static int E = 4; private final static int F = 5;
+		 * private final static int G = 6; private final static int H = 7;
+		 * private final static int ONE = 0; private final static int TWO = 1;
+		 * private final static int THREE = 2; private final static int FOUR =
+		 * 3; private final static int FIVE = 4; private final static int SIX =
+		 * 5; private final static int SEVEN = 6; private final static int EIGHT
+		 * = 7;
+		 */
 
-		pawn_w_1.move(new Position('A', 2));
-		System.out.println(pawn_w_1);
 	}
 
 }

@@ -41,7 +41,7 @@ public final class Position {
 	}
 
 	public void setChesspiece(Chesspiece cp) {
-		if (this.cp.getColor().equals(cp.getColor()))
+		if (this.cp != null && this.cp.getColor().equals(cp.getColor()))
 			return;
 		this.cp = cp;
 		cp.setPosition(this);
