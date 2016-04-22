@@ -14,18 +14,18 @@ public final class MoveChecker {
 	}
 
 	/**
-	 * checks if pos is occupied by a DIFFERENT chesspiece (that is NOT "piece")
+	 * checks if pos is occupied by a DIFFERENT chesspiece (that is NOT this.piece)
 	 * 
 	 * @param pos
 	 * @return
 	 */
-	public boolean isFieldOccupied(Position pos) {
-		if (pos.getChesspiece() != null && pos.getChesspiece() != piece)
+	private boolean isFieldOccupied(Position pos) {
+		if (pos.getChesspiece() != null)
 			return true;
 		return false;
 	}
 
-	public boolean isFieldAccessible(Position pos) {
+	private boolean isFieldAccessible(Position pos) {
 		if (isFieldOccupied(pos))
 			if (piece.getPlayer() == pos.getChesspiece().getPlayer())
 				return false;
@@ -61,7 +61,7 @@ public final class MoveChecker {
 		chessboard = piece.getChess().getChessboard();
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
-		while (y <= 6 && isFieldAccessible(chessboard[x][y])) { // up
+		while (y <= 6 && isFieldAccessible(chessboard[x][++y])) { // up
 			posList.add(chessboard[x][y]);
 			if (isFieldOccupied(chessboard[x][y]))
 				break;

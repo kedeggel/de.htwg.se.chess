@@ -7,8 +7,8 @@ import de.htwg.chess.Chess;
 
 public final class Pawn extends Chesspiece {
 
-	public Pawn(String name, Player player, Position position, Chess chess) {
-		super(name, player, position, chess);
+	public Pawn(Player player, Position position, Chess chess) {
+		super(player, position, chess);
 	}
 
 	@Override

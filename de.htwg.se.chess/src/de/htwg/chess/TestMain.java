@@ -1,7 +1,6 @@
 package de.htwg.chess;
 
-import static de.htwg.chess.model.FieldConstants.D;
-import static de.htwg.chess.model.FieldConstants.FIVE;
+import static de.htwg.chess.model.FieldConstants.*;
 
 import de.htwg.chess.model.Chesspiece;
 import de.htwg.chess.model.Position;
@@ -11,7 +10,7 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		Chess chess = new Chess();
-		Chesspiece rook_test = new Rook("Rook_test", chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
+		Chesspiece rook_test = new Rook(chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
 		System.out.println(rook_test);
 		for (Position pos : rook_test.possibleMoves())
 			System.out.println(pos);

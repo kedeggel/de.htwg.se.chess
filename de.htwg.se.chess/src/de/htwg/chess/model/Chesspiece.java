@@ -1,19 +1,16 @@
 package de.htwg.chess.model;
 
 import java.util.List;
-
 import de.htwg.chess.Chess;
 
 public abstract class Chesspiece {
 
-	protected String name;
 	protected Player player;
 	protected Position position;
 	protected int drawCount;
 	protected Chess chess;
 
-	public Chesspiece(String name, Player player, Position position, Chess chess) {
-		this.name = name;
+	public Chesspiece(Player player, Position position, Chess chess) {
 		this.player = player;
 		this.setPosition(position);
 		this.drawCount = 0;
@@ -56,7 +53,7 @@ public abstract class Chesspiece {
 	public abstract List<Position> possibleMoves();
 
 	public String toString() {
-		return name + " " + getColor() + " " + position;
+		return getClass().getSimpleName().toString() + " " + getColor() + " " + position;
 	}
 
 }

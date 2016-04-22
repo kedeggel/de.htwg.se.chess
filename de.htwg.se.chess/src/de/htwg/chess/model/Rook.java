@@ -8,8 +8,8 @@ import de.htwg.chess.Chess;
 public final class Rook extends Chesspiece {
 	private MoveChecker checker;
 
-	public Rook(String name, Player player, Position position, Chess chess) {
-		super(name, player, position, chess);
+	public Rook(Player player, Position position, Chess chess) {
+		super(player, position, chess);
 	}
 
 	@Override
