@@ -28,8 +28,6 @@ public abstract class Chesspiece {
 	}
 
 	public void setPosition(Position pos) {
-		if (pos.getChesspiece() != null && player.equals(pos.getChesspiece().getPlayer()))
-			return; // field is occupied by an different-colored piece
 		this.position = pos;
 		pos.setChesspiece(this);
 	}
@@ -52,8 +50,9 @@ public abstract class Chesspiece {
 
 	public abstract List<Position> possibleMoves();
 
+	@Override
 	public String toString() {
-		return getClass().getSimpleName().toString() + " " + getColor() + " " + position;
+		return getClass().getSimpleName() + " " + getColor() + " " + position;
 	}
 
 }

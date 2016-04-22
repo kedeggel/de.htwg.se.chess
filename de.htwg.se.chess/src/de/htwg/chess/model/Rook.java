@@ -6,8 +6,6 @@ import java.util.List;
 import de.htwg.chess.Chess;
 
 public final class Rook extends Chesspiece {
-	private MoveChecker checker;
-
 	public Rook(Player player, Position position, Chess chess) {
 		super(player, position, chess);
 	}
@@ -15,7 +13,7 @@ public final class Rook extends Chesspiece {
 	@Override
 	public List<Position> possibleMoves() {
 		List<Position> listPossibleMoves = new LinkedList<>();
-		checker = new MoveChecker(this);
+		MoveChecker checker = new MoveChecker(this);
 		listPossibleMoves.addAll(checker.checkHorizontal());
 		listPossibleMoves.addAll(checker.checkVertikal());
 		return listPossibleMoves;

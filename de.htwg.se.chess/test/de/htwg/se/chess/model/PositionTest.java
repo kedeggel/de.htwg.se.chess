@@ -33,7 +33,7 @@ public class PositionTest extends TestCase {
 	public void testGetter() {
 		pos.setX('C');
 		pos.setY(3);
-		assertTrue((new Position('C', 3)).equals(pos));
+		assertTrue((new Position('C', 3)).samePosition(pos));
 	}
 	
 	public void testToString() {

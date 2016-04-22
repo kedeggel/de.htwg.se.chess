@@ -8,7 +8,6 @@ public final class Position {
 	public Position(char x, int y) {
 		if (!setPosition(x, y))
 			throw new IllegalArgumentException(x + y + " is not a valid Position");
-		setPosition(x, y);
 	}
 
 	public boolean setPosition(char x, int y) {
@@ -47,10 +46,10 @@ public final class Position {
 		cp.setPosition(this);
 	}
 
-	public boolean equals(Position pos) {
-		if (this.x == pos.x && this.y == pos.y)
-			return true;
-		return false;
+	public boolean samePosition(Position pos) {
+		if (pos == null || this.x != pos.x || this.y != pos.y)
+			return false;
+		return true;
 	}
 
 	@Override

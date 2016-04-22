@@ -14,7 +14,8 @@ public final class MoveChecker {
 	}
 
 	/**
-	 * checks if pos is occupied by a DIFFERENT chesspiece (that is NOT this.piece)
+	 * checks if pos is occupied by a DIFFERENT chesspiece (that is NOT
+	 * this.piece)
 	 * 
 	 * @param pos
 	 * @return
@@ -26,9 +27,8 @@ public final class MoveChecker {
 	}
 
 	private boolean isFieldAccessible(Position pos) {
-		if (isFieldOccupied(pos))
-			if (piece.getPlayer() == pos.getChesspiece().getPlayer())
-				return false;
+		if (isFieldOccupied(pos) && piece.getPlayer() == pos.getChesspiece().getPlayer())
+			return false;
 		return true;
 	}
 
@@ -83,33 +83,33 @@ public final class MoveChecker {
 		// clockwise, starting right up
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
-		while (isFieldAccessible(chessboard[x][y]) && y <= 6 && x <= 8) { // right
-																			// up
-			posList.add(chessboard[++x][++y]);
+		while (y <= 6 && x <= 6 && isFieldAccessible(chessboard[++x][++y])) { // right
+																				// up
+			posList.add(chessboard[x][y]);
 			if (isFieldOccupied(chessboard[x][y]))
 				break;
 		}
 		x = pos.getX() - 'A';
 		y = pos.getY() - 1;
-		while (isFieldAccessible(chessboard[x][y]) && y >= 1 && x >= 1) {// left
-																			// up
-			posList.add(chessboard[--x][++y]);
+		while (y <= 6 && x >= 1 && isFieldAccessible(chessboard[--x][++y])) {// left
+																				// up
+			posList.add(chessboard[x][y]);
 			if (isFieldOccupied(chessboard[x][y]))
 				break;
 		}
 		x = pos.getX() - 'A';
 		y = pos.getY() - 1;
-		while (isFieldAccessible(chessboard[x][y]) && y <= 6 && x <= 8) { // left
-																			// down
-			posList.add(chessboard[--x][--y]);
+		while (y >= 1 && x >= 1 && isFieldAccessible(chessboard[--x][--y])) { // left
+																				// down
+			posList.add(chessboard[x][y]);
 			if (isFieldOccupied(chessboard[x][y]))
 				break;
 		}
 		x = pos.getX() - 'A';
 		y = pos.getY() - 1;
-		while (isFieldAccessible(chessboard[x][y]) && y >= 1 && x >= 1) {// right
-																			// down
-			posList.add(chessboard[++x][--y]);
+		while (y >= 1 && x <= 6 && isFieldAccessible(chessboard[++x][--y])) {// right
+																				// down
+			posList.add(chessboard[x][y]);
 			if (isFieldOccupied(chessboard[x][y]))
 				break;
 		}

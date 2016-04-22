@@ -1,20 +1,31 @@
 package de.htwg.chess;
 
-import static de.htwg.chess.model.FieldConstants.*;
+import java.util.LinkedList;
+import java.util.List;
 
-import de.htwg.chess.model.Chesspiece;
-import de.htwg.chess.model.Position;
-import de.htwg.chess.model.Rook;
+import de.htwg.chess.model.*;
 
 public class TestMain {
 
 	public static void main(String[] args) {
 		Chess chess = new Chess();
-		Chesspiece rook_test = new Rook(chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
-		System.out.println(rook_test);
-		for (Position pos : rook_test.possibleMoves())
-			System.out.println(pos);
+		List<Chesspiece> list = new LinkedList<>(chess.getBlack().getPieceList());
+		for (Chesspiece piece : list) {
+			System.out.println(piece + ": ");
+			for (Position pos : piece.possibleMoves())
+				System.out.println("\t" + pos);
+		}
 
+		// Chesspiece rook_test = new Rook(chess.getWhite(),
+		// chess.getChessboard()[D][FIVE], chess);
+		// System.out.println(rook_test);
+		// for (Position pos : rook_test.possibleMoves())
+		// System.out.println(pos);
+		// Chesspiece bishop_test = new Bishop(chess.getWhite(),
+		// chess.getChessboard()[C][FOUR], chess);
+		// System.out.println(bishop_test);
+		// for (Position pos : bishop_test.possibleMoves())
+		// System.out.println(pos);
 		// for (int i = 0; i < 8; i++)
 		// for (int j = 0; j < 8; j++)
 		// System.out.println(board.getChessboard()[i][j]);
