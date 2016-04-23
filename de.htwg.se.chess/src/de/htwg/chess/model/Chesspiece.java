@@ -7,13 +7,11 @@ public abstract class Chesspiece {
 
 	protected Player player;
 	protected Position position;
-	protected int drawCount;
 	protected Chess chess;
 
 	public Chesspiece(Player player, Position position, Chess chess) {
 		this.player = player;
 		this.setPosition(position);
-		this.drawCount = 0;
 		this.chess = chess;
 	}
 
@@ -21,7 +19,7 @@ public abstract class Chesspiece {
 		for (Position posMov : possibleMoves()) {
 			if (pos.equals(posMov)) {
 				position.setPosition(pos.getX(), pos.getY());
-				drawCount++;
+				pos.setChesspiece(this);
 				break;
 			}
 		}

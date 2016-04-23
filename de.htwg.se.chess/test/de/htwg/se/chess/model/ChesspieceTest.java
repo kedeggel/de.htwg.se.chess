@@ -14,4 +14,5 @@ public final class ChesspieceTest extends TestCase {
 		rook_test.move(chess.getChessboard()[G][FOUR]);
 		assertTrue(rook_test.getPosition().samePosition(chess.getChessboard()[H][THREE]));
 	}
+	
 }

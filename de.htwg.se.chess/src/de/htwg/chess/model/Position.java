@@ -7,7 +7,7 @@ public final class Position {
 
 	public Position(char x, int y) {
 		if (!setPosition(x, y))
-			throw new IllegalArgumentException(x + y + " is not a valid Position");
+			throw new IllegalArgumentException(x + "" + y + " is not a valid Position");
 	}
 
 	public boolean setPosition(char x, int y) {

@@ -8,6 +8,12 @@ public class PositionTest extends TestCase {
 
 	public void setUp() {
 		pos = new Position('A', 1);
+		try {
+			new Position('I', 2);
+		} catch (IllegalArgumentException e) {
+			assertEquals("I2 is not a valid Position", e.getMessage());
+		}
+
 	}
 
 	public void testSetter() {
@@ -28,6 +34,7 @@ public class PositionTest extends TestCase {
 		for (int y = 1; y <= 8; y++) {
 			assertTrue(pos.setY(y));
 		}
+
 	}
 
 	public void testGetter() {
@@ -35,7 +42,7 @@ public class PositionTest extends TestCase {
 		pos.setY(3);
 		assertTrue((new Position('C', 3)).samePosition(pos));
 	}
-	
+
 	public void testToString() {
 		pos.setPosition('B', 8);
 		assertTrue(("B8").equals(pos.toString()));

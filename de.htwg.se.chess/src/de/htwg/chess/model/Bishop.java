@@ -12,8 +12,7 @@ public final class Bishop extends Chesspiece {
 
 	@Override
 	public List<Position> possibleMoves() {
-		MoveChecker mc = new MoveChecker(this);
-		return mc.checkDiagonal();
+		return (new MoveChecker(this)).checkDiagonal();
 	}
 
 }
