@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.htwg.se.chess.model.PositionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-04-22T10:59:48" hostname="3dlab9" time="0.007">
+  <properties/>
+  <testcase name="testToString" classname="de.htwg.se.chess.model.PositionTest" time="0.006"/>
+  <testcase name="testGetter" classname="de.htwg.se.chess.model.PositionTest" time="0.0"/>
+  <testcase name="testSetter" classname="de.htwg.se.chess.model.PositionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
