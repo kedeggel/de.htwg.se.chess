@@ -11,10 +11,25 @@ public final class Pawn extends Chesspiece {
 		super(player, position, chess);
 	}
 
+	public Chesspiece transformer(String cp) {
+		if (cp.equals("Queen")) {
+			return new Queen(this.player, this.position, this.chess);
+		}
+		if (cp.equals("Rook")) {
+			return new Rook(this.player, this.position, this.chess);
+		}
+		if (cp.equals("Knight")) {
+			return new Knight(this.player, this.position, this.chess);
+		}
+		if (cp.equals("Bishop")) {
+			return new Bishop(this.player, this.position, this.chess);
+		}
+		return this;
+	}
+
 	@Override
 	public List<Position> possibleMoves() {
-		List<Position> listPossibleMoves = new LinkedList<>();
-		return listPossibleMoves;
+		return (new MoveChecker(this)).checkPawn();
 	}
 
 }
