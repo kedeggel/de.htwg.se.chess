@@ -1,8 +1,0 @@
-#Eclipse
-bin/
-.settings/
-.classpath
-
-# Gradle
-/.gradle/
-/build/
