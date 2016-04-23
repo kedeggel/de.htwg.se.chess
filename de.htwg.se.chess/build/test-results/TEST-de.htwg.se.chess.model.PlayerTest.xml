@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="de.htwg.se.chess.model.PlayerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-04-22T10:59:48" hostname="3dlab9" time="0.016">
-  <properties/>
-  <testcase name="testNewPlayer" classname="de.htwg.se.chess.model.PlayerTest" time="0.016"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
