@@ -1,6 +1,5 @@
 package de.htwg.chess.model;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import de.htwg.chess.Chess;

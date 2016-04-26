@@ -6,20 +6,20 @@ import de.htwg.chess.model.*;
 public class TestMain {
 
 	public static void main(String[] args) {
-//		Chess chess = new Chess();
-//		Chesspiece rook_test = new Pawn(chess.getWhite(), chess.getChessboard()[F][FOUR], chess);
-//		for (int i = 0; i < 8; i++)
-//			for (int j = 0; j < 8; j++)
-//				System.out.println(chess.getChessboard()[j][i] + ": " + chess.getChessboard()[j][i].getChesspiece());
-//
-//		System.out.println(rook_test);
-//		for (Position pos : rook_test.possibleMoves())
-//			System.out.println(pos);
-//		Chesspiece rook_test_enemy = new Rook(chess.getBlack(), chess.getChessboard()[E][FIVE], chess);
-//		System.out.println(rook_test_enemy);
-//
-//		rook_test.move(chess.getChessboard()[E][FIVE]);
-//		System.out.println(chess.getChessboard()[E][FIVE].getChesspiece());
+		Chess chess = new Chess();
+		Chesspiece rook_test = new Pawn(chess.getWhite(), chess.getChessboard()[F][FOUR], chess);
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++)
+				System.out.println(chess.getChessboard()[j][i] + ": " + chess.getChessboard()[j][i].getChesspiece());
+
+		System.out.println(rook_test);
+		for (Position pos : rook_test.possibleMoves())
+			System.out.println(pos);
+		Chesspiece rook_test_enemy = new Rook(chess.getBlack(), chess.getChessboard()[E][FIVE], chess);
+		System.out.println(rook_test_enemy);
+
+		rook_test.move(chess.getChessboard()[E][FIVE]);
+		System.out.println(chess.getChessboard()[E][FIVE].getChesspiece());
 		// Chesspiece bishop_test = new Bishop(chess.getWhite(),
 		// chess.getChessboard()[C][FOUR], chess);
 		// System.out.println(bishop_test);
@@ -42,7 +42,7 @@ public class TestMain {
 		 * System.out.println(board);
 		 * 
 		 * System.out.println(pawn_w_1); pawn_w_1.move(new Position('A', 3)); //
-		 * move ändert noch keine Werte an // den Objekten
+		 * move ï¿½ndert noch keine Werte an // den Objekten
 		 * System.out.println(pawn_w_1);
 		 * 
 		 * pawn_w_1.move(new Position('A', 2)); System.out.println(pawn_w_1);

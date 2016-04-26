@@ -27,7 +27,8 @@ public abstract class Chesspiece {
 
 	public void setPosition(Position pos) {
 		this.position = pos;
-		pos.setChesspiece(this);
+		if (pos != null)
+			pos.setChesspiece(this);
 	}
 
 	protected String getColor() {

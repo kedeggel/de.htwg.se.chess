@@ -26,38 +26,42 @@ public final class MovementTest extends TestCase {
 		rook_enemy_1.setPosition(chess.getChessboard()[A][FIVE]);
 		rook_test.possibleMoves();
 
-		//up
+		// up
 		rook_test.setPosition(chess.getChessboard()[D][EIGHT]);
 		rook_test.possibleMoves();
 		rook_test.setPosition(chess.getChessboard()[D][FIVE]);
 		rook_1.setPosition(chess.getChessboard()[D][SIX]);
 		rook_test.possibleMoves();
-		//down
+		// down
 		rook_test.setPosition(chess.getChessboard()[D][ONE]);
 		rook_test.possibleMoves();
-		
-		
+
 		Chesspiece bishop_test = new Bishop(chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
 		bishop_test.possibleMoves();
-		//rook_1.setPosition(chess.getChessboard()[C][SIX]);
-		//rook_enemy_1.setPosition(chess.getChessboard()[E][SIX]);
-		
-		
-		LinkedList<Position> poslist= new LinkedList<>();
+		// rook_1.setPosition(chess.getChessboard()[C][SIX]);
+		// rook_enemy_1.setPosition(chess.getChessboard()[E][SIX]);
+
+		LinkedList<Position> poslist = new LinkedList<>();
 		poslist.add(chess.getChessboard()[A][EIGHT]);
 		poslist.add(chess.getChessboard()[H][EIGHT]);
 		poslist.add(chess.getChessboard()[A][ONE]);
 		poslist.add(chess.getChessboard()[H][ONE]);
-		
-		for(Position pos : poslist) {
+
+		for (Position pos : poslist) {
 			bishop_test.setPosition(pos);
 			bishop_test.possibleMoves();
 		}
-		
-		for(Position pos : poslist) {
+
+		for (Position pos : poslist) {
 			bishop_test.setPosition(pos);
 			bishop_test.possibleMoves();
 		}
+
+		Chesspiece queen = new Queen(chess.getWhite(), chess.getChessboard()[A][SIX], chess);
+		queen.possibleMoves();
 		
+		Chesspiece pferdchen = new Knight(chess.getWhite(), chess.getChessboard()[B][FIVE], chess);
+		pferdchen.possibleMoves();
+
 	}
 }
