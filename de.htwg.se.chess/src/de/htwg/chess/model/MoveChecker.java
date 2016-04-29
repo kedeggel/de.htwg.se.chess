@@ -173,7 +173,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x <= 5 && y <= 6) {
-			Position pos = chessboard[x + 2][y + 1];
+			pos = chessboard[x + 2][y + 1];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
@@ -185,7 +185,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x <= 5 && y >= 1) {
-			Position pos = chessboard[x + 2][y - 1];
+			pos = chessboard[x + 2][y - 1];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
@@ -197,7 +197,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x <= 6 && y <= 5) {
-			Position pos = chessboard[x + 1][y + 2];
+			pos = chessboard[x + 1][y + 2];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
@@ -209,7 +209,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x >= 1 && y <= 5) {
-			Position pos = chessboard[x - 1][y + 2];
+			pos = chessboard[x - 1][y + 2];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
@@ -221,7 +221,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x >= 2 && y <= 6) {
-			Position pos = chessboard[x - 2][y + 1];
+			pos = chessboard[x - 2][y + 1];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
@@ -233,7 +233,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x >= 2 && y >= 1) {
-			Position pos = chessboard[x - 2][y - 1];
+			pos = chessboard[x - 2][y - 1];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
@@ -245,7 +245,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x >= 1 && y >= 2) {
-			Position pos = chessboard[x - 1][y - 2];
+			pos = chessboard[x - 1][y - 2];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
@@ -257,7 +257,7 @@ public final class MoveChecker {
 		int x = pos.getX() - 'A';
 		int y = pos.getY() - 1;
 		if (x >= 1 && y >= 2) {
-			Position pos = chessboard[x + 1][y - 2];
+			pos = chessboard[x + 1][y - 2];
 			if (isFieldAccessible(pos)) {
 				return pos;
 			}
