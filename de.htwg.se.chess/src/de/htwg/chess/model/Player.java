@@ -24,6 +24,12 @@ public class Player {
 			Chesspiece pawnW7 = new Pawn(this, boardMatrix[G][TWO], chess);
 			Chesspiece pawnW8 = new Pawn(this, boardMatrix[H][TWO], chess);
 			Chesspiece rookW1 = new Rook(this, boardMatrix[A][ONE], chess);
+			Chesspiece knightW1 = new Knight(this, boardMatrix[B][ONE], chess);
+			Chesspiece bishopW1 = new Bishop(this, boardMatrix[C][ONE], chess);
+			Chesspiece queenW = new Queen(this, boardMatrix[D][ONE], chess);
+			Chesspiece kingW = new King(this, boardMatrix[E][ONE], chess);
+			Chesspiece bishopW2 = new Bishop(this, boardMatrix[F][ONE], chess);
+			Chesspiece knightW2 = new Knight(this, boardMatrix[G][ONE], chess);
 			Chesspiece rookW2 = new Rook(this, boardMatrix[H][ONE], chess);
 
 			pieceList.add(pawnW1);
@@ -35,6 +41,12 @@ public class Player {
 			pieceList.add(pawnW7);
 			pieceList.add(pawnW8);
 			pieceList.add(rookW1);
+			pieceList.add(knightW1);
+			pieceList.add(bishopW1);
+			pieceList.add(queenW);
+			pieceList.add(kingW);
+			pieceList.add(bishopW2);
+			pieceList.add(knightW2);
 			pieceList.add(rookW2);
 		} else if ("black".equals(color)) {
 			Chesspiece pawnB1 = new Pawn(this, boardMatrix[A][SEVEN], chess);
@@ -46,6 +58,12 @@ public class Player {
 			Chesspiece pawnB7 = new Pawn(this, boardMatrix[G][SEVEN], chess);
 			Chesspiece pawnB8 = new Pawn(this, boardMatrix[H][SEVEN], chess);
 			Chesspiece rookB1 = new Rook(this, boardMatrix[A][EIGHT], chess);
+			Chesspiece knightB1 = new Knight(this, boardMatrix[B][EIGHT], chess);
+			Chesspiece bishopB1 = new Bishop(this, boardMatrix[C][EIGHT], chess);
+			Chesspiece queenB = new Queen(this, boardMatrix[D][EIGHT], chess);
+			Chesspiece kingB = new King(this, boardMatrix[E][EIGHT], chess);
+			Chesspiece bishopB2 = new Bishop(this, boardMatrix[F][EIGHT], chess);
+			Chesspiece knightB2 = new Knight(this, boardMatrix[G][EIGHT], chess);
 			Chesspiece rookB2 = new Rook(this, boardMatrix[H][EIGHT], chess);
 
 			pieceList.add(pawnB1);
@@ -57,6 +75,12 @@ public class Player {
 			pieceList.add(pawnB7);
 			pieceList.add(pawnB8);
 			pieceList.add(rookB1);
+			pieceList.add(knightB1);
+			pieceList.add(bishopB1);
+			pieceList.add(queenB);
+			pieceList.add(kingB);
+			pieceList.add(bishopB2);
+			pieceList.add(knightB2);
 			pieceList.add(rookB2);
 		}
 

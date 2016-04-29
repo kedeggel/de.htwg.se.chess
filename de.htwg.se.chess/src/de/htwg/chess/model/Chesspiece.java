@@ -26,9 +26,22 @@ public abstract class Chesspiece {
 	}
 
 	public void setPosition(Position pos) {
+		Position old_position = this.position;
 		this.position = pos;
+		if (pos != null && this == pos.getChesspiece()) // figur steht bereits
+														// auf pos
+			return;
+		if (old_position != null) // alter pos bescheid, dass wir weg sind
+			old_position.setChesspiece(null);
 		if (pos != null)
-			pos.setChesspiece(this);
+			pos.setChesspiece(this); // neuer Pos sagen, "wir sind neu hier"
+
+		// if(this.position != pos) {
+		// if (this.position != null)
+		// this.position.setChesspiece(null);
+		// this.position = pos;
+		// if (pos != null)
+		// pos.setChesspiece(this);
 	}
 
 	protected String getColor() {

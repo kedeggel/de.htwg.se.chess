@@ -8,6 +8,7 @@ public final class Position {
 	public Position(char x, int y) {
 		if (!setPosition(x, y))
 			throw new IllegalArgumentException(x + "" + y + " is not a valid Position");
+		cp = null;
 	}
 
 	public boolean setPosition(char x, int y) {
@@ -40,13 +41,20 @@ public final class Position {
 	}
 
 	public void setChesspiece(Chesspiece cp) {
-		if (this.cp != null) {
-			if (this.cp.getColor().equals(cp.getColor()))
-				return;
-			this.cp.setPosition(null);
-		}
+		Chesspiece old_cp = this.cp;
 		this.cp = cp;
-		cp.setPosition(this);
+		if (cp != null && this == cp.getPosition()) // figur ist bereits her
+			return;
+		if (old_cp != null) // altem cp bescheid, dass keine pos mehr hat
+			old_cp.setPosition(null);
+		if (cp != null)
+			cp.setPosition(this); // neuem cp sagen, wo es steht
+
+		// if (this.cp != null)
+		// this.cp.setPosition(null);
+		// this.cp = cp;
+		// if (this.cp != null)
+		// cp.setPosition(this);
 	}
 
 	public boolean samePosition(Position pos) {
