@@ -4,10 +4,6 @@ import static de.htwg.chess.model.FieldConstants.*;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import de.htwg.chess.model.*;
 
 public class TestMain {
