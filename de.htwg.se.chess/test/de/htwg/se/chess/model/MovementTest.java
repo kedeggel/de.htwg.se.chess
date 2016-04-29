@@ -12,17 +12,17 @@ import junit.framework.TestCase;
 public final class MovementTest extends TestCase {
 
 	Chess chess;
-	Chesspiece piece_test;
-	Chesspiece piece_friendly;
-	Chesspiece piece_enemy;
+	Chesspiece pieceTest;
+	Chesspiece pieceFriendly;
+	Chesspiece pieceEnemy;
 	List<Position> checklist;
 
 	@Before
 	public void setUp() {
 		chess = new Chess();
-		piece_test = new Rook(chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
-		piece_friendly = new Pawn(chess.getWhite(), chess.getChessboard()[G][FIVE], chess);
-		piece_enemy = new Pawn(chess.getBlack(), chess.getChessboard()[B][FIVE], chess);
+		pieceTest = new Rook(chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
+		pieceFriendly = new Pawn(chess.getWhite(), chess.getChessboard()[G][FIVE], chess);
+		pieceEnemy = new Pawn(chess.getBlack(), chess.getChessboard()[B][FIVE], chess);
 		checklist = new LinkedList<>();
 	}
 
@@ -41,30 +41,30 @@ public final class MovementTest extends TestCase {
 		checklist.add(chess.getChessboard()[D][THREE]);
 
 		assertTrue(
-				checklist.containsAll(piece_test.possibleMoves()) && piece_test.possibleMoves().containsAll(checklist));
+				checklist.containsAll(pieceTest.possibleMoves()) && pieceTest.possibleMoves().containsAll(checklist));
 
 		/**
 		 * left friendly, right enemy
 		 */
-		piece_friendly.setPosition(chess.getChessboard()[B][FIVE]);
-		piece_enemy.setPosition(chess.getChessboard()[G][FIVE]);
+		pieceFriendly.setPosition(chess.getChessboard()[B][FIVE]);
+		pieceEnemy.setPosition(chess.getChessboard()[G][FIVE]);
 		checklist.add(chess.getChessboard()[G][FIVE]);
 		checklist.remove(chess.getChessboard()[B][FIVE]);
 		assertTrue(
-				checklist.containsAll(piece_test.possibleMoves()) && piece_test.possibleMoves().containsAll(checklist));
+				checklist.containsAll(pieceTest.possibleMoves()) && pieceTest.possibleMoves().containsAll(checklist));
 
 		/**
 		 * down enemy, up friendly
 		 */
-		piece_friendly.setPosition(chess.getChessboard()[D][SIX]);
-		piece_enemy.setPosition(chess.getChessboard()[D][THREE]);
+		pieceFriendly.setPosition(chess.getChessboard()[D][SIX]);
+		pieceEnemy.setPosition(chess.getChessboard()[D][THREE]);
 		checklist.add(chess.getChessboard()[A][FIVE]);
 		checklist.add(chess.getChessboard()[B][FIVE]);
 		checklist.add(chess.getChessboard()[H][FIVE]);
 		checklist.remove(chess.getChessboard()[D][SIX]);
 		checklist.remove(chess.getChessboard()[D][SEVEN]);
 		assertTrue(
-				checklist.containsAll(piece_test.possibleMoves()) && piece_test.possibleMoves().containsAll(checklist));
+				checklist.containsAll(pieceTest.possibleMoves()) && pieceTest.possibleMoves().containsAll(checklist));
 
 		assertTrue(chess.getChessboard()[A][ONE].getChesspiece().possibleMoves().isEmpty());
 		assertTrue(chess.getChessboard()[A][EIGHT].getChesspiece().possibleMoves().isEmpty());
@@ -73,45 +73,70 @@ public final class MovementTest extends TestCase {
 
 	@Test
 	public void testDiagonalMoves() {
-		piece_test = new Bishop(chess.getWhite(), chess.getChessboard()[B][FIVE], chess);
+		pieceTest = new Bishop(chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
+		checklist = new LinkedList<>();
+		checklist.add(chess.getChessboard()[C][SIX]);
+		checklist.add(chess.getChessboard()[B][SEVEN]);
+		checklist.add(chess.getChessboard()[F][SEVEN]);
+		checklist.add(chess.getChessboard()[E][SIX]);
+		checklist.add(chess.getChessboard()[C][FOUR]);
+		checklist.add(chess.getChessboard()[E][FOUR]);
+		checklist.add(chess.getChessboard()[B][THREE]);
+		checklist.add(chess.getChessboard()[F][THREE]);
+		assertTrue(
+				checklist.containsAll(pieceTest.possibleMoves()) && pieceTest.possibleMoves().containsAll(checklist));
+		pieceEnemy.setPosition(chess.getChessboard()[B][THREE]);
+		pieceFriendly.setPosition(chess.getChessboard()[C][SIX]);
+		checklist.remove(chess.getChessboard()[C][SIX]);
+		checklist.remove(chess.getChessboard()[B][SEVEN]);
+		assertTrue(
+				checklist.containsAll(pieceTest.possibleMoves()) && pieceTest.possibleMoves().containsAll(checklist));
+
+		pieceTest.setPosition(chess.getChessboard()[A][EIGHT]);
+		checklist = new LinkedList<>();
+		checklist.add(chess.getChessboard()[B][SEVEN]);
+		assertTrue(pieceTest.possibleMoves().equals(checklist));
+		pieceTest.setPosition(chess.getChessboard()[A][ONE]);
+		assertTrue(pieceTest.possibleMoves().isEmpty());
 	}
+
 }
 
 // @Test
 // public void testMove() {
-// Chesspiece piece_test = new Rook(chess.getWhite(),
+// Chesspiece pieceTest = new Rook(chess.getWhite(),
 // chess.getChessboard()[D][FIVE], chess);
-// assertTrue(piece_test.getPosition().toString().equals("D5"));
-// piece_test.possibleMoves();
+// assertTrue(pieceTest.getPosition().toString().equals("D5"));
+// pieceTest.possibleMoves();
 //
 // // right
 // Chesspiece rook_1 = new Rook(chess.getWhite(),
 // chess.getChessboard()[F][FIVE], chess);
-// piece_test.possibleMoves();
-// Chesspiece rook_enemy_1 = new Rook(chess.getBlack(),
+// pieceTest.possibleMoves();
+// Chesspiece rookEnemy_1 = new Rook(chess.getBlack(),
 // chess.getChessboard()[F][FIVE], chess);
-// piece_test.possibleMoves();
+// pieceTest.possibleMoves();
 // // left
 // rook_1.setPosition(chess.getChessboard()[A][FIVE]);
-// piece_test.possibleMoves();
-// rook_enemy_1.setPosition(chess.getChessboard()[A][FIVE]);
-// piece_test.possibleMoves();
+// pieceTest.possibleMoves();
+// rookEnemy_1.setPosition(chess.getChessboard()[A][FIVE]);
+// pieceTest.possibleMoves();
 //
 // // up
-// piece_test.setPosition(chess.getChessboard()[D][EIGHT]);
-// piece_test.possibleMoves();
-// piece_test.setPosition(chess.getChessboard()[D][FIVE]);
+// pieceTest.setPosition(chess.getChessboard()[D][EIGHT]);
+// pieceTest.possibleMoves();
+// pieceTest.setPosition(chess.getChessboard()[D][FIVE]);
 // rook_1.setPosition(chess.getChessboard()[D][SIX]);
-// piece_test.possibleMoves();
+// pieceTest.possibleMoves();
 // // down
-// piece_test.setPosition(chess.getChessboard()[D][ONE]);
-// piece_test.possibleMoves();
+// pieceTest.setPosition(chess.getChessboard()[D][ONE]);
+// pieceTest.possibleMoves();
 //
-// Chesspiece bishop_test = new Bishop(chess.getWhite(),
+// Chesspiece bishopTest = new Bishop(chess.getWhite(),
 // chess.getChessboard()[D][FIVE], chess);
-// bishop_test.possibleMoves();
+// bishopTest.possibleMoves();
 // // rook_1.setPosition(chess.getChessboard()[C][SIX]);
-// // rook_enemy_1.setPosition(chess.getChessboard()[E][SIX]);
+// // rookEnemy_1.setPosition(chess.getChessboard()[E][SIX]);
 //
 // LinkedList<Position> poslist = new LinkedList<>();
 // poslist.add(chess.getChessboard()[A][EIGHT]);
@@ -120,13 +145,13 @@ public final class MovementTest extends TestCase {
 // poslist.add(chess.getChessboard()[H][ONE]);
 //
 // for (Position pos : poslist) {
-// bishop_test.setPosition(pos);
-// bishop_test.possibleMoves();
+// bishopTest.setPosition(pos);
+// bishopTest.possibleMoves();
 // }
 //
 // for (Position pos : poslist) {
-// bishop_test.setPosition(pos);
-// bishop_test.possibleMoves();
+// bishopTest.setPosition(pos);
+// bishopTest.possibleMoves();
 // }
 //
 // Chesspiece queen = new Queen(chess.getWhite(), chess.getChessboard()[A][SIX],
