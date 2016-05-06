@@ -1,16 +1,17 @@
-package de.htwg.se.chess.model;
+package de.htwg.chess.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import de.htwg.chess.Chess;
+
+import de.htwg.chess.model.Chessboard;
 import junit.framework.TestCase;
 
 public final class ChessBoardTest extends TestCase {
-	Chess chess;
+	Chessboard chess;
 
 	@Before
 	public void setUp() {
-		chess = new Chess();
+		chess = new Chessboard();
 	}
 
 	@Test

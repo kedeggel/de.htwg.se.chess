@@ -4,13 +4,11 @@ import static de.htwg.chess.model.FieldConstants.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.htwg.chess.Chess;
-
 public class Player {
 	private String color;
 	private List<Chesspiece> pieceList;
 
-	public Player(String color, Chess chess) {
+	public Player(String color, Chessboard chess) {
 		this.color = color;
 		Position[][] boardMatrix = chess.getChessboard();
 		pieceList = new LinkedList<>();

@@ -3,11 +3,9 @@ package de.htwg.chess.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.htwg.chess.Chess;
-
 public final class Queen extends Chesspiece{
 
-	public Queen(Player player, Position position, Chess chess) {
+	public Queen(Player player, Position position, Chessboard chess) {
 		super(player, position, chess);
 	}
 

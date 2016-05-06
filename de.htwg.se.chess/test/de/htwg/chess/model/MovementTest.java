@@ -1,6 +1,5 @@
-package de.htwg.se.chess.model;
+package de.htwg.chess.model;
 
-import de.htwg.chess.Chess;
 import de.htwg.chess.model.*;
 import static de.htwg.chess.model.FieldConstants.*;
 import java.util.LinkedList;
@@ -11,7 +10,7 @@ import junit.framework.TestCase;
 
 public final class MovementTest extends TestCase {
 
-	Chess chess;
+	Chessboard chess;
 	Chesspiece pieceTest;
 	Chesspiece pieceFriendly;
 	Chesspiece pieceEnemy;
@@ -19,7 +18,7 @@ public final class MovementTest extends TestCase {
 
 	@Before
 	public void setUp() {
-		chess = new Chess();
+		chess = new Chessboard();
 		pieceTest = new Rook(chess.getWhite(), chess.getChessboard()[D][FIVE], chess);
 		pieceFriendly = new Pawn(chess.getWhite(), chess.getChessboard()[G][FIVE], chess);
 		pieceEnemy = new Pawn(chess.getBlack(), chess.getChessboard()[B][FIVE], chess);

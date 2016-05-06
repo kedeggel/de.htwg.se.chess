@@ -1,16 +1,15 @@
 package de.htwg.chess.model;
 
 import java.util.List;
-import de.htwg.chess.Chess;
 
 public abstract class Chesspiece {
 
 	protected Player player;
 	protected Position position;
-	protected Chess chess;
+	protected Chessboard chess;
 	protected boolean wasMoved;
 
-	public Chesspiece(Player player, Position position, Chess chess) {
+	public Chesspiece(Player player, Position position, Chessboard chess) {
 		this.player = player;
 		this.setPosition(position);
 		this.chess = chess;
@@ -59,7 +58,7 @@ public abstract class Chesspiece {
 		return this.position;
 	}
 
-	public Chess getChess() {
+	public Chessboard getChess() {
 		return chess;
 	}
 	

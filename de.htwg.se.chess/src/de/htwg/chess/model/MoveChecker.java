@@ -14,20 +14,16 @@ public final class MoveChecker {
 		this.chessboard = piece.getChess().getChessboard();
 	}
 
-	private boolean isFieldOccupied(Position pos) {
-		if (pos.getChesspiece() != null)
-			return true;
-		return false;
-	}
+
 
 	private boolean isFieldAccessible(Position pos) {
-		if (isFieldOccupied(pos) && piece.getPlayer() == pos.getChesspiece().getPlayer())
+		if (pos.isFieldOccupied() && piece.getPlayer() == pos.getChesspiece().getPlayer())
 			return false;
 		return true;
 	}
 
 	private boolean isFieldOccupiedByEnemy(Position pos) {
-		if (isFieldOccupied(pos) && piece.getPlayer() != pos.getChesspiece().getPlayer())
+		if (pos.isFieldOccupied() && piece.getPlayer() != pos.getChesspiece().getPlayer())
 			return true;
 		return false;
 	}
@@ -45,7 +41,7 @@ public final class MoveChecker {
 		int y = pos.getY() - 1;
 		while (x >= 1 && isFieldAccessible(chessboard[--x][y])) { // left
 			posList.add(chessboard[x][y]);
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -61,7 +57,7 @@ public final class MoveChecker {
 			 * if field is occupied by the other player's chesspiece: this field
 			 * is accessible; then break.
 			 */
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -81,7 +77,7 @@ public final class MoveChecker {
 		int y = pos.getY() - 1;
 		while (y <= 6 && isFieldAccessible(chessboard[x][++y])) {
 			posList.add(chessboard[x][y]);
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -93,7 +89,7 @@ public final class MoveChecker {
 		int y = pos.getY() - 1;
 		while (y >= 1 && isFieldAccessible(chessboard[x][--y])) {
 			posList.add(chessboard[x][y]);
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -114,7 +110,7 @@ public final class MoveChecker {
 		int y = pos.getY() - 1;
 		while (y <= 6 && x <= 6 && isFieldAccessible(chessboard[++x][++y])) {
 			posList.add(chessboard[x][y]);
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -126,7 +122,7 @@ public final class MoveChecker {
 		int y = pos.getY() - 1;
 		while (y <= 6 && x >= 1 && isFieldAccessible(chessboard[--x][++y])) {
 			posList.add(chessboard[x][y]);
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -138,7 +134,7 @@ public final class MoveChecker {
 		int y = pos.getY() - 1;
 		while (y >= 1 && x >= 1 && isFieldAccessible(chessboard[--x][--y])) {
 			posList.add(chessboard[x][y]);
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -150,7 +146,7 @@ public final class MoveChecker {
 		int y = pos.getY() - 1;
 		while (y >= 1 && x <= 6 && isFieldAccessible(chessboard[++x][--y])) {
 			posList.add(chessboard[x][y]);
-			if (isFieldOccupied(chessboard[x][y]))
+			if (chessboard[x][y].isFieldOccupied())
 				break;
 		}
 		return posList;
@@ -285,9 +281,9 @@ public final class MoveChecker {
 			posList.add(upleft);
 		if (isFieldOccupiedByEnemy(upright))
 			posList.add(upright);
-		if (!isFieldOccupied(up)) {
+		if (!up.isFieldOccupied()) {
 			posList.add(up);
-			if (y == 1 && !isFieldOccupied(upup))
+			if (y == 1 && !upup.isFieldOccupied())
 				posList.add(upup);
 
 		}
@@ -306,9 +302,9 @@ public final class MoveChecker {
 			posList.add(downleft);
 		if (isFieldOccupiedByEnemy(downright))
 			posList.add(downright);
-		if (!isFieldOccupied(down)) {
+		if (!down.isFieldOccupied()) {
 			posList.add(down);
-			if (y == 6 && !isFieldOccupied(downdown))
+			if (y == 6 && !downdown.isFieldOccupied())
 				posList.add(downdown);
 
 		}
@@ -326,19 +322,15 @@ public final class MoveChecker {
 		Position right1 = chessboard[x + 1][y];
 		Position right2 = chessboard[x + 2][y];
 		Position rightRookPos = chessboard[x + 3][y];
-		if (!chessboard[x][y].getChesspiece().getWasMoved())
-			if (!isFieldOccupied(left1) && !isFieldOccupied(left2) && !isFieldOccupied(left3)) { // &&
-																									// leftRookPos.getChesspiece().getDrawCounter()
-																									// ==
-																									// 0
+		if (!chessboard[x][y].getChesspiece().getWasMoved()) {
+			if (!leftRookPos.getChesspiece().getWasMoved() && !left1.isFieldOccupied() && !left2.isFieldOccupied()
+					&& !left3.isFieldOccupied()) {
 				posList.add(left2);
 			}
-		if (!isFieldOccupied(right1) && !isFieldOccupied(right2)) { // &&
-																	// rightRookPos.getChesspiece().getDrawCounter()
-																	// == 0
-			posList.add(right2);
+			if (!rightRookPos.getChesspiece().getWasMoved() && !right1.isFieldOccupied() && !right2.isFieldOccupied()) {
+				posList.add(right2);
+			}
 		}
-		// end-if
 		return posList;
 	}
 

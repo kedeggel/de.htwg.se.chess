@@ -1,14 +1,15 @@
-package de.htwg.se.chess.model;
+package de.htwg.chess.model;
 
 import junit.framework.TestCase;
 import static de.htwg.chess.model.FieldConstants.*;
-import de.htwg.chess.Chess;
+
+import de.htwg.chess.model.Chessboard;
 
 public final class PlayerTest extends TestCase {
-	Chess chess;
+	Chessboard chess;
 
 	public void testNewPlayer() {
-		chess = new Chess();
+		chess = new Chessboard();
 		// Player black = new Player("black", board);
 		for (int i = 0; i < 8; i++)
 			assertTrue(chess.getWhite().getPieceList().contains(chess.getChessboard()[i][TWO].getChesspiece()));

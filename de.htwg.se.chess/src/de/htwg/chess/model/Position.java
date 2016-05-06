@@ -50,17 +50,18 @@ public final class Position {
 		if (cp != null)
 			cp.setPosition(this); // neuem cp sagen, wo es steht
 
-		// if (this.cp != null)
-		// this.cp.setPosition(null);
-		// this.cp = cp;
-		// if (this.cp != null)
-		// cp.setPosition(this);
 	}
 
 	public boolean samePosition(Position pos) {
 		if (pos == null || this.x != pos.x || this.y != pos.y)
 			return false;
 		return true;
+	}
+	
+	public boolean isFieldOccupied() {
+		if (cp != null)
+			return true;
+		return false;
 	}
 
 	@Override

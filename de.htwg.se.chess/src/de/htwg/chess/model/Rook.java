@@ -3,10 +3,8 @@ package de.htwg.chess.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.htwg.chess.Chess;
-
 public final class Rook extends Chesspiece {
-	public Rook(Player player, Position position, Chess chess) {
+	public Rook(Player player, Position position, Chessboard chess) {
 		super(player, position, chess);
 	}
 

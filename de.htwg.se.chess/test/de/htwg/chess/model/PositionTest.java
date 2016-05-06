@@ -1,11 +1,11 @@
-package de.htwg.se.chess.model;
+package de.htwg.chess.model;
 
 import junit.framework.TestCase;
 import de.htwg.chess.model.Position;
 
 public class PositionTest extends TestCase {
 	Position pos;
-
+	
 	public void setUp() {
 		pos = new Position('A', 1);
 		try {
@@ -42,6 +42,7 @@ public class PositionTest extends TestCase {
 		pos.setY(3);
 		assertTrue((new Position('C', 3)).samePosition(pos));
 	}
+	
 
 	public void testToString() {
 		pos.setPosition('B', 8);

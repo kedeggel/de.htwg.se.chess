@@ -2,11 +2,9 @@ package de.htwg.chess.model;
 
 import java.util.List;
 
-import de.htwg.chess.Chess;
-
 public class Knight extends Chesspiece {
 
-	public Knight(Player player, Position position, Chess chess) {
+	public Knight(Player player, Position position, Chessboard chess) {
 		super(player, position, chess);
 	}
 
