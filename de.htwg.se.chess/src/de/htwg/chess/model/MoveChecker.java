@@ -326,13 +326,13 @@ public final class MoveChecker {
 		Position right1 = chessboard[x + 1][y];
 		Position right2 = chessboard[x + 2][y];
 		Position rightRookPos = chessboard[x + 3][y];
-		// if (chessboard[x][y].getChesspiece().getDrawCounter() == 0)
-		if (!isFieldOccupied(left1) && !isFieldOccupied(left2) && !isFieldOccupied(left3)) { // &&
-																								// leftRookPos.getChesspiece().getDrawCounter()
-																								// ==
-																								// 0
-			posList.add(left2);
-		}
+		if (!chessboard[x][y].getChesspiece().getWasMoved())
+			if (!isFieldOccupied(left1) && !isFieldOccupied(left2) && !isFieldOccupied(left3)) { // &&
+																									// leftRookPos.getChesspiece().getDrawCounter()
+																									// ==
+																									// 0
+				posList.add(left2);
+			}
 		if (!isFieldOccupied(right1) && !isFieldOccupied(right2)) { // &&
 																	// rightRookPos.getChesspiece().getDrawCounter()
 																	// == 0

@@ -8,11 +8,13 @@ public abstract class Chesspiece {
 	protected Player player;
 	protected Position position;
 	protected Chess chess;
+	protected boolean wasMoved;
 
 	public Chesspiece(Player player, Position position, Chess chess) {
 		this.player = player;
 		this.setPosition(position);
 		this.chess = chess;
+		wasMoved = false;
 	}
 
 	public void move(Position pos) {
@@ -20,6 +22,7 @@ public abstract class Chesspiece {
 			if (pos.equals(posMov)) {
 				position.setPosition(pos.getX(), pos.getY());
 				pos.setChesspiece(this);
+				wasMoved = true;
 				break;
 			}
 		}
@@ -58,6 +61,10 @@ public abstract class Chesspiece {
 
 	public Chess getChess() {
 		return chess;
+	}
+	
+	public boolean getWasMoved() {
+		return wasMoved;
 	}
 
 	public abstract List<Position> possibleMoves();
