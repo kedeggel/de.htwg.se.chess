@@ -314,4 +314,32 @@ public final class MoveChecker {
 		}
 		return posList;
 	}
+
+	public List<Position> checkRochade() {
+		List<Position> posList = new LinkedList<>();
+		int x = pos.getX() - 'A';
+		int y = pos.getY() - 1;
+		Position left1 = chessboard[x - 1][y];
+		Position left2 = chessboard[x - 2][y];
+		Position left3 = chessboard[x - 3][y];
+		Position leftRookPos = chessboard[x - 4][y];
+		Position right1 = chessboard[x + 1][y];
+		Position right2 = chessboard[x + 2][y];
+		Position rightRookPos = chessboard[x + 3][y];
+		// if (chessboard[x][y].getChesspiece().getDrawCounter() == 0)
+		if (!isFieldOccupied(left1) && !isFieldOccupied(left2) && !isFieldOccupied(left3)) { // &&
+																								// leftRookPos.getChesspiece().getDrawCounter()
+																								// ==
+																								// 0
+			posList.add(left2);
+		}
+		if (!isFieldOccupied(right1) && !isFieldOccupied(right2)) { // &&
+																	// rightRookPos.getChesspiece().getDrawCounter()
+																	// == 0
+			posList.add(right2);
+		}
+		// end-if
+		return posList;
+	}
+
 }
