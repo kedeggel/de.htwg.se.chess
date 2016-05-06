@@ -4,16 +4,17 @@ import java.util.List;
 
 public abstract class Chesspiece {
 
-	protected Player player;
+	protected Player player; // später -> protected boolean color; //white=true,
+								// black=false
 	protected Position position;
-	protected Chessboard chess;
+	protected Chessboard board;
 	protected boolean wasMoved;
 
-	public Chesspiece(Player player, Position position, Chessboard chess) {
+	public Chesspiece(Player player, Position position, Chessboard board) {
 		this.player = player;
 		this.setPosition(position);
-		this.chess = chess;
-		wasMoved = false;
+		this.board = board;
+		this.wasMoved = false;
 	}
 
 	public void move(Position pos) {
@@ -59,9 +60,9 @@ public abstract class Chesspiece {
 	}
 
 	public Chessboard getChess() {
-		return chess;
+		return board;
 	}
-	
+
 	public boolean getWasMoved() {
 		return wasMoved;
 	}
