@@ -8,8 +8,6 @@ package de.htwg.chess.model;
 
 public class Chessboard {
 	private Position[][] chessboard;
-	private Player white;
-	private Player black;
 
 	public Chessboard() {
 		initChessboard();
@@ -26,14 +24,6 @@ public class Chessboard {
 
 	public Position[][] getChessboard() {
 		return chessboard;
-	}
-
-	public Player getWhite() {
-		return white;
-	}
-
-	public Player getBlack() {
-		return black;
 	}
 
 	@Override
