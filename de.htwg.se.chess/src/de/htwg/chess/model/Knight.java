@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Knight extends Chesspiece {
 
-	public Knight(Player player, Position position, Chessboard chess) {
+	public Knight(Player player, Field position, Chessboard chess) {
 		super(player, position, chess);
 	}
 
 	@Override
-	public List<Position> possibleMoves() {
+	public List<Field> possibleMoves() {
 
 		return (new MoveChecker(this)).checkKnight();
 	}

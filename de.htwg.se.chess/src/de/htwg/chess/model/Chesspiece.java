@@ -6,38 +6,38 @@ public abstract class Chesspiece {
 
 	protected Player player; // später -> protected boolean color; //white=true,
 								// black=false
-	protected Position position;
+	protected Field field;
 	protected Chessboard board;
 	protected boolean wasMoved;
 
-	public Chesspiece(Player player, Position position, Chessboard board) {
+	public Chesspiece(Player player, Field field, Chessboard board) {
 		this.player = player;
-		this.setPosition(position);
+		this.setField(field);
 		this.board = board;
 		this.wasMoved = false;
 	}
 
-	public void move(Position pos) {
-		for (Position posMov : possibleMoves()) {
-			if (pos.equals(posMov)) {
-				position.setPosition(pos.getX(), pos.getY());
-				pos.setChesspiece(this);
+	public void move(Field f) {
+		for (Field posMov : possibleMoves()) {
+			if (f.equals(posMov)) {
+				field.setPosition(f.getX(), f.getY());
+				f.setChesspiece(this);
 				wasMoved = true;
 				break;
 			}
 		}
 	}
 
-	public void setPosition(Position pos) {
-		Position old_position = this.position;
-		this.position = pos;
-		if (pos != null && this == pos.getChesspiece()) // figur steht bereits
+	public void setField(Field i) {
+		Field old_position = this.field;
+		this.field = i;
+		if (i != null && this == i.getChesspiece()) // figur steht bereits
 														// auf pos
 			return;
 		if (old_position != null) // alter pos bescheid, dass wir weg sind
 			old_position.setChesspiece(null);
-		if (pos != null)
-			pos.setChesspiece(this); // neuer Pos sagen, "wir sind neu hier"
+		if (i != null)
+			i.setChesspiece(this); // neuer Pos sagen, "wir sind neu hier"
 
 		// if(this.position != pos) {
 		// if (this.position != null)
@@ -55,8 +55,8 @@ public abstract class Chesspiece {
 		return player;
 	}
 
-	public Position getPosition() {
-		return this.position;
+	public Field getField() {
+		return this.field;
 	}
 
 	public Chessboard getChess() {
@@ -67,11 +67,11 @@ public abstract class Chesspiece {
 		return wasMoved;
 	}
 
-	public abstract List<Position> possibleMoves();
+	public abstract List<Field> possibleMoves();
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " " + getColor() + " " + position;
+		return getClass().getSimpleName() + " " + getColor() + " " + field;
 	}
 
 }

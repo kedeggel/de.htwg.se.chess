@@ -10,7 +10,7 @@ public class Player {
 
 	public Player(String color, Chessboard chess) {
 		this.color = color;
-		Position[][] boardMatrix = chess.getChessboard();
+		Field[][] boardMatrix = chess.getChessboard();
 		pieceList = new LinkedList<>();
 		if ("white".equals(color)) {
 			Chesspiece pawnW1 = new Pawn(this, boardMatrix[A][TWO], chess);

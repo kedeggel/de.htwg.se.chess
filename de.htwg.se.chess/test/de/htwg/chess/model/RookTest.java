@@ -13,7 +13,7 @@ public final class RookTest extends TestCase {
 	Chesspiece rook_test;
 	Chesspiece piece_friendly;
 	Chesspiece piece_enemy;
-	List<Position> checklist;
+	List<Field> checklist;
 
 	@Before
 	public void setUp() {

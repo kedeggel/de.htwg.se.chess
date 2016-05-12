@@ -5,7 +5,7 @@ import java.util.List;
 public class King extends Chesspiece {
 	private boolean isInCheck = false;
 
-	public King(Player player, Position position, Chessboard chess) {
+	public King(Player player, Field position, Chessboard chess) {
 		super(player, position, chess);
 	}
 
@@ -18,7 +18,7 @@ public class King extends Chesspiece {
 	}
 	
 	@Override
-	public List<Position> possibleMoves() {
+	public List<Field> possibleMoves() {
 		// TODO Auto-generated method stub
 		return null;
 	}

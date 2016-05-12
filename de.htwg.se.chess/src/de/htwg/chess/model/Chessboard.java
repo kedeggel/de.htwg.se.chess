@@ -7,22 +7,22 @@ package de.htwg.chess.model;
  */
 
 public class Chessboard {
-	private Position[][] chessboard;
+	private Field[][] chessboard;
 
 	public Chessboard() {
 		initChessboard();
 	}
 
 	private void initChessboard() {
-		chessboard = new Position[8][8];
+		chessboard = new Field[8][8];
 		for (char x = 'A'; x <= 'H'; x++) {
 			for (int y = 1; y <= 8; y++) {
-				chessboard[x - 'A'][y - 1] = new Position(x, y);
+				chessboard[x - 'A'][y - 1] = new Field(x, y);
 			}
 		}
 	}
 
-	public Position[][] getChessboard() {
+	public Field[][] getChessboard() {
 		return chessboard;
 	}
 

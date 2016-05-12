@@ -5,13 +5,13 @@ import java.util.List;
 
 public final class Queen extends Chesspiece{
 
-	public Queen(Player player, Position position, Chessboard chess) {
+	public Queen(Player player, Field position, Chessboard chess) {
 		super(player, position, chess);
 	}
 
 	@Override
-	public List<Position> possibleMoves() {
-		List<Position> listPossibleMoves = new LinkedList<>();
+	public List<Field> possibleMoves() {
+		List<Field> listPossibleMoves = new LinkedList<>();
 		MoveChecker checker = new MoveChecker(this);
 		listPossibleMoves.addAll(checker.checkHorizontal());
 		listPossibleMoves.addAll(checker.checkVertikal());

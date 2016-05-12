@@ -4,28 +4,28 @@ import java.util.List;
 
 public final class Pawn extends Chesspiece {
 
-	public Pawn(Player player, Position position, Chessboard board) {
+	public Pawn(Player player, Field position, Chessboard board) {
 		super(player, position, board);
 	}
 
 	public Chesspiece transformer(String cp) {
 		if (cp.equals("Queen")) {
-			return new Queen(this.player, this.position, this.board);
+			return new Queen(this.player, this.field, this.board);
 		}
 		if (cp.equals("Rook")) {
-			return new Rook(this.player, this.position, this.board);
+			return new Rook(this.player, this.field, this.board);
 		}
 		if (cp.equals("Knight")) {
-			return new Knight(this.player, this.position, this.board);
+			return new Knight(this.player, this.field, this.board);
 		}
 		if (cp.equals("Bishop")) {
-			return new Bishop(this.player, this.position, this.board);
+			return new Bishop(this.player, this.field, this.board);
 		}
 		return this;
 	}
 
 	@Override
-	public List<Position> possibleMoves() {
+	public List<Field> possibleMoves() {
 		return (new MoveChecker(this)).checkPawn();
 	}
 

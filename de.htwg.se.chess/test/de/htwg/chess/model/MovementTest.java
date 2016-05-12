@@ -14,7 +14,7 @@ public final class MovementTest extends TestCase {
 	Chesspiece pieceTest;
 	Chesspiece pieceFriendly;
 	Chesspiece pieceEnemy;
-	List<Position> checklist;
+	List<Field> checklist;
 
 	@Before
 	public void setUp() {

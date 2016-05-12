@@ -1,15 +1,15 @@
 package de.htwg.chess.model;
 
 import junit.framework.TestCase;
-import de.htwg.chess.model.Position;
+import de.htwg.chess.model.Field;
 
 public class PositionTest extends TestCase {
-	Position pos;
+	Field pos;
 	
 	public void setUp() {
-		pos = new Position('A', 1);
+		pos = new Field('A', 1);
 		try {
-			new Position('I', 2);
+			new Field('I', 2);
 		} catch (IllegalArgumentException e) {
 			assertEquals("I2 is not a valid Position", e.getMessage());
 		}
@@ -40,7 +40,7 @@ public class PositionTest extends TestCase {
 	public void testGetter() {
 		pos.setX('C');
 		pos.setY(3);
-		assertTrue((new Position('C', 3)).samePosition(pos));
+		assertTrue((new Field('C', 3)).samePosition(pos));
 	}
 	
 
