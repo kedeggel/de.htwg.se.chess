@@ -1,7 +1,5 @@
 package de.htwg.chess.model;
 
-import java.util.List;
-
 import de.htwg.chess.model.Team.Color;
 
 public final class Bishop extends Chesspiece {
@@ -11,8 +9,8 @@ public final class Bishop extends Chesspiece {
 	}
 
 	@Override
-	public List<Field> possibleMoves() {
-		return checkDiagonal(field);
+	public void checkPossibleMoves(MoveChecker mc) {
+		possibleMoves = mc.checkDiagonal(field);
 	}
 
 }

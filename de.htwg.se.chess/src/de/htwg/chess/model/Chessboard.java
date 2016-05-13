@@ -10,13 +10,13 @@ import static de.htwg.chess.model.Team.Color.*;
 
 public class Chessboard {
 	private Field[][] chessboard;
-	private Team white;
-	private Team black;
+	private Team[] teamlist;
+	private MoveChecker moveChecker;
 
 	public Chessboard() {
 		initChessboard();
-		white = new Team(WHITE, this);
-		black = new Team(BLACK, this);
+		initTeamlist();
+		moveChecker = new MoveChecker(this);
 	}
 
 	private void initChessboard() {
@@ -28,8 +28,18 @@ public class Chessboard {
 		}
 	}
 
+	private void initTeamlist() {
+		teamlist = new Team[2];
+		teamlist[WHITE.ordinal()] = new Team(WHITE, this, moveChecker);
+		teamlist[BLACK.ordinal()] = new Team(BLACK, this, moveChecker);
+	}
+
 	public Field getField(int x, int y) {
 		return chessboard[x][y];
+	}
+
+	public Team getTeam(Team.Color color) {
+		return teamlist[color.ordinal()];
 	}
 
 	@Override

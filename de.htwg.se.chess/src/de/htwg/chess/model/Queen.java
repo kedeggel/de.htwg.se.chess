@@ -1,7 +1,5 @@
 package de.htwg.chess.model;
 
-import java.util.LinkedList;
-import java.util.List;
 import de.htwg.chess.model.Team.Color;
 
 public final class Queen extends Chesspiece {
@@ -11,13 +9,10 @@ public final class Queen extends Chesspiece {
 	}
 
 	@Override
-	public List<Field> possibleMoves() {
-		List<Field> listPossibleMoves = new LinkedList<>();
-		MoveChecker checker = new MoveChecker(this);
-		listPossibleMoves.addAll(checker.checkHorizontal());
-		listPossibleMoves.addAll(checker.checkVertikal());
-		listPossibleMoves.addAll(checker.checkDiagonal());
-		return listPossibleMoves;
+	public void checkPossibleMoves(MoveChecker mc) {
+		possibleMoves = mc.checkHorizontal(field);
+		possibleMoves.addAll(mc.checkVertikal(field));
+		possibleMoves.addAll(mc.checkDiagonal(field));
 	}
 
 }

@@ -1,7 +1,5 @@
 package de.htwg.chess.model;
 
-import java.util.List;
-
 import de.htwg.chess.model.Team.Color;
 
 public class King extends Chesspiece {
@@ -20,9 +18,9 @@ public class King extends Chesspiece {
 	}
 	
 	@Override
-	public List<Field> possibleMoves() {
+	public void checkPossibleMoves(MoveChecker mc) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }

@@ -12,10 +12,12 @@ public class Team {
 	private Color color;
 	private List<Chesspiece> pieceList;
 	private Chessboard chessboard;
+	private MoveChecker mc;
 
-	public Team(Color color, Chessboard chessboard) {
+	public Team(Color color, Chessboard chessboard, MoveChecker mc) {
 		this.chessboard = chessboard;
 		this.color = color;
+		this.mc = mc;
 		pieceList = new LinkedList<>();
 		switch (color) {
 		case WHITE:
@@ -28,6 +30,7 @@ public class Team {
 			pawnRowInit(Color.WHITE, SEVEN);
 			break;
 		}
+		updatePosMoves();
 	}
 
 	private void pawnRowInit(Color c, int y) {
@@ -46,12 +49,27 @@ public class Team {
 		pieceList.add(new Rook(color, chessboard.getField(H, y)));
 	}
 
+	public void move(Chesspiece cp, Field target) {
+		updatePosMoves();
+		cp.move(target);
+	}
+
 	public List<Chesspiece> getPieceList() {
 		return pieceList;
 	}
 
 	public Color getColor() {
 		return color;
+	}
+
+	public void updatePosMoves() {
+		for (Chesspiece piece : pieceList)
+			piece.checkPossibleMoves(mc);
+	}
+
+	@Override
+	public String toString() {
+		return color.toString();
 	}
 
 }

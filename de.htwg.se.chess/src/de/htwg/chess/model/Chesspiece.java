@@ -5,25 +5,29 @@ import de.htwg.chess.model.Team.Color;
 
 public abstract class Chesspiece {
 
-	// protected Team team; // später -> protected boolean color; //white=true,
-	// black=false
 	protected Color color;
 	protected Field field;
 	protected boolean wasMoved;
-	protected MoveChecker moveChecker;
+	protected List<Field> possibleMoves;
 
 	public Chesspiece(Color color, Field field) {
-		this.moveChecker = new MoveChecker(chessboard);
 		this.color = color;
 		this.setField(field);
 		this.wasMoved = false;
+		
+	}
+	
+	public List<Field> getPossibleMoves() {
+		return possibleMoves;
 	}
 
-	public void move(Field f) {
-		for (Field posMov : possibleMoves()) {
-			if (f.equals(posMov)) {
-				field.setPosition(f.getX(), f.getY());
-				f.setChesspiece(this);
+	public abstract void checkPossibleMoves(MoveChecker mc);
+
+	public void move(Field target) {
+		for (Field posMov : possibleMoves) {
+			if (target.equals(posMov)) {
+				field.setPosition(target.getX(), target.getY());
+				target.setChesspiece(this);
 				wasMoved = true;
 				break;
 			}
@@ -59,11 +63,10 @@ public abstract class Chesspiece {
 		return wasMoved;
 	}
 
-	public abstract List<Field> possibleMoves();
-
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " " + getColor() + " " + field;
 	}
+
 
 }
