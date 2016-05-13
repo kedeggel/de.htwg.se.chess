@@ -43,12 +43,12 @@ public final class Field {
 	public void setChesspiece(Chesspiece cp) {
 		Chesspiece old_cp = this.cp;
 		this.cp = cp;
-		if (cp != null && this == cp.getPosition()) // figur ist bereits her
+		if (cp != null && this == cp.getField()) // figur ist bereits her
 			return;
 		if (old_cp != null) // altem cp bescheid, dass keine pos mehr hat
-			old_cp.setPosition(null);
+			old_cp.setField(null);
 		if (cp != null)
-			cp.setPosition(this); // neuem cp sagen, wo es steht
+			cp.setField(this); // neuem cp sagen, wo es steht
 
 	}
 

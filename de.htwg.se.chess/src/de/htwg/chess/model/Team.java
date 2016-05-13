@@ -1,0 +1,57 @@
+package de.htwg.chess.model;
+
+import static de.htwg.chess.model.FieldConstants.*;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Team {
+	public enum Color {
+		WHITE, BLACK
+	}
+
+	private Color color;
+	private List<Chesspiece> pieceList;
+	private Chessboard chessboard;
+
+	public Team(Color color, Chessboard chessboard) {
+		this.chessboard = chessboard;
+		this.color = color;
+		pieceList = new LinkedList<>();
+		switch (color) {
+		case WHITE:
+			backRowInit(Color.WHITE, ONE);
+			pawnRowInit(Color.WHITE, TWO);
+			break;
+
+		case BLACK:
+			backRowInit(Color.WHITE, EIGHT);
+			pawnRowInit(Color.WHITE, SEVEN);
+			break;
+		}
+	}
+
+	private void pawnRowInit(Color c, int y) {
+		for (int x = A; x <= H; x++)
+			pieceList.add(new Pawn(color, chessboard.getField(x, y)));
+	}
+
+	private void backRowInit(Color c, int y) {
+		pieceList.add(new Rook(color, chessboard.getField(A, y)));
+		pieceList.add(new Knight(color, chessboard.getField(B, y)));
+		pieceList.add(new Bishop(color, chessboard.getField(C, y)));
+		pieceList.add(new Queen(color, chessboard.getField(D, y)));
+		pieceList.add(new King(color, chessboard.getField(E, y)));
+		pieceList.add(new Bishop(color, chessboard.getField(F, y)));
+		pieceList.add(new Knight(color, chessboard.getField(G, y)));
+		pieceList.add(new Rook(color, chessboard.getField(H, y)));
+	}
+
+	public List<Chesspiece> getPieceList() {
+		return pieceList;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+}
