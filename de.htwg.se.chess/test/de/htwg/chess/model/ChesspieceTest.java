@@ -1,6 +1,5 @@
 package de.htwg.chess.model;
 
-import de.htwg.chess.model.*;
 import static de.htwg.chess.model.FieldConstants.*;
 import junit.framework.TestCase;
 

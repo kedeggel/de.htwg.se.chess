@@ -7,16 +7,19 @@ import de.htwg.chess.model.Chessboard;
 import junit.framework.TestCase;
 
 public final class ChessBoardTest extends TestCase {
-	Chessboard chess;
-
+	Chessboard chessboard;
+	Team white;
+	Team black;
+	
 	@Before
 	public void setUp() {
-		chess = new Chessboard();
+		chessboard = new Chessboard();
 	}
 
 	@Test
 	public void testToString() {
-		assertTrue(chess.toString()
+		System.out.println(chessboard.toString());
+		assertTrue(chessboard.toString()
 				.equals("A1: Rook white A1\nA2: Pawn white A2\nA3: null\nA4: null\nA5: null\nA6: null\nA7: Pawn "
 						+ "black A7\nA8: Rook black A8\nB1: Knight white B1\nB2: Pawn white B2\nB3: null\nB4: null\n"
 						+ "B5: null\nB6: null\nB7: Pawn black B7\nB8: Knight black B8\nC1: Bishop white C1\n"
