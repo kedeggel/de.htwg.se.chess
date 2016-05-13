@@ -1,5 +1,7 @@
 package de.htwg.chess.model;
 
+import static de.htwg.chess.model.Team.Color.*;
+
 /**
  * 
  * @author Sascha Nunes, Kevin Deggelmann (team 10)
@@ -8,9 +10,13 @@ package de.htwg.chess.model;
 
 public class Chessboard {
 	private Field[][] chessboard;
+	private Team white;
+	private Team black;
 
 	public Chessboard() {
 		initChessboard();
+		white = new Team(WHITE, this);
+		black = new Team(BLACK, this);
 	}
 
 	private void initChessboard() {
@@ -22,8 +28,8 @@ public class Chessboard {
 		}
 	}
 
-	public Field[][] getChessboard() {
-		return chessboard;
+	public Field getField(int x, int y) {
+		return chessboard[x][y];
 	}
 
 	@Override
