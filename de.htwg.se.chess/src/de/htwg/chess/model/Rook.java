@@ -2,10 +2,11 @@ package de.htwg.chess.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
 public final class Rook extends Chesspiece {
-	public Rook(Player player, Field position, Chessboard chess) {
-		super(player, position, chess);
+	public Rook(Color color, Field position) {
+		super(color, position);
 	}
 
 	@Override

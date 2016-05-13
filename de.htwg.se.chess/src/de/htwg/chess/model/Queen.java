@@ -2,11 +2,12 @@ package de.htwg.chess.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
-public final class Queen extends Chesspiece{
+public final class Queen extends Chesspiece {
 
-	public Queen(Player player, Field position, Chessboard chess) {
-		super(player, position, chess);
+	public Queen(Color color, Field position) {
+		super(color, position);
 	}
 
 	@Override

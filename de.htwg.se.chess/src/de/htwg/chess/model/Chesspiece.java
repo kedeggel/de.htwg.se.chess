@@ -1,19 +1,21 @@
 package de.htwg.chess.model;
 
 import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
 public abstract class Chesspiece {
 
-	protected Player player; // später -> protected boolean color; //white=true,
-								// black=false
+	// protected Team team; // später -> protected boolean color; //white=true,
+	// black=false
+	protected Color color;
 	protected Field field;
-	protected Chessboard board;
 	protected boolean wasMoved;
+	protected MoveChecker moveChecker;
 
-	public Chesspiece(Player player, Field field, Chessboard board) {
-		this.player = player;
+	public Chesspiece(Color color, Field field) {
+		this.moveChecker = new MoveChecker(chessboard);
+		this.color = color;
 		this.setField(field);
-		this.board = board;
 		this.wasMoved = false;
 	}
 
@@ -32,35 +34,25 @@ public abstract class Chesspiece {
 		Field old_position = this.field;
 		this.field = i;
 		if (i != null && this == i.getChesspiece()) // figur steht bereits
-														// auf pos
+													// auf pos
 			return;
 		if (old_position != null) // alter pos bescheid, dass wir weg sind
 			old_position.setChesspiece(null);
 		if (i != null)
 			i.setChesspiece(this); // neuer Pos sagen, "wir sind neu hier"
 
-		// if(this.position != pos) {
-		// if (this.position != null)
-		// this.position.setChesspiece(null);
-		// this.position = pos;
-		// if (pos != null)
-		// pos.setChesspiece(this);
 	}
 
-	protected String getColor() {
-		return player.getColor();
+	protected Color getColor() {
+		return this.color;
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
+	// public Team getTeam() {
+	// return team;
+	// }
 
 	public Field getField() {
 		return this.field;
-	}
-
-	public Chessboard getChess() {
-		return board;
 	}
 
 	public boolean getWasMoved() {
