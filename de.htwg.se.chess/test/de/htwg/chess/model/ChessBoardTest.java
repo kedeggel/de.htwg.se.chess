@@ -17,7 +17,6 @@ public final class ChessBoardTest extends TestCase {
 
 	@Test
 	public void testToString() {
-		System.out.println(chessboard.toString());
 		assertTrue(chessboard.toString()
 				.equals("A1: Rook WHITE A1\nA2: Pawn WHITE A2\nA3: null\nA4: null\nA5: null\nA6: null\nA7: Pawn "
 						+ "BLACK A7\nA8: Rook BLACK A8\nB1: Knight WHITE B1\nB2: Pawn WHITE B2\nB3: null\nB4: null\n"

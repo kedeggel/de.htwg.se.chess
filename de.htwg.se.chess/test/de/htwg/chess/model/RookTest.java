@@ -30,43 +30,47 @@ public final class RookTest extends TestCase {
 		/**
 		 * right friendly, left enemy
 		 */
-		checklist.add(chessboard.getField( C ,FIVE));
-		checklist.add(chessboard.getField( B ,FIVE));
-		checklist.add(chessboard.getField(E ,FIVE));
-		checklist.add(chessboard.getField(F ,FIVE));
-		checklist.add(chessboard.getField(D ,SIX));
-		checklist.add(chessboard.getField(D ,SEVEN));
-		checklist.add(chessboard.getField(D ,FOUR));
-		checklist.add(chessboard.getField(D ,THREE));
+		checklist.add(chessboard.getField(C, FIVE));
+		checklist.add(chessboard.getField(B, FIVE));
+		checklist.add(chessboard.getField(E, FIVE));
+		checklist.add(chessboard.getField(F, FIVE));
+		checklist.add(chessboard.getField(D, SIX));
+		checklist.add(chessboard.getField(D, SEVEN));
+		checklist.add(chessboard.getField(D, FOUR));
+		checklist.add(chessboard.getField(D, THREE));
+		chessboard.getTeam(Color.WHITE).addChesspiece(rook_test);
+		chessboard.getTeam(Color.WHITE).addChesspiece(piece_friendly);
+		chessboard.getTeam(Color.BLACK).addChesspiece(piece_enemy);
 
-		assertTrue(
-				checklist.containsAll(rook_test.getPossibleMoves()) && rook_test.getPossibleMoves().containsAll(checklist));
+		assertTrue(checklist.containsAll(rook_test.getPossibleMoves())
+				&& rook_test.getPossibleMoves().containsAll(checklist));
 
 		/**
 		 * left friendly, right enemy
 		 */
-		piece_friendly.setField(chessboard.getField(B ,FIVE));
-		piece_enemy.setField(chessboard.getField(G ,FIVE));
-		checklist.add(chessboard.getField(G ,FIVE));
-		checklist.remove(chessboard.getField(B ,FIVE));
-		assertTrue(
-				checklist.containsAll(rook_test.getPossibleMoves()) && rook_test.getPossibleMoves().containsAll(checklist));
+		piece_friendly.setField(chessboard.getField(B, FIVE));
+		piece_enemy.setField(chessboard.getField(G, FIVE));
+		checklist.add(chessboard.getField(G, FIVE));
+		checklist.remove(chessboard.getField(B, FIVE));
+		chessboard.updateTeams();
+		assertTrue(checklist.containsAll(rook_test.getPossibleMoves())
+				&& rook_test.getPossibleMoves().containsAll(checklist));
 
 		/**
 		 * down enemy, up friendly
 		 */
-		piece_friendly.setField(chessboard.getField(D ,SIX));
-		piece_enemy.setField(chessboard.getField(D ,THREE));
-		checklist.add(chessboard.getField(A ,FIVE));
-		checklist.add(chessboard.getField(B ,FIVE));
-		checklist.add(chessboard.getField(H ,FIVE));
-		checklist.remove(chessboard.getField(D ,SIX));
-		checklist.remove(chessboard.getField(D ,SEVEN));
-		assertTrue(
-				checklist.containsAll(rook_test.getPossibleMoves()) && rook_test.getPossibleMoves().containsAll(checklist));
-
-		assertTrue(chessboard.getField(A ,ONE).getChesspiece().getPossibleMoves().isEmpty());
-		assertTrue(chessboard.getField(A ,EIGHT).getChesspiece().getPossibleMoves().isEmpty());
+		piece_friendly.setField(chessboard.getField(D, SIX));
+		piece_enemy.setField(chessboard.getField(D, THREE));
+		checklist.add(chessboard.getField(A, FIVE));
+		checklist.add(chessboard.getField(B, FIVE));
+		checklist.add(chessboard.getField(H, FIVE));
+		checklist.remove(chessboard.getField(D, SIX));
+		checklist.remove(chessboard.getField(D, SEVEN));
+		chessboard.updateTeams();
+		assertTrue(checklist.containsAll(rook_test.getPossibleMoves())
+				&& rook_test.getPossibleMoves().containsAll(checklist));
+		assertTrue(chessboard.getField(A, ONE).getChesspiece().getPossibleMoves().isEmpty());
+		assertTrue(chessboard.getField(A, EIGHT).getChesspiece().getPossibleMoves().isEmpty());
 
 	}
 }
