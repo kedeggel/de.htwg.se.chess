@@ -14,9 +14,9 @@ public class Chessboard {
 	private MoveChecker moveChecker;
 
 	public Chessboard() {
+		moveChecker = new MoveChecker(this);
 		initChessboard();
 		initTeamlist();
-		moveChecker = new MoveChecker(this);
 	}
 
 	private void initChessboard() {
@@ -40,6 +40,11 @@ public class Chessboard {
 
 	public Team getTeam(Team.Color color) {
 		return teamlist[color.ordinal()];
+	}
+	
+	public void updateTeams() {
+		for (Team team : teamlist)
+			team.updatePosMoves();
 	}
 
 	@Override

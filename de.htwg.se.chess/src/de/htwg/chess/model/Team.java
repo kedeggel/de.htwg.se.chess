@@ -50,8 +50,11 @@ public class Team {
 	}
 
 	public void move(Chesspiece cp, Field target) {
-		updatePosMoves();
-		cp.move(target);
+		if (pieceList.contains(cp)) {
+			updatePosMoves();
+			cp.move(target);
+			updatePosMoves();
+		}
 	}
 
 	public List<Chesspiece> getPieceList() {
@@ -65,6 +68,11 @@ public class Team {
 	public void updatePosMoves() {
 		for (Chesspiece piece : pieceList)
 			piece.checkPossibleMoves(mc);
+	}
+
+	public void addChesspiece(Chesspiece cp) {
+		pieceList.add(cp);
+		updatePosMoves();
 	}
 
 	@Override

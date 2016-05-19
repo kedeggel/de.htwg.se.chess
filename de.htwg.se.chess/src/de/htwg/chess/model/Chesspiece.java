@@ -14,7 +14,6 @@ public abstract class Chesspiece {
 		this.color = color;
 		this.setField(field);
 		this.wasMoved = false;
-		
 	}
 	
 	public List<Field> getPossibleMoves() {
@@ -26,8 +25,7 @@ public abstract class Chesspiece {
 	public void move(Field target) {
 		for (Field posMov : possibleMoves) {
 			if (target.equals(posMov)) {
-				field.setPosition(target.getX(), target.getY());
-				target.setChesspiece(this);
+				setField(target);
 				wasMoved = true;
 				break;
 			}
@@ -50,10 +48,6 @@ public abstract class Chesspiece {
 	protected Color getColor() {
 		return this.color;
 	}
-
-	// public Team getTeam() {
-	// return team;
-	// }
 
 	public Field getField() {
 		return this.field;
