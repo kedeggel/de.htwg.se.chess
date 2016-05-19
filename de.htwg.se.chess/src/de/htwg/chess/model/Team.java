@@ -13,6 +13,7 @@ public class Team {
 	private List<Chesspiece> pieceList;
 	private Chessboard chessboard;
 	private MoveChecker mc;
+	private King king;
 
 	public Team(Color color, Chessboard chessboard, MoveChecker mc) {
 		this.chessboard = chessboard;
@@ -43,7 +44,8 @@ public class Team {
 		pieceList.add(new Knight(color, chessboard.getField(B, y)));
 		pieceList.add(new Bishop(color, chessboard.getField(C, y)));
 		pieceList.add(new Queen(color, chessboard.getField(D, y)));
-		pieceList.add(new King(color, chessboard.getField(E, y)));
+		king = new King(color, chessboard.getField(E, y));
+		pieceList.add(king);
 		pieceList.add(new Bishop(color, chessboard.getField(F, y)));
 		pieceList.add(new Knight(color, chessboard.getField(G, y)));
 		pieceList.add(new Rook(color, chessboard.getField(H, y)));
@@ -73,6 +75,10 @@ public class Team {
 	public void addChesspiece(Chesspiece cp) {
 		pieceList.add(cp);
 		updatePosMoves();
+	}
+
+	public King getKing() {
+		return king;
 	}
 
 	@Override
