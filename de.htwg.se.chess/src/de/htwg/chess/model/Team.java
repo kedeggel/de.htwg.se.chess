@@ -30,6 +30,9 @@ public class Team {
 			backRowInit(Color.WHITE, EIGHT);
 			pawnRowInit(Color.WHITE, SEVEN);
 			break;
+			
+		default:
+			throw new IllegalArgumentException(color.toString() + " must be WHITE or BLACK");
 		}
 		updatePosMoves();
 	}
