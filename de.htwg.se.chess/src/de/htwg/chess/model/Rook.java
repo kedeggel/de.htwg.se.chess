@@ -9,8 +9,7 @@ public final class Rook extends Chesspiece {
 
 	@Override
 	public void checkPossibleMoves(MoveChecker mc) {
-		possibleMoves = mc.checkHorizontal(field);
-		possibleMoves.addAll(mc.checkVertikal(field));
+		possibleMoves = mc.checkRook(field);
 	}
 
 }

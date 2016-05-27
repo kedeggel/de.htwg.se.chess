@@ -5,7 +5,7 @@ import java.util.List;
 
 import de.htwg.chess.model.Team.Color;
 
-public final class MoveChecker {
+public final class MoveChecker implements MoveCheckerVisitor {
 	private Chessboard chessboard;
 
 	public MoveChecker(Chessboard chessboard) {
@@ -24,7 +24,58 @@ public final class MoveChecker {
 		return false;
 	}
 
-	public List<Field> checkHorizontal(Field field) {
+	@Override
+	public List<Field> checkQueen(Field field) {
+		List<Field> moveList = new LinkedList<>();
+		moveList = checkHorizontal(field);
+		moveList.addAll(checkVertikal(field));
+		moveList.addAll(checkDiagonal(field));
+		return moveList;
+	}
+
+	@Override
+	public List<Field> checkKing(Field field) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Field> checkRook(Field field) {
+		List<Field> moveList = new LinkedList<>();
+		moveList = checkHorizontal(field);
+		moveList.addAll(checkVertikal(field));
+		return moveList;
+	}
+
+	@Override
+	public List<Field> checkBishop(Field field) {
+		return checkDiagonal(field);
+	}
+
+	@Override
+	public List<Field> checkKnight(Field field) {
+		List<Field> posList = new LinkedList<>();
+		checkKnightRightUp(field, posList);
+		checkKnightRightDown(field, posList);
+		checkKnightUpRight(field, posList);
+		checkKnightUpLeft(field, posList);
+		checkKnightLeftUp(field, posList);
+		checkKnightLeftDown(field, posList);
+		checkKnightDownLeft(field, posList);
+		checkKnightDownRight(field, posList);
+		return posList;
+	}
+
+	@Override
+	public List<Field> checkPawn(Field field) {
+		if (field.getChesspiece().getColor().equals(Color.WHITE))
+			return checkWhitePawn(field);
+		else
+			return checkBlackPawn(field);
+
+	}
+
+	private List<Field> checkHorizontal(Field field) {
 		List<Field> posList = new LinkedList<>();
 		posList.addAll(checkLeft(field));
 		posList.addAll(checkRight(field));
@@ -59,7 +110,7 @@ public final class MoveChecker {
 		return posList;
 	}
 
-	public List<Field> checkVertikal(Field field) {
+	private List<Field> checkVertikal(Field field) {
 		List<Field> posList = new LinkedList<>();
 		posList.addAll(checkUp(field));
 		posList.addAll(checkDown(field));
@@ -91,7 +142,7 @@ public final class MoveChecker {
 		return posList;
 	}
 
-	public List<Field> checkDiagonal(Field field) {
+	private List<Field> checkDiagonal(Field field) {
 		List<Field> posList = new LinkedList<>();
 		posList.addAll(checkRightUp(field));
 		posList.addAll(checkLeftUp(field));
@@ -145,19 +196,6 @@ public final class MoveChecker {
 			if (chessboard.getField(x, y).isFieldOccupied())
 				break;
 		}
-		return posList;
-	}
-
-	public List<Field> checkKnight(Field field) {
-		List<Field> posList = new LinkedList<>();
-		checkKnightRightUp(field, posList);
-		checkKnightRightDown(field, posList);
-		checkKnightUpRight(field, posList);
-		checkKnightUpLeft(field, posList);
-		checkKnightLeftUp(field, posList);
-		checkKnightLeftDown(field, posList);
-		checkKnightDownLeft(field, posList);
-		checkKnightDownRight(field, posList);
 		return posList;
 	}
 
@@ -249,14 +287,6 @@ public final class MoveChecker {
 		}
 	}
 
-	public List<Field> checkPawn(Field field) {
-		if (field.getChesspiece().getColor().equals(Color.WHITE))
-			return checkWhitePawn(field);
-		else
-			return checkBlackPawn(field);
-
-	}
-
 	private List<Field> checkWhitePawn(Field field) {
 		List<Field> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
@@ -307,7 +337,7 @@ public final class MoveChecker {
 		return posList;
 	}
 
-	public List<Field> checkRochade(Field field) {
+	private List<Field> checkRochade(Field field) {
 		List<Field> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;

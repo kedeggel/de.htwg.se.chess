@@ -10,7 +10,7 @@ public final class Bishop extends Chesspiece {
 
 	@Override
 	public void checkPossibleMoves(MoveChecker mc) {
-		possibleMoves = mc.checkDiagonal(field);
+		possibleMoves = mc.checkBishop(field);
 	}
 
 }

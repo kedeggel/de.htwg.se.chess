@@ -15,7 +15,7 @@ public abstract class Chesspiece {
 		this.setField(field);
 		this.wasMoved = false;
 	}
-	
+
 	public List<Field> getPossibleMoves() {
 		return possibleMoves;
 	}
@@ -35,14 +35,12 @@ public abstract class Chesspiece {
 	public void setField(Field i) {
 		Field old_position = this.field;
 		this.field = i;
-		if (i != null && this == i.getChesspiece()) // figur steht bereits
-													// auf pos
+		if (i != null && this == i.getChesspiece())
 			return;
-		if (old_position != null) // alter pos bescheid, dass wir weg sind
+		if (old_position != null)
 			old_position.setChesspiece(null);
 		if (i != null)
-			i.setChesspiece(this); // neuer Pos sagen, "wir sind neu hier"
-
+			i.setChesspiece(this);
 	}
 
 	protected Color getColor() {
@@ -61,6 +59,4 @@ public abstract class Chesspiece {
 	public String toString() {
 		return getClass().getSimpleName() + " " + getColor() + " " + field;
 	}
-
-
 }

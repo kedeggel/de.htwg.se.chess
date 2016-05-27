@@ -10,9 +10,7 @@ public final class Queen extends Chesspiece {
 
 	@Override
 	public void checkPossibleMoves(MoveChecker mc) {
-		possibleMoves = mc.checkHorizontal(field);
-		possibleMoves.addAll(mc.checkVertikal(field));
-		possibleMoves.addAll(mc.checkDiagonal(field));
+		possibleMoves = mc.checkQueen(field);
 	}
 
 }

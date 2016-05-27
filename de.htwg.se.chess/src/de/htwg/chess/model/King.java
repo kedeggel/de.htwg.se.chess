@@ -16,11 +16,10 @@ public class King extends Chesspiece {
 	public void setIsInCheck(boolean check) {
 		isInCheck = check;
 	}
-	
+
 	@Override
 	public void checkPossibleMoves(MoveChecker mc) {
-		// TODO Auto-generated method stub
-		
+		possibleMoves = mc.checkKing(field);
 	}
 
 }
