@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="de.htwg.se.chess.model.ChesspieceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-04-29T10:34:59" hostname="3dlab9" time="0.003">
-  <properties/>
-  <testcase name="testMove" classname="de.htwg.se.chess.model.ChesspieceTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
