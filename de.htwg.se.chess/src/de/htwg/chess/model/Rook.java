@@ -1,20 +1,16 @@
 package de.htwg.chess.model;
 
-import java.util.LinkedList;
-import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
 public final class Rook extends Chesspiece {
-	public Rook(Player player, Position position, Chessboard chess) {
-		super(player, position, chess);
+	public Rook(Color color, Field position) {
+		super(color, position);
 	}
 
 	@Override
-	public List<Position> possibleMoves() {
-		List<Position> listPossibleMoves = new LinkedList<>();
-		MoveChecker checker = new MoveChecker(this);
-		listPossibleMoves.addAll(checker.checkHorizontal());
-		listPossibleMoves.addAll(checker.checkVertikal());
-		return listPossibleMoves;
+	public void checkPossibleMoves(MoveChecker mc) {
+		possibleMoves = mc.checkHorizontal(field);
+		possibleMoves.addAll(mc.checkVertikal(field));
 	}
 
 }

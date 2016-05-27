@@ -1,17 +1,15 @@
 package de.htwg.chess.model;
 
-import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
 public class Knight extends Chesspiece {
-
-	public Knight(Player player, Position position, Chessboard chess) {
-		super(player, position, chess);
+	public Knight(Color color, Field position) {
+		super(color, position);
 	}
 
 	@Override
-	public List<Position> possibleMoves() {
-
-		return (new MoveChecker(this)).checkKnight();
+	public void checkPossibleMoves(MoveChecker mc) {
+		possibleMoves = mc.checkKnight(field);
 	}
 
 }

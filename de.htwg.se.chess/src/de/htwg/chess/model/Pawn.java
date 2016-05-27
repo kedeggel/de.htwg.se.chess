@@ -1,32 +1,33 @@
 package de.htwg.chess.model;
 
-import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
 public final class Pawn extends Chesspiece {
 
-	public Pawn(Player player, Position position, Chessboard chess) {
-		super(player, position, chess);
+	public Pawn(Color color, Field position) {
+		super(color, position);
 	}
 
-	public Chesspiece transformer(String cp) {
-		if (cp.equals("Queen")) {
-			return new Queen(this.player, this.position, this.chess);
-		}
-		if (cp.equals("Rook")) {
-			return new Rook(this.player, this.position, this.chess);
-		}
-		if (cp.equals("Knight")) {
-			return new Knight(this.player, this.position, this.chess);
-		}
-		if (cp.equals("Bishop")) {
-			return new Bishop(this.player, this.position, this.chess);
-		}
-		return this;
-	}
+	// public Chesspiece transformer(String cp) {
+	// if (cp.equals("Queen")) {
+	// return new Queen(this.team, this.field, this.board);
+	// }
+	// if (cp.equals("Rook")) {
+	// return new Rook(this.team, this.field, this.board);
+	// }
+	// if (cp.equals("Knight")) {
+	// return new Knight(this.team, this.field, this.board);
+	// }
+	// if (cp.equals("Bishop")) {
+	// return new Bishop(this.team, this.field, this.board);
+	// }
+	// return this;
+	// }
+
 
 	@Override
-	public List<Position> possibleMoves() {
-		return (new MoveChecker(this)).checkPawn();
+	public void checkPossibleMoves(MoveChecker mc) {
+		possibleMoves = mc.checkPawn(field);
 	}
 
 }

@@ -1,5 +1,6 @@
 package de.htwg.chess.model;
 
+import static de.htwg.chess.model.Team.Color.*;
 
 /**
  * 
@@ -8,25 +9,42 @@ package de.htwg.chess.model;
  */
 
 public class Chessboard {
-	private Position[][] chessboard;
-	private Player white;
-	private Player black;
+	private Field[][] chessboard;
+	private Team[] teamlist;
+	private MoveChecker moveChecker;
 
 	public Chessboard() {
-		chessboard = new ChessboardCreater().getChessboard();
+		moveChecker = new MoveChecker(this);
+		initChessboard();
+		initTeamlist();
 	}
 
+	private void initChessboard() {
+		chessboard = new Field[8][8];
+		for (char x = 'A'; x <= 'H'; x++) {
+			for (int y = 1; y <= 8; y++) {
+				chessboard[x - 'A'][y - 1] = new Field(x, y);
+			}
+		}
+	}
+
+	private void initTeamlist() {
+		teamlist = new Team[2];
+		teamlist[WHITE.ordinal()] = new Team(WHITE, this, moveChecker);
+		teamlist[BLACK.ordinal()] = new Team(BLACK, this, moveChecker);
+	}
+
+	public Field getField(int x, int y) {
+		return chessboard[x][y];
+	}
+
+	public Team getTeam(Team.Color color) {
+		return teamlist[color.ordinal()];
+	}
 	
-	public Position[][] getChessboard() {
-		return chessboard;
-	}
-
-	public Player getWhite() {
-		return white;
-	}
-
-	public Player getBlack() {
-		return black;
+	public void updateTeams() {
+		for (Team team : teamlist)
+			team.updatePosMoves();
 	}
 
 	@Override
@@ -37,7 +55,5 @@ public class Chessboard {
 				sb.append(chessboard[i][j] + ": " + chessboard[i][j].getChesspiece() + "\n");
 		return sb.toString();
 	}
-	
-	
 
 }

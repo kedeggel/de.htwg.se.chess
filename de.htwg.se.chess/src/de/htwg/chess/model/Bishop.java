@@ -1,16 +1,16 @@
 package de.htwg.chess.model;
 
-import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
 public final class Bishop extends Chesspiece {
 
-	public Bishop(Player player, Position position, Chessboard chess) {
-		super(player, position, chess);
+	public Bishop(Color color, Field position) {
+		super(color, position);
 	}
 
 	@Override
-	public List<Position> possibleMoves() {
-		return (new MoveChecker(this)).checkDiagonal();
+	public void checkPossibleMoves(MoveChecker mc) {
+		possibleMoves = mc.checkDiagonal(field);
 	}
 
 }

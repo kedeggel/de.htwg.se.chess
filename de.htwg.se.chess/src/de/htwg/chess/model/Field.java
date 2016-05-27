@@ -1,11 +1,11 @@
 package de.htwg.chess.model;
 
-public final class Position {
+public final class Field {
 	private char x;
 	private int y;
 	private Chesspiece cp;
 
-	public Position(char x, int y) {
+	public Field(char x, int y) {
 		if (!setPosition(x, y))
 			throw new IllegalArgumentException(x + "" + y + " is not a valid Position");
 		cp = null;
@@ -43,16 +43,16 @@ public final class Position {
 	public void setChesspiece(Chesspiece cp) {
 		Chesspiece old_cp = this.cp;
 		this.cp = cp;
-		if (cp != null && this == cp.getPosition()) // figur ist bereits her
+		if (cp != null && this == cp.getField()) // figur ist bereits her
 			return;
 		if (old_cp != null) // altem cp bescheid, dass keine pos mehr hat
-			old_cp.setPosition(null);
+			old_cp.setField(null);
 		if (cp != null)
-			cp.setPosition(this); // neuem cp sagen, wo es steht
+			cp.setField(this); // neuem cp sagen, wo es steht
 
 	}
 
-	public boolean samePosition(Position pos) {
+	public boolean samePosition(Field pos) {
 		if (pos == null || this.x != pos.x || this.y != pos.y)
 			return false;
 		return true;

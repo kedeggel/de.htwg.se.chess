@@ -1,76 +1,66 @@
 package de.htwg.chess.model;
 
 import java.util.List;
+import de.htwg.chess.model.Team.Color;
 
 public abstract class Chesspiece {
 
-	protected Player player;
-	protected Position position;
-	protected Chessboard chess;
+	protected Color color;
+	protected Field field;
 	protected boolean wasMoved;
+	protected List<Field> possibleMoves;
 
-	public Chesspiece(Player player, Position position, Chessboard chess) {
-		this.player = player;
-		this.setPosition(position);
-		this.chess = chess;
-		wasMoved = false;
+	public Chesspiece(Color color, Field field) {
+		this.color = color;
+		this.setField(field);
+		this.wasMoved = false;
+	}
+	
+	public List<Field> getPossibleMoves() {
+		return possibleMoves;
 	}
 
-	public void move(Position pos) {
-		for (Position posMov : possibleMoves()) {
-			if (pos.equals(posMov)) {
-				position.setPosition(pos.getX(), pos.getY());
-				pos.setChesspiece(this);
+	public abstract void checkPossibleMoves(MoveChecker mc);
+
+	public void move(Field target) {
+		for (Field posMov : possibleMoves) {
+			if (target.equals(posMov)) {
+				setField(target);
 				wasMoved = true;
 				break;
 			}
 		}
 	}
 
-	public void setPosition(Position pos) {
-		Position old_position = this.position;
-		this.position = pos;
-		if (pos != null && this == pos.getChesspiece()) // figur steht bereits
-														// auf pos
+	public void setField(Field i) {
+		Field old_position = this.field;
+		this.field = i;
+		if (i != null && this == i.getChesspiece()) // figur steht bereits
+													// auf pos
 			return;
 		if (old_position != null) // alter pos bescheid, dass wir weg sind
 			old_position.setChesspiece(null);
-		if (pos != null)
-			pos.setChesspiece(this); // neuer Pos sagen, "wir sind neu hier"
+		if (i != null)
+			i.setChesspiece(this); // neuer Pos sagen, "wir sind neu hier"
 
-		// if(this.position != pos) {
-		// if (this.position != null)
-		// this.position.setChesspiece(null);
-		// this.position = pos;
-		// if (pos != null)
-		// pos.setChesspiece(this);
 	}
 
-	protected String getColor() {
-		return player.getColor();
+	protected Color getColor() {
+		return this.color;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public Field getField() {
+		return this.field;
 	}
 
-	public Position getPosition() {
-		return this.position;
-	}
-
-	public Chessboard getChess() {
-		return chess;
-	}
-	
 	public boolean getWasMoved() {
 		return wasMoved;
 	}
 
-	public abstract List<Position> possibleMoves();
-
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " " + getColor() + " " + position;
+		return getClass().getSimpleName() + " " + getColor() + " " + field;
 	}
+
 
 }
