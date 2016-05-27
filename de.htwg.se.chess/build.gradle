@@ -32,7 +32,7 @@ jar {
 }
 sonarqube {
 	properties {
-		property "sonar.projectName", "de.htwg.se.chess"
+		property "sonar.projectName", "SE2016SS-10-Schach"
 		property "sonar.projectKey", "de.htwg.se.chess"
 		property "sonar.projectVersion", "1.0"
 		property "sonar.binaries", "build/sonar"
