@@ -22,27 +22,27 @@ public class Team {
 		pieceList = new LinkedList<>();
 		switch (color) {
 		case WHITE:
-			backRowInit(Color.WHITE, ONE);
-			pawnRowInit(Color.WHITE, TWO);
+			backRowInit(ONE);
+			pawnRowInit(TWO);
 			break;
 
 		case BLACK:
-			backRowInit(Color.WHITE, EIGHT);
-			pawnRowInit(Color.WHITE, SEVEN);
+			backRowInit(EIGHT);
+			pawnRowInit(SEVEN);
 			break;
-			
+
 		default:
 			throw new IllegalArgumentException(color.toString() + " must be WHITE or BLACK");
 		}
 		updatePosMoves();
 	}
 
-	private void pawnRowInit(Color c, int y) {
+	private void pawnRowInit(int y) {
 		for (int x = A; x <= H; x++)
 			pieceList.add(new Pawn(color, chessboard.getField(x, y)));
 	}
 
-	private void backRowInit(Color c, int y) {
+	private void backRowInit(int y) {
 		pieceList.add(new Rook(color, chessboard.getField(A, y)));
 		pieceList.add(new Knight(color, chessboard.getField(B, y)));
 		pieceList.add(new Bishop(color, chessboard.getField(C, y)));
