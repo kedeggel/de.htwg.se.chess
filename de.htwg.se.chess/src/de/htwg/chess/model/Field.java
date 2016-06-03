@@ -5,7 +5,7 @@ public final class Field {
 	private int y;
 	private Chesspiece cp;
 
-	public Field(char x, int y) {
+	public Field(char x, int y) throws IllegalArgumentException {
 		if (!setPosition(x, y))
 			throw new IllegalArgumentException(x + "" + y + " is not a valid Position");
 		cp = null;

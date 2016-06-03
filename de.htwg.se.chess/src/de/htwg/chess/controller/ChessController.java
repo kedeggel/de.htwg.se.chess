@@ -45,8 +45,13 @@ public class ChessController extends Observable {
 	}
 
 	public void checkCheck(Team toTest) {
+		for (Chesspiece cp : board.getTeam(toTest.opponent()).getPieceList()) {
+			boolean check = cp.getPossibleMoves().contains(toTest.getKing().getField());
+			toTest.getKing().setIsInCheck(check);
+			setCheck(toTest, check);
+		}
 	}
-
+	
 	public void setCheck(Team team, boolean isInCheck) {
 		if (team == white)
 			isInCheckWhite = isInCheck;

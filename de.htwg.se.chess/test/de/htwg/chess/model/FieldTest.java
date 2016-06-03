@@ -13,19 +13,12 @@ public class FieldTest extends TestCase {
 	@Before
 	public void setUp() {
 		pos = new Field('A', 1);
-		try {
-			new Field('I', 2);
-		} catch (IllegalArgumentException e) {
-			assertEquals("I2 is not a valid Position", e.getMessage());
-		}
 	}
 
-	/*
 	@Test(expected = IllegalArgumentException.class)
 	public void testField() {
 		new Field('I', 2);
 	}
-	*/
 
 	@Test
 	public void testSetter() {
