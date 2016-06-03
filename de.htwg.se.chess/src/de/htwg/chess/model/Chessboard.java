@@ -11,7 +11,7 @@ import static de.htwg.chess.model.Team.Color.*;
 public class Chessboard {
 	private Field[][] board;
 	private Team[] teamlist;
-	private MoveChecker moveChecker;
+	private MoveCheckerVisitor moveChecker;
 
 	public Chessboard() {
 		moveChecker = new MoveChecker(this);

@@ -12,10 +12,10 @@ public class Team {
 	private Color color;
 	private List<Chesspiece> pieceList;
 	private Chessboard chessboard;
-	private MoveChecker mc;
+	private MoveCheckerVisitor mc;
 	private King king;
 
-	public Team(Color color, Chessboard chessboard, MoveChecker mc) {
+	public Team(Color color, Chessboard chessboard, MoveCheckerVisitor mc) {
 		this.chessboard = chessboard;
 		this.color = color;
 		this.mc = mc;
@@ -68,6 +68,13 @@ public class Team {
 
 	public Color getColor() {
 		return color;
+	}
+
+	public Color opponent() {
+		if (this.color == Color.WHITE)
+			return Color.BLACK;
+		else
+			return Color.WHITE;
 	}
 
 	public void updatePosMoves() {

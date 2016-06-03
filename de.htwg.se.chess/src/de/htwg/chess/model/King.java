@@ -18,7 +18,7 @@ public class King extends Chesspiece {
 	}
 
 	@Override
-	public void checkPossibleMoves(MoveChecker mc) {
+	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkKing(field);
 	}
 

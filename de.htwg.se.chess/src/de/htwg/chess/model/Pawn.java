@@ -26,7 +26,7 @@ public final class Pawn extends Chesspiece {
 
 
 	@Override
-	public void checkPossibleMoves(MoveChecker mc) {
+	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkPawn(field);
 	}
 

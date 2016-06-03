@@ -9,7 +9,7 @@ public final class Queen extends Chesspiece {
 	}
 
 	@Override
-	public void checkPossibleMoves(MoveChecker mc) {
+	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkQueen(field);
 	}
 

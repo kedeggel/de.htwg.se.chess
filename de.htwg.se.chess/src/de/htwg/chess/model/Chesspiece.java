@@ -20,7 +20,7 @@ public abstract class Chesspiece {
 		return possibleMoves;
 	}
 
-	public abstract void checkPossibleMoves(MoveChecker mc);
+	public abstract void checkPossibleMoves(MoveCheckerVisitor mc);
 
 	public void move(Field target) {
 		for (Field posMov : possibleMoves) {
