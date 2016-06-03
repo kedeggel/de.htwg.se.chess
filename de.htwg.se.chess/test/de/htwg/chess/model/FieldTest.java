@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import de.htwg.chess.model.Field;
 
-public class PositionTest extends TestCase {
+public class FieldTest extends TestCase {
 	Field pos;
 
 	@Before
@@ -18,7 +18,11 @@ public class PositionTest extends TestCase {
 		} catch (IllegalArgumentException e) {
 			assertEquals("I2 is not a valid Position", e.getMessage());
 		}
+	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testField() {
+		new Field('I', 2);
 	}
 
 	@Test
