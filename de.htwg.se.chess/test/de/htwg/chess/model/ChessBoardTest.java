@@ -3,8 +3,8 @@ package de.htwg.chess.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.chess.model.Chessboard;
-import de.htwg.chess.model.Team.Color;
+import de.htwg.chess.model.impl.Chessboard;
+import de.htwg.chess.model.impl.Team.Color;
 import junit.framework.TestCase;
 
 public final class ChessBoardTest extends TestCase {

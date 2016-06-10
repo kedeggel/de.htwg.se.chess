@@ -1,6 +1,9 @@
-package de.htwg.chess.model;
+package de.htwg.chess.model.impl;
 
-import static de.htwg.chess.model.Team.Color.*;
+import static de.htwg.chess.model.impl.Team.Color.*;
+
+import de.htwg.chess.model.IChessboard;
+import de.htwg.chess.model.MoveCheckerVisitor;
 
 /**
  * 
@@ -8,7 +11,7 @@ import static de.htwg.chess.model.Team.Color.*;
  *
  */
 
-public class Chessboard {
+public class Chessboard implements IChessboard {
 	private Field[][] board;
 	private Team[] teamlist;
 	private MoveCheckerVisitor moveChecker;
@@ -38,10 +41,11 @@ public class Chessboard {
 		return board[x][y];
 	}
 
+	@Override
 	public Team getTeam(Team.Color color) {
 		return teamlist[color.ordinal()];
 	}
-	
+
 	public void updateTeams() {
 		for (Team team : teamlist)
 			team.updatePosMoves();

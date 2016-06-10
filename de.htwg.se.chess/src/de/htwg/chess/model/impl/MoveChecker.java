@@ -1,9 +1,12 @@
-package de.htwg.chess.model;
+package de.htwg.chess.model.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import de.htwg.chess.model.Team.Color;
+import de.htwg.chess.model.IChesspiece;
+import de.htwg.chess.model.IField;
+import de.htwg.chess.model.MoveCheckerVisitor;
+import de.htwg.chess.model.impl.Team.Color;
 
 public final class MoveChecker implements MoveCheckerVisitor {
 	private Chessboard chessboard;
@@ -12,21 +15,21 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		this.chessboard = chessboard;
 	}
 
-	private boolean isFieldAccessible(Chesspiece piece, Field field) {
+	private boolean isFieldAccessible(IChesspiece piece, IField field) {
 		if (field.isFieldOccupied() && piece.getColor() == field.getChesspiece().getColor())
 			return false;
 		return true;
 	}
 
-	private boolean isFieldOccupiedByEnemy(Chesspiece piece, Field field) {
+	private boolean isFieldOccupiedByEnemy(IChesspiece piece, IField field) {
 		if (field.isFieldOccupied() && piece.getColor() != field.getChesspiece().getColor())
 			return true;
 		return false;
 	}
 
 	@Override
-	public List<Field> checkQueen(Field field) {
-		List<Field> moveList = new LinkedList<>();
+	public List<IField> checkQueen(IField field) {
+		List<IField> moveList = new LinkedList<>();
 		moveList = checkHorizontal(field);
 		moveList.addAll(checkVertikal(field));
 		moveList.addAll(checkDiagonal(field));
@@ -34,27 +37,27 @@ public final class MoveChecker implements MoveCheckerVisitor {
 	}
 
 	@Override
-	public List<Field> checkKing(Field field) {
+	public List<IField> checkKing(IField field) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Field> checkRook(Field field) {
-		List<Field> moveList = new LinkedList<>();
+	public List<IField> checkRook(IField field) {
+		List<IField> moveList = new LinkedList<>();
 		moveList = checkHorizontal(field);
 		moveList.addAll(checkVertikal(field));
 		return moveList;
 	}
 
 	@Override
-	public List<Field> checkBishop(Field field) {
+	public List<IField> checkBishop(IField field) {
 		return checkDiagonal(field);
 	}
 
 	@Override
-	public List<Field> checkKnight(Field field) {
-		List<Field> posList = new LinkedList<>();
+	public List<IField> checkKnight(IField field) {
+		List<IField> posList = new LinkedList<>();
 		checkKnightRightUp(field, posList);
 		checkKnightRightDown(field, posList);
 		checkKnightUpRight(field, posList);
@@ -67,7 +70,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 	}
 
 	@Override
-	public List<Field> checkPawn(Field field) {
+	public List<IField> checkPawn(IField field) {
 		if (field.getChesspiece().getColor().equals(Color.WHITE))
 			return checkWhitePawn(field);
 		else
@@ -75,15 +78,15 @@ public final class MoveChecker implements MoveCheckerVisitor {
 
 	}
 
-	private List<Field> checkHorizontal(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkHorizontal(IField field) {
+		List<IField> posList = new LinkedList<>();
 		posList.addAll(checkLeft(field));
 		posList.addAll(checkRight(field));
 		return posList;
 	}
 
-	private List<Field> checkLeft(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkLeft(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (x >= 1 && isFieldAccessible(field.getChesspiece(), chessboard.getField(--x, y))) { // left
@@ -94,8 +97,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkRight(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkRight(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (x <= 6 && isFieldAccessible(field.getChesspiece(), chessboard.getField(++x, y))) { // right
@@ -110,16 +113,16 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkVertikal(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkVertikal(IField field) {
+		List<IField> posList = new LinkedList<>();
 		posList.addAll(checkUp(field));
 		posList.addAll(checkDown(field));
 		return posList;
 
 	}
 
-	private List<Field> checkUp(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkUp(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (y <= 6 && isFieldAccessible(field.getChesspiece(), chessboard.getField(x, ++y))) {
@@ -130,8 +133,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkDown(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkDown(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (y >= 1 && isFieldAccessible(field.getChesspiece(), chessboard.getField(x, --y))) {
@@ -142,8 +145,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkDiagonal(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkDiagonal(IField field) {
+		List<IField> posList = new LinkedList<>();
 		posList.addAll(checkRightUp(field));
 		posList.addAll(checkLeftUp(field));
 		posList.addAll(checkLeftDown(field));
@@ -151,8 +154,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkRightUp(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkRightUp(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (y <= 6 && x <= 6 && isFieldAccessible(field.getChesspiece(), chessboard.getField(++x, ++y))) {
@@ -163,8 +166,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkLeftUp(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkLeftUp(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (y <= 6 && x >= 1 && isFieldAccessible(field.getChesspiece(), chessboard.getField(--x, ++y))) {
@@ -175,8 +178,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkLeftDown(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkLeftDown(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (y >= 1 && x >= 1 && isFieldAccessible(field.getChesspiece(), chessboard.getField(--x, --y))) {
@@ -187,8 +190,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkRightDown(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkRightDown(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		while (y >= 1 && x <= 6 && isFieldAccessible(field.getChesspiece(), chessboard.getField(++x, --y))) {
@@ -199,7 +202,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private void checkKnightRightUp(Field field, List<Field> posList) {
+	private void checkKnightRightUp(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x <= 5 && y <= 6) {
@@ -210,7 +213,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private void checkKnightRightDown(Field field, List<Field> posList) {
+	private void checkKnightRightDown(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x <= 5 && y >= 1) {
@@ -221,7 +224,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private void checkKnightUpRight(Field field, List<Field> posList) {
+	private void checkKnightUpRight(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x <= 6 && y <= 5) {
@@ -232,7 +235,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private void checkKnightUpLeft(Field field, List<Field> posList) {
+	private void checkKnightUpLeft(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 1 && y <= 5) {
@@ -243,7 +246,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private void checkKnightLeftUp(Field field, List<Field> posList) {
+	private void checkKnightLeftUp(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 2 && y <= 6) {
@@ -254,7 +257,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private void checkKnightLeftDown(Field field, List<Field> posList) {
+	private void checkKnightLeftDown(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 2 && y >= 1) {
@@ -265,7 +268,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private void checkKnightDownLeft(Field field, List<Field> posList) {
+	private void checkKnightDownLeft(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 1 && y >= 2) {
@@ -276,7 +279,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private void checkKnightDownRight(Field field, List<Field> posList) {
+	private void checkKnightDownRight(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 1 && y >= 2) {
@@ -287,8 +290,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 	}
 
-	private List<Field> checkWhitePawn(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkWhitePawn(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		Field up = chessboard.getField(x, y + 1);
@@ -312,8 +315,8 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkBlackPawn(Field field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkBlackPawn(IField field) {
+		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		Field down = chessboard.getField(x, y - 1);
@@ -337,7 +340,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkRochade(Field field) {
+	private List<Field> checkRochade(IField field) {
 		List<Field> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;

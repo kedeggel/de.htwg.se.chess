@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.chess.model.Field;
+import de.htwg.chess.model.impl.Field;
 
 public class FieldTest extends TestCase {
 	Field pos;
@@ -13,11 +13,6 @@ public class FieldTest extends TestCase {
 	@Before
 	public void setUp() {
 		pos = new Field('A', 1);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testField() {
-		new Field('I', 2);
 	}
 
 	@Test

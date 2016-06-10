@@ -1,16 +1,22 @@
-package de.htwg.chess.model;
+package de.htwg.chess.model.impl;
 
-import static de.htwg.chess.model.FieldConstants.*;
+import static de.htwg.chess.model.impl.FieldConstants.*;
+
 import java.util.LinkedList;
 import java.util.List;
 
-public class Team {
+import de.htwg.chess.model.IChesspiece;
+import de.htwg.chess.model.IField;
+import de.htwg.chess.model.ITeam;
+import de.htwg.chess.model.MoveCheckerVisitor;
+
+public class Team implements ITeam {
 	public enum Color {
 		WHITE, BLACK
 	}
 
 	private Color color;
-	private List<Chesspiece> pieceList;
+	private List<IChesspiece> pieceList;
 	private Chessboard chessboard;
 	private MoveCheckerVisitor mc;
 	private King king;
@@ -54,7 +60,8 @@ public class Team {
 		pieceList.add(new Rook(color, chessboard.getField(H, y)));
 	}
 
-	public void move(Chesspiece cp, Field target) {
+	@Override
+	public void move(IChesspiece cp, IField target) {
 		if (pieceList.contains(cp)) {
 			updatePosMoves();
 			cp.move(target);
@@ -62,7 +69,8 @@ public class Team {
 		}
 	}
 
-	public List<Chesspiece> getPieceList() {
+	@Override
+	public List<IChesspiece> getPieceList() {
 		return pieceList;
 	}
 
@@ -70,6 +78,7 @@ public class Team {
 		return color;
 	}
 
+	@Override
 	public Color opponent() {
 		if (this.color == Color.WHITE)
 			return Color.BLACK;
@@ -78,7 +87,7 @@ public class Team {
 	}
 
 	public void updatePosMoves() {
-		for (Chesspiece piece : pieceList)
+		for (IChesspiece piece : pieceList)
 			piece.checkPossibleMoves(mc);
 	}
 

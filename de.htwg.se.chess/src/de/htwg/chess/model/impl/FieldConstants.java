@@ -1,4 +1,4 @@
-package de.htwg.chess.model;
+package de.htwg.chess.model.impl;
 
 public final class FieldConstants {
 

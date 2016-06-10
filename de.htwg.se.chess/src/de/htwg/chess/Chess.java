@@ -1,6 +1,6 @@
 package de.htwg.chess;
 
-import de.htwg.chess.controller.ChessController;
+import de.htwg.chess.controller.impl.ChessController;
 
 public class Chess {
 	private ChessController controller;

@@ -2,18 +2,20 @@ package de.htwg.chess.model;
 
 import java.util.List;
 
+import de.htwg.chess.model.impl.Field;
+
 public interface MoveCheckerVisitor {
 
-	public List<Field> checkQueen(Field field);
+	public List<IField> checkQueen(IField field);
 
-	public List<Field> checkKing(Field field);
+	public List<IField> checkKing(IField field);
 
-	public List<Field> checkRook(Field field);
+	public List<IField> checkRook(IField field);
 
-	public List<Field> checkBishop(Field field);
+	public List<IField> checkBishop(IField field);
 
-	public List<Field> checkKnight(Field field);
+	public List<IField> checkKnight(IField field);
 
-	public List<Field> checkPawn(Field field);
+	public List<IField> checkPawn(IField field);
 
 }

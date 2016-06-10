@@ -1,6 +1,8 @@
-package de.htwg.chess.model;
+package de.htwg.chess.model.impl;
 
-public final class Field {
+import de.htwg.chess.model.IField;
+
+public final class Field implements IField {
 	private char x;
 	private int y;
 	private Chesspiece cp;
@@ -20,6 +22,7 @@ public final class Field {
 		return true;
 	}
 
+	@Override
 	public char getX() {
 		return x;
 	}
@@ -28,6 +31,7 @@ public final class Field {
 		return setPosition(x, this.y);
 	}
 
+	@Override
 	public int getY() {
 		return y;
 	}
@@ -36,10 +40,12 @@ public final class Field {
 		return setPosition(this.x, y);
 	}
 
+	@Override
 	public Chesspiece getChesspiece() {
 		return cp;
 	}
 
+	@Override
 	public void setChesspiece(Chesspiece cp) {
 		Chesspiece old_cp = this.cp;
 		this.cp = cp;
@@ -57,7 +63,8 @@ public final class Field {
 			return false;
 		return true;
 	}
-	
+
+	@Override
 	public boolean isFieldOccupied() {
 		if (cp != null)
 			return true;
