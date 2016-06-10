@@ -38,6 +38,8 @@ public class Chessboard implements IChessboard {
 	}
 
 	public Field getField(int x, int y) {
+		if (x < 0 || x > 7 || y < 0 || y > 7)
+			return null;
 		return board[x][y];
 	}
 

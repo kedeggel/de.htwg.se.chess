@@ -38,8 +38,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 
 	@Override
 	public List<IField> checkKing(IField field) {
-		// TODO Auto-generated method stub
-		return null;
+		return checkNeighbourFields(field);
 	}
 
 	@Override
@@ -206,7 +205,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x <= 5 && y <= 6) {
-			Field fieldToTest = chessboard.getField(x + 2, y + 1);
+			IField fieldToTest = chessboard.getField(x + 2, y + 1);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -217,7 +216,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x <= 5 && y >= 1) {
-			Field fieldToTest = chessboard.getField(x + 2, y - 1);
+			IField fieldToTest = chessboard.getField(x + 2, y - 1);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -228,7 +227,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x <= 6 && y <= 5) {
-			Field fieldToTest = chessboard.getField(x + 1, y + 2);
+			IField fieldToTest = chessboard.getField(x + 1, y + 2);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -239,7 +238,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 1 && y <= 5) {
-			Field fieldToTest = chessboard.getField(x - 1, y + 2);
+			IField fieldToTest = chessboard.getField(x - 1, y + 2);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -250,7 +249,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 2 && y <= 6) {
-			Field fieldToTest = chessboard.getField(x - 2, y + 1);
+			IField fieldToTest = chessboard.getField(x - 2, y + 1);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -261,7 +260,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 2 && y >= 1) {
-			Field fieldToTest = chessboard.getField(x - 2, y - 1);
+			IField fieldToTest = chessboard.getField(x - 2, y - 1);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -272,7 +271,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 1 && y >= 2) {
-			Field fieldToTest = chessboard.getField(x - 1, y - 2);
+			IField fieldToTest = chessboard.getField(x - 1, y - 2);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -283,7 +282,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		if (x >= 1 && y >= 2) {
-			Field fieldToTest = chessboard.getField(x + 1, y - 2);
+			IField fieldToTest = chessboard.getField(x + 1, y - 2);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
 			}
@@ -294,18 +293,18 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
-		Field up = chessboard.getField(x, y + 1);
+		IField up = chessboard.getField(x, y + 1);
 		if (x > 0) {
-			Field upleft = chessboard.getField(x - 1, y + 1);
+			IField upleft = chessboard.getField(x - 1, y + 1);
 			if (isFieldOccupiedByEnemy(field.getChesspiece(), upleft))
 				posList.add(upleft);
 		}
 		if (x < 7) {
-			Field upright = chessboard.getField(x + 1, y + 1);
+			IField upright = chessboard.getField(x + 1, y + 1);
 			if (isFieldOccupiedByEnemy(field.getChesspiece(), upright))
 				posList.add(upright);
 		}
-		Field upup = chessboard.getField(x, y + 2);
+		IField upup = chessboard.getField(x, y + 2);
 		if (!up.isFieldOccupied()) {
 			posList.add(up);
 			if (y == 1 && !upup.isFieldOccupied())
@@ -319,18 +318,18 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		List<IField> posList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
-		Field down = chessboard.getField(x, y - 1);
+		IField down = chessboard.getField(x, y - 1);
 		if (x > 0) {
-			Field downleft = chessboard.getField(x - 1, y - 1);
+			IField downleft = chessboard.getField(x - 1, y - 1);
 			if (isFieldOccupiedByEnemy(field.getChesspiece(), downleft))
 				posList.add(downleft);
 		}
 		if (x < 7) {
-			Field downright = chessboard.getField(x + 1, y - 1);
+			IField downright = chessboard.getField(x + 1, y - 1);
 			if (isFieldOccupiedByEnemy(field.getChesspiece(), downright))
 				posList.add(downright);
 		}
-		Field downdown = chessboard.getField(x, y - 2);
+		IField downdown = chessboard.getField(x, y - 2);
 		if (!down.isFieldOccupied()) {
 			posList.add(down);
 			if (y == 6 && !downdown.isFieldOccupied())
@@ -340,17 +339,37 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		return posList;
 	}
 
-	private List<Field> checkRochade(IField field) {
-		List<Field> posList = new LinkedList<>();
+	private List<IField> checkNeighbourFields(IField field) {
+		List<IField> posList = new LinkedList<>();
+		List<IField> testList = new LinkedList<>();
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
-		Field left1 = chessboard.getField(x - 1, y);
-		Field left2 = chessboard.getField(x - 2, y);
-		Field left3 = chessboard.getField(x - 3, y);
-		Field leftRookPos = chessboard.getField(x - 4, y);
-		Field right1 = chessboard.getField(x + 1, y);
-		Field right2 = chessboard.getField(x + 2, y);
-		Field rightRookPos = chessboard.getField(x + 3, y);
+		testList.add(chessboard.getField(x, y - 1));
+		testList.add(chessboard.getField(x, y + 1));
+		testList.add(chessboard.getField(x - 1, y));
+		testList.add(chessboard.getField(x + 1, y));
+		testList.add(chessboard.getField(x + 1, y + 1));
+		testList.add(chessboard.getField(x + 1, y - 1));
+		testList.add(chessboard.getField(x - 1, y + 1));
+		testList.add(chessboard.getField(x - 1, y - 1));
+		for (IField f : testList) {
+			if (f != null && isFieldAccessible(field.getChesspiece(), f))
+				posList.add(f);
+		}
+		return posList;
+	}
+
+	private List<IField> checkRochade(IField field) {
+		List<IField> posList = new LinkedList<>();
+		int x = field.getX() - 'A';
+		int y = field.getY() - 1;
+		IField left1 = chessboard.getField(x - 1, y);
+		IField left2 = chessboard.getField(x - 2, y);
+		IField left3 = chessboard.getField(x - 3, y);
+		IField leftRookPos = chessboard.getField(x - 4, y);
+		IField right1 = chessboard.getField(x + 1, y);
+		IField right2 = chessboard.getField(x + 2, y);
+		IField rightRookPos = chessboard.getField(x + 3, y);
 		if (!chessboard.getField(x, y).getChesspiece().getWasMoved()) {
 			if (!leftRookPos.getChesspiece().getWasMoved() && !left1.isFieldOccupied() && !left2.isFieldOccupied()
 					&& !left3.isFieldOccupied()) {
