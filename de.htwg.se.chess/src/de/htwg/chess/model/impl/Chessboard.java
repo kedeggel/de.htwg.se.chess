@@ -37,6 +37,7 @@ public class Chessboard implements IChessboard {
 		teamlist[BLACK.ordinal()] = new Team(BLACK, this, moveChecker);
 	}
 
+	@Override
 	public Field getField(int x, int y) {
 		if (x < 0 || x > 7 || y < 0 || y > 7)
 			return null;
@@ -58,7 +59,17 @@ public class Chessboard implements IChessboard {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++)
-				sb.append(board[i][j] + ": " + board[i][j].getChesspiece() + "\n");
+				sb.append(board[j][i] + ": " + board[j][i].getChesspiece() + "\n");
+		return sb.toString();
+	}
+
+	@Override
+	public String toSimpleString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++)
+				if (board[j][i].getChesspiece() != null)
+					sb.append(board[j][i] + ": " + board[j][i].getChesspiece() + "\n");
 		return sb.toString();
 	}
 

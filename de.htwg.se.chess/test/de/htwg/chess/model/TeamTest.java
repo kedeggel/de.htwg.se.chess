@@ -13,9 +13,9 @@ import de.htwg.chess.model.impl.Chesspiece;
 import de.htwg.chess.model.impl.Team;
 
 public final class TeamTest extends TestCase {
-	Chessboard chessboard;
-	Team white;
-	Team black;
+	IChessboard chessboard;
+	ITeam white;
+	ITeam black;
 
 	@Before
 	public void setUp() {
@@ -45,7 +45,7 @@ public final class TeamTest extends TestCase {
 
 	@Test
 	public void testMove() {
-		Chesspiece testpiece = chessboard.getField(A, TWO).getChesspiece();
+		IChesspiece testpiece = chessboard.getField(A, TWO).getChesspiece();
 		white.move(testpiece, chessboard.getField(A, THREE));
 		assertTrue(testpiece.getField() == chessboard.getField(A, THREE));
 		assertNull(chessboard.getField(A, TWO).getChesspiece());

@@ -59,12 +59,13 @@ public abstract class Chesspiece implements IChesspiece {
 		return this.field;
 	}
 
-	public boolean getWasMoved() {
+	@Override
+	public boolean wasMoved() {
 		return wasMoved;
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " " + getColor() + " " + field;
+		return getClass().getSimpleName() + " " + getColor();
 	}
 }

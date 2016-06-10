@@ -4,7 +4,7 @@ import de.htwg.chess.model.impl.Chesspiece;
 
 public interface IField {
 
-	Chesspiece getChesspiece();
+	IChesspiece getChesspiece();
 
 	void setChesspiece(Chesspiece chesspiece);
 

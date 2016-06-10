@@ -14,5 +14,6 @@ public interface ITeam {
 
 	IChesspiece getKing();
 
+	Color getColor();
 
 }

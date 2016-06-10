@@ -2,8 +2,6 @@ package de.htwg.chess.model;
 
 import java.util.List;
 
-import de.htwg.chess.model.impl.Field;
-
 public interface MoveCheckerVisitor {
 
 	public List<IField> checkQueen(IField field);

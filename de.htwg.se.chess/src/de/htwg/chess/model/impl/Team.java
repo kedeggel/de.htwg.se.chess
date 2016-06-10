@@ -74,6 +74,7 @@ public class Team implements ITeam {
 		return pieceList;
 	}
 
+	@Override
 	public Color getColor() {
 		return color;
 	}

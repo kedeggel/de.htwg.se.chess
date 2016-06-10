@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 
 public final class ChessBoardTest extends TestCase {
 	Chessboard chessboard;
-	
+
 	@Before
 	public void setUp() {
 		chessboard = new Chessboard();
@@ -31,9 +31,16 @@ public final class ChessBoardTest extends TestCase {
 						+ "G8: Knight BLACK G8\nH1: Rook WHITE H1\nH2: Pawn WHITE H2\nH3: null\nH4: null\n"
 						+ "H5: null\nH6: null\nH7: Pawn BLACK H7\nH8: Rook BLACK H8\n"));
 	}
-	
+
 	public void testTeamGetter() {
 		assertTrue(chessboard.getTeam(Color.WHITE).toString() == "WHITE");
 		assertTrue(chessboard.getTeam(Color.BLACK).toString() == "BLACK");
+	}
+
+	public void testMove() {
+		System.out.println(chessboard.toString());
+		System.out.println(chessboard.getField(1, 0).getChesspiece());
+		chessboard.getTeam(Color.WHITE).move(chessboard.getField(1, 0).getChesspiece(), chessboard.getField(0, 2));
+		System.out.println(chessboard.toString());
 	}
 }

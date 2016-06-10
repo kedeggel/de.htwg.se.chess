@@ -24,13 +24,14 @@ public class ChessController extends Observable implements IChessController {
 	private boolean isInCheckWhite;
 	private boolean isInCheckBlack;
 	private boolean checkmate;
+	private StringBuilder statusMessage;
 
 	public ChessController() {
 		board = new Chessboard();
 		white = board.getTeam(WHITE);
 		black = board.getTeam(BLACK);
 		isOnTurn = white;
-		checkmate = false;
+		setCheckmate(false);
 		isInCheckWhite = false;
 		isInCheckBlack = false;
 	}
@@ -42,28 +43,40 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	@Override
-	public boolean move(IField start, IField target) {
-		Chesspiece cp = start.getChesspiece();
+	public boolean move(char startX, int startY, char targetX, int targetY) {
+		IField start = board.getField(startX - 'A', startY - 1);
+		IField target = board.getField(targetX - 'A', startY - 1);
+		IChesspiece cp = start.getChesspiece();
+		IChesspiece pieceOnTarget = target.getChesspiece();
 		if (isOnTurn == white) {
-			if (!white.getPieceList().contains(cp))
+			if (!white.getPieceList().contains(cp)) {
+				statusMessage = new StringBuilder(cp.toString() + " is not one of white's chesspieces.\n");
 				return false;
+			}
 			white.move(cp, target);
 		} else if (isOnTurn == black) {
-			if (!black.getPieceList().contains(cp))
+			if (!black.getPieceList().contains(cp)) {
+				statusMessage = new StringBuilder(cp.toString() + " is not one of black's chesspieces.\n");
 				return false;
+			}
 			black.move(cp, target);
 		}
+		if (target.getChesspiece() == pieceOnTarget) {
+			statusMessage = new StringBuilder(start.toString() + "-" + target.toString() + " is not a valid draw.\n");
+			return false;
+		} else
+			statusMessage = new StringBuilder(cp.toString() + " hit " + pieceOnTarget.toString() + ".\n");
+		checkCheck(board.getTeam(isOnTurn.opponent()));
 		notifyObservers();
 		return true;
 	}
 
-	@Override
-	public void checkCheck(ITeam toTest) {
+	private void checkCheck(ITeam toTest) {
 		for (IChesspiece cp : board.getTeam(toTest.opponent()).getPieceList()) {
 			boolean check = cp.getPossibleMoves().contains(toTest.getKing().getField());
 			setCheck(toTest, check);
+			statusMessage.append("Check!\n");
 		}
-		notifyObservers();
 	}
 
 	@Override
@@ -77,6 +90,13 @@ public class ChessController extends Observable implements IChessController {
 
 	@Override
 	public void restart() {
+		board = new Chessboard();
+		white = board.getTeam(WHITE);
+		black = board.getTeam(BLACK);
+		isOnTurn = white;
+		setCheckmate(false);
+		isInCheckWhite = false;
+		isInCheckBlack = false;
 		notifyObservers();
 	}
 
@@ -101,10 +121,32 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	@Override
-	public void addObserver(IObserver s) {
-		// TODO Auto-generated method stub
-		
+	public boolean isCheckmate() {
+		return checkmate;
 	}
 
+	@Override
+	public ITeam whoIsOnTurn() {
+		return isOnTurn;
+	}
+
+	public void setCheckmate(boolean checkmate) {
+		this.checkmate = checkmate;
+	}
+
+	@Override
+	public String printBoard() {
+		return board.toSimpleString();
+	}
+
+	@Override
+	public String printTotalBoard() {
+		return board.toString();
+	}
+
+	@Override
+	public String getStatusMessage() {
+		return statusMessage.toString();
+	}
 
 }
