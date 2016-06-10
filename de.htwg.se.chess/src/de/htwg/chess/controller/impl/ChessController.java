@@ -45,27 +45,28 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public boolean move(char startX, int startY, char targetX, int targetY) {
 		IField start = board.getField(startX - 'A', startY - 1);
-		IField target = board.getField(targetX - 'A', startY - 1);
+		IField target = board.getField(targetX - 'A', targetY - 1);
 		IChesspiece cp = start.getChesspiece();
 		IChesspiece pieceOnTarget = target.getChesspiece();
+		//String victim = pieceOnTarget.toString();
 		if (isOnTurn == white) {
 			if (!white.getPieceList().contains(cp)) {
-				statusMessage = new StringBuilder(cp.toString() + " is not one of white's chesspieces.\n");
+//				statusMessage = new StringBuilder(cp.toString() + " is not one of white's chesspieces.\n");
 				return false;
 			}
 			white.move(cp, target);
 		} else if (isOnTurn == black) {
 			if (!black.getPieceList().contains(cp)) {
-				statusMessage = new StringBuilder(cp.toString() + " is not one of black's chesspieces.\n");
+//				statusMessage = new StringBuilder(cp.toString() + " is not one of black's chesspieces.\n");
 				return false;
 			}
 			black.move(cp, target);
 		}
 		if (target.getChesspiece() == pieceOnTarget) {
-			statusMessage = new StringBuilder(start.toString() + "-" + target.toString() + " is not a valid draw.\n");
+			//statusMessage = new StringBuilder(start.toString() + "-" + target.toString() + " is not a valid draw.\n");
 			return false;
 		} else
-			statusMessage = new StringBuilder(cp.toString() + " hit " + pieceOnTarget.toString() + ".\n");
+			//statusMessage = new StringBuilder(cp.toString() + " hit " + victim + ".\n");
 		checkCheck(board.getTeam(isOnTurn.opponent()));
 		notifyObservers();
 		return true;
@@ -75,7 +76,7 @@ public class ChessController extends Observable implements IChessController {
 		for (IChesspiece cp : board.getTeam(toTest.opponent()).getPieceList()) {
 			boolean check = cp.getPossibleMoves().contains(toTest.getKing().getField());
 			setCheck(toTest, check);
-			statusMessage.append("Check!\n");
+			//statusMessage.append("Check!\n");
 		}
 	}
 
