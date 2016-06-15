@@ -14,4 +14,7 @@ public interface IField {
 
 	boolean isFieldOccupied();
 
+	@Override
+	String toString();
+
 }

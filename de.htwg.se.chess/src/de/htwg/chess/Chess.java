@@ -21,7 +21,6 @@ public class Chess {
 		scanner = new Scanner(System.in);
 		while (continu) {
 			continu = tui.processInputLine(scanner.next());
-			controller.nextRound();
 		}
 	}
 }

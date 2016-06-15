@@ -92,7 +92,7 @@ public class Team implements ITeam {
 			piece.checkPossibleMoves(mc);
 	}
 
-	public void addChesspiece(Chesspiece cp) {
+	public void addChesspiece(IChesspiece cp) {
 		pieceList.add(cp);
 		updatePosMoves();
 	}
@@ -104,6 +104,12 @@ public class Team implements ITeam {
 	@Override
 	public String toString() {
 		return color.toString();
+	}
+
+	@Override
+	public void removeChesspiece(IChesspiece cp) {
+		pieceList.remove(cp);
+		updatePosMoves();
 	}
 
 }

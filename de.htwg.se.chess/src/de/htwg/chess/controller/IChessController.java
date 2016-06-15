@@ -7,7 +7,7 @@ public interface IChessController extends IObservable {
 
 	void nextRound();
 
-	boolean move(char startX, int startY, char targetX, int targetY);
+	void move(char startX, int startY, char targetX, int targetY);
 
 	void setCheck(ITeam team, boolean isInCheck);
 

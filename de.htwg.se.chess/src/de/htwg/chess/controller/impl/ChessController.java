@@ -24,7 +24,8 @@ public class ChessController extends Observable implements IChessController {
 	private boolean isInCheckWhite;
 	private boolean isInCheckBlack;
 	private boolean checkmate;
-	private StringBuilder statusMessage;
+	private String statusMessage;
+	private boolean moveAccepted;
 
 	public ChessController() {
 		board = new Chessboard();
@@ -43,40 +44,71 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	@Override
-	public boolean move(char startX, int startY, char targetX, int targetY) {
+	public void move(char startX, int startY, char targetX, int targetY) {
 		IField start = board.getField(startX - 'A', startY - 1);
+		if (start == null) {
+			statusMessage = startX + "" + startY + " is not a valid position.\n";
+			moveAccepted = false;
+			notifyObservers();
+			return;
+		}
 		IField target = board.getField(targetX - 'A', targetY - 1);
+		if (target == null) {
+			statusMessage = targetX + "" + targetY + " is not a valid position.\n";
+			moveAccepted = false;
+			notifyObservers();
+			return;
+		}
 		IChesspiece cp = start.getChesspiece();
 		IChesspiece pieceOnTarget = target.getChesspiece();
-		//String victim = pieceOnTarget.toString();
 		if (isOnTurn == white) {
 			if (!white.getPieceList().contains(cp)) {
-//				statusMessage = new StringBuilder(cp.toString() + " is not one of white's chesspieces.\n");
-				return false;
+				if (cp == null)
+					statusMessage = "No chesspiece on " + start.toString() + ".\n";
+				else
+					statusMessage = cp.toString() + " is not one of white's chesspieces.\n";
+				moveAccepted = false;
+				notifyObservers();
+				return;
 			}
 			white.move(cp, target);
+
 		} else if (isOnTurn == black) {
 			if (!black.getPieceList().contains(cp)) {
-//				statusMessage = new StringBuilder(cp.toString() + " is not one of black's chesspieces.\n");
-				return false;
+				if (cp == null)
+					statusMessage = "No chesspiece on " + start.toString() + ".\n";
+				else
+					statusMessage = cp.toString() + " is not one of black's chesspieces.\n";
+				moveAccepted = false;
+				notifyObservers();
+				return;
 			}
 			black.move(cp, target);
 		}
+
 		if (target.getChesspiece() == pieceOnTarget) {
-			//statusMessage = new StringBuilder(start.toString() + "-" + target.toString() + " is not a valid draw.\n");
-			return false;
-		} else
-			//statusMessage = new StringBuilder(cp.toString() + " hit " + victim + ".\n");
+			statusMessage = start.toString() + "-" + target.toString() + " is not a valid draw.\n";
+			moveAccepted = false;
+			notifyObservers();
+			return;
+		} else if (pieceOnTarget != null && pieceOnTarget.getField() == null){
+			board.getTeam(isOnTurn.opponent()).removeChesspiece(pieceOnTarget);
+			statusMessage = cp.toString() + " hit " + pieceOnTarget.toString() + " on " + target.toString() + ".\n";
+		}
+		else
+			statusMessage = cp.toString() + " moved to " + target.toString() + ".\n";
 		checkCheck(board.getTeam(isOnTurn.opponent()));
+		moveAccepted = true;
+		nextRound();
 		notifyObservers();
-		return true;
 	}
 
 	private void checkCheck(ITeam toTest) {
 		for (IChesspiece cp : board.getTeam(toTest.opponent()).getPieceList()) {
 			boolean check = cp.getPossibleMoves().contains(toTest.getKing().getField());
 			setCheck(toTest, check);
-			//statusMessage.append("Check!\n");
+			if (check)
+				statusMessage = new String(statusMessage + "Check!");
 		}
 	}
 

@@ -16,4 +16,6 @@ public interface ITeam {
 
 	Color getColor();
 
+	void removeChesspiece(IChesspiece cp);
+
 }
