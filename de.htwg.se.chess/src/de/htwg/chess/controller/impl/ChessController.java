@@ -90,6 +90,7 @@ public class ChessController extends Observable implements IChessController {
 		} else
 			statusMessage = cp.toString() + " moved to " + target.toString() + ".\n";
 
+		board.getTeam(isOnTurn.opponent()).updatePosMoves();
 		checkCheck(isOnTurn);
 		if (getIsInCheck(isOnTurn)) {
 			cp.setField(start);
@@ -109,15 +110,15 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	private void checkCheck(ITeam toTest) {
+		boolean wasInCheck = getIsInCheck(toTest);
 		for (IChesspiece cp : board.getTeam(toTest.opponent()).getPieceList()) {
-			boolean wasInCheck = getIsInCheck(toTest);
 			boolean check = cp.getPossibleMoves().contains(toTest.getKing().getField());
 			setCheck(toTest, check);
 			if (check) {
 				statusMessage = new String(statusMessage + "Check!");
 				break;
 			}
-			if (wasInCheck) {
+			if (!check && wasInCheck) {
 				statusMessage = new String(statusMessage + "Broke check ;) !");
 			}
 		}
