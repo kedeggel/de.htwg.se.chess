@@ -88,6 +88,7 @@ public class Team implements ITeam {
 			return Color.WHITE;
 	}
 
+	@Override
 	public void updatePosMoves() {
 		for (IChesspiece piece : pieceList)
 			piece.checkPossibleMoves(mc);
