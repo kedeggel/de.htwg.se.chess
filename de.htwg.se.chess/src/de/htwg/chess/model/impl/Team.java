@@ -5,6 +5,7 @@ import static de.htwg.chess.model.impl.FieldConstants.*;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.htwg.chess.model.IChessboard;
 import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.ITeam;
@@ -17,11 +18,11 @@ public class Team implements ITeam {
 
 	private Color color;
 	private List<IChesspiece> pieceList;
-	private Chessboard chessboard;
+	private IChessboard chessboard;
 	private MoveCheckerVisitor mc;
-	private King king;
+	private IChesspiece king;
 
-	public Team(Color color, Chessboard chessboard, MoveCheckerVisitor mc) {
+	public Team(Color color, IChessboard chessboard, MoveCheckerVisitor mc) {
 		this.chessboard = chessboard;
 		this.color = color;
 		this.mc = mc;
@@ -92,12 +93,13 @@ public class Team implements ITeam {
 			piece.checkPossibleMoves(mc);
 	}
 
+	@Override
 	public void addChesspiece(IChesspiece cp) {
 		pieceList.add(cp);
 		updatePosMoves();
 	}
 
-	public King getKing() {
+	public IChesspiece getKing() {
 		return king;
 	}
 

@@ -1,11 +1,12 @@
 package de.htwg.chess.model.impl;
 
+import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 
 public final class Field implements IField {
 	private char x;
 	private int y;
-	private Chesspiece cp;
+	private IChesspiece cp;
 
 	public Field(char x, int y) throws IllegalArgumentException {
 		if (!setPosition(x, y))
@@ -41,13 +42,13 @@ public final class Field implements IField {
 	}
 
 	@Override
-	public Chesspiece getChesspiece() {
+	public IChesspiece getChesspiece() {
 		return cp;
 	}
 
 	@Override
-	public void setChesspiece(Chesspiece cp) {
-		Chesspiece old_cp = this.cp;
+	public void setChesspiece(IChesspiece cp) {
+		IChesspiece old_cp = this.cp;
 		this.cp = cp;
 		if (cp != null && this == cp.getField()) // figur ist bereits her
 			return;
@@ -58,8 +59,8 @@ public final class Field implements IField {
 
 	}
 
-	public boolean samePosition(Field pos) {
-		if (pos == null || this.x != pos.x || this.y != pos.y)
+	public boolean samePosition(IField pos) {
+		if (pos == null || this.x != pos.getX() || this.y != pos.getY())
 			return false;
 		return true;
 	}

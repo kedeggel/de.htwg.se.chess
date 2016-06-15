@@ -2,15 +2,16 @@ package de.htwg.chess.model.impl;
 
 import java.util.LinkedList;
 import java.util.List;
+import de.htwg.chess.model.IChessboard;
 import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.MoveCheckerVisitor;
 import de.htwg.chess.model.impl.Team.Color;
 
 public final class MoveChecker implements MoveCheckerVisitor {
-	private Chessboard chessboard;
+	private IChessboard chessboard;
 
-	public MoveChecker(Chessboard chessboard) {
+	public MoveChecker(IChessboard chessboard) {
 		this.chessboard = chessboard;
 	}
 

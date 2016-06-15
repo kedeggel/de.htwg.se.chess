@@ -14,7 +14,7 @@ public abstract class Chesspiece implements IChesspiece {
 	protected boolean wasMoved;
 	protected List<IField> possibleMoves;
 
-	public Chesspiece(Color color, Field field) {
+	public Chesspiece(Color color, IField field) {
 		this.color = color;
 		this.setField(field);
 		this.wasMoved = false;
@@ -39,6 +39,7 @@ public abstract class Chesspiece implements IChesspiece {
 		}
 	}
 
+	@Override
 	public void setField(IField target) {
 		IField old_position = this.field;
 		this.field = target;
