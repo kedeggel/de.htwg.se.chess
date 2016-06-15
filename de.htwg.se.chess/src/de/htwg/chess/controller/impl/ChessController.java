@@ -5,11 +5,6 @@ import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.ITeam;
 import de.htwg.chess.model.impl.Chessboard;
-import de.htwg.chess.model.impl.Chesspiece;
-import de.htwg.chess.model.impl.Field;
-import de.htwg.chess.model.impl.Team;
-import de.htwg.util.observer.Event;
-import de.htwg.util.observer.IObserver;
 import de.htwg.util.observer.Observable;
 
 import static de.htwg.chess.model.impl.Team.Color.*;
@@ -21,8 +16,7 @@ public class ChessController extends Observable implements IChessController {
 	private ITeam white;
 	private ITeam black;
 	private ITeam isOnTurn;
-	private boolean isInCheckWhite;
-	private boolean isInCheckBlack;
+	private boolean[] isInCheck;
 	private boolean checkmate;
 	private String statusMessage;
 	private boolean moveAccepted;
@@ -32,9 +26,8 @@ public class ChessController extends Observable implements IChessController {
 		white = board.getTeam(WHITE);
 		black = board.getTeam(BLACK);
 		isOnTurn = white;
+		isInCheck = new boolean[2];
 		setCheckmate(false);
-		isInCheckWhite = false;
-		isInCheckBlack = false;
 	}
 
 	@Override
@@ -91,12 +84,24 @@ public class ChessController extends Observable implements IChessController {
 			moveAccepted = false;
 			notifyObservers();
 			return;
-		} else if (pieceOnTarget != null && pieceOnTarget.getField() == null){
+		} else if (pieceOnTarget != null && pieceOnTarget.getField() == null) {
 			board.getTeam(isOnTurn.opponent()).removeChesspiece(pieceOnTarget);
 			statusMessage = cp.toString() + " hit " + pieceOnTarget.toString() + " on " + target.toString() + ".\n";
-		}
-		else
+		} else
 			statusMessage = cp.toString() + " moved to " + target.toString() + ".\n";
+
+		checkCheck(isOnTurn);
+		if (getIsInCheck(isOnTurn)) {
+			cp.setField(start);
+			if (pieceOnTarget != null) {
+				pieceOnTarget.setField(target);
+				board.getTeam(isOnTurn.opponent()).addChesspiece(pieceOnTarget);
+			}
+			moveAccepted = false;
+			isInCheck[teamToInt(isOnTurn)] = false;
+			return;
+		}
+
 		checkCheck(board.getTeam(isOnTurn.opponent()));
 		moveAccepted = true;
 		nextRound();
@@ -105,19 +110,22 @@ public class ChessController extends Observable implements IChessController {
 
 	private void checkCheck(ITeam toTest) {
 		for (IChesspiece cp : board.getTeam(toTest.opponent()).getPieceList()) {
+			boolean wasInCheck = getIsInCheck(toTest);
 			boolean check = cp.getPossibleMoves().contains(toTest.getKing().getField());
 			setCheck(toTest, check);
-			if (check)
+			if (check) {
 				statusMessage = new String(statusMessage + "Check!");
+				break;
+			}
+			if (wasInCheck) {
+				statusMessage = new String(statusMessage + "Broke check ;) !");
+			}
 		}
 	}
 
 	@Override
-	public void setCheck(ITeam team, boolean isInCheck) {
-		if (team == white)
-			isInCheckWhite = isInCheck;
-		else if (team == black)
-			isInCheckBlack = isInCheck;
+	public void setCheck(ITeam team, boolean isCheck) {
+		isInCheck[teamToInt(team)] = isCheck;
 		notifyObservers();
 	}
 
@@ -128,8 +136,7 @@ public class ChessController extends Observable implements IChessController {
 		black = board.getTeam(BLACK);
 		isOnTurn = white;
 		setCheckmate(false);
-		isInCheckWhite = false;
-		isInCheckBlack = false;
+		isInCheck = new boolean[2];
 		notifyObservers();
 	}
 
@@ -180,6 +187,14 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public String getStatusMessage() {
 		return statusMessage.toString();
+	}
+
+	private int teamToInt(ITeam team) {
+		return team.getColor().ordinal();
+	}
+
+	private boolean getIsInCheck(ITeam team) {
+		return isInCheck[team.getColor().ordinal()];
 	}
 
 }
