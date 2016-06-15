@@ -281,7 +281,7 @@ public final class MoveChecker implements MoveCheckerVisitor {
 	private void checkKnightDownRight(IField field, List<IField> posList) {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
-		if (x >= 1 && y >= 2) {
+		if (x <= 6 && y >= 2) {
 			IField fieldToTest = chessboard.getField(x + 1, y - 2);
 			if (isFieldAccessible(field.getChesspiece(), fieldToTest)) {
 				posList.add(fieldToTest);
