@@ -18,4 +18,6 @@ public interface IChesspiece {
 
 	boolean wasMoved();
 
+	void setField(IField target);
+
 }

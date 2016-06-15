@@ -1,12 +1,11 @@
 package de.htwg.chess.model;
 
-import de.htwg.chess.model.impl.Chesspiece;
 
 public interface IField {
 
 	IChesspiece getChesspiece();
 
-	void setChesspiece(Chesspiece chesspiece);
+	void setChesspiece(IChesspiece cp);
 
 	char getX();
 
@@ -16,5 +15,6 @@ public interface IField {
 
 	@Override
 	String toString();
+
 
 }

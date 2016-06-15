@@ -10,4 +10,6 @@ public interface IChessboard {
 
 	String toSimpleString();
 
+	void updateTeams();
+
 }

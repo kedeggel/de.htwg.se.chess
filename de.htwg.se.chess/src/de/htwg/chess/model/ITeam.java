@@ -18,4 +18,8 @@ public interface ITeam {
 
 	void removeChesspiece(IChesspiece cp);
 
+	void addChesspiece(IChesspiece cp);
+
+	void updatePosMoves();
+
 }
