@@ -100,6 +100,7 @@ public class Team implements ITeam {
 		updatePosMoves();
 	}
 
+	@Override
 	public IChesspiece getKing() {
 		return king;
 	}

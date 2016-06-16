@@ -40,12 +40,12 @@ public abstract class Chesspiece implements IChesspiece {
 
 	@Override
 	public void setField(IField target) {
-		IField old_position = this.field;
+		IField oldPosition = this.field;
 		this.field = target;
 		if (target != null && this == target.getChesspiece())
 			return;
-		if (old_position != null)
-			old_position.setChesspiece(null);
+		if (oldPosition != null)
+			oldPosition.setChesspiece(null);
 		if (target != null)
 			target.setChesspiece(this);
 	}
@@ -55,6 +55,7 @@ public abstract class Chesspiece implements IChesspiece {
 		return this.color;
 	}
 
+	@Override
 	public IField getField() {
 		return this.field;
 	}

@@ -8,7 +8,7 @@ public final class Field implements IField {
 	private int y;
 	private IChesspiece cp;
 
-	public Field(char x, int y) throws IllegalArgumentException {
+	public Field(char x, int y) {
 		if (!setPosition(x, y))
 			throw new IllegalArgumentException(x + "" + y + " is not a valid Position");
 		cp = null;
@@ -48,12 +48,12 @@ public final class Field implements IField {
 
 	@Override
 	public void setChesspiece(IChesspiece cp) {
-		IChesspiece old_cp = this.cp;
+		IChesspiece oldCp = this.cp;
 		this.cp = cp;
 		if (cp != null && this == cp.getField()) // figur ist bereits her
 			return;
-		if (old_cp != null) // altem cp bescheid, dass keine pos mehr hat
-			old_cp.setField(null);
+		if (oldCp != null) // altem cp bescheid, dass keine pos mehr hat
+			oldCp.setField(null);
 		if (cp != null)
 			cp.setField(this); // neuem cp sagen, wo es steht
 

@@ -8,39 +8,38 @@ import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
 
 public class TextUI implements IObserver {
-	protected IChessController controller;
 	private static final Logger LOGGER = LogManager.getLogger(TextUI.class.getName());
-	private final String help = "HELP\n" + "h\t\t\thelp\nq\t\t\tquit\n" + "r\t\t\trestart\n"
+	private static final String HELP = "HELP\n" + "h\t\t\thelp\nq\t\t\tquit\n" + "r\t\t\trestart\n"
 			+ "print\t\t\tprint current chessboard w/o empty fields\n"
 			+ "printall\t\tprint current chessboard with empty fields\n" + "u\t\t\tundo\n"
 			+ "[A-H][1-8]-[A-H][1-8]\tMove from ... to ...";
+	protected IChessController controller;
 
 	public TextUI(IChessController controller) {
 		this.controller = controller;
 		this.controller.addObserver(this);
 		LOGGER.info("Welcome to CHESS!");
-		LOGGER.info(help);
+		LOGGER.info(HELP);
 	}
 
 	public boolean processInputLine(String line) {
-
-		if (line.equalsIgnoreCase("q") || line.equalsIgnoreCase("quit")) {
+		if ("q".equalsIgnoreCase(line)) {
 			LOGGER.info("Exit...");
 			return false;
-		} else if (line.equalsIgnoreCase("r") || line.equalsIgnoreCase("restart")) {
+		} else if ("r".equalsIgnoreCase(line)) {
 			LOGGER.info("New Game");
 			controller.restart();
 			return true;
-		} else if (line.equalsIgnoreCase("print")) {
+		} else if ("print".equalsIgnoreCase(line)) {
 			LOGGER.info(controller.printBoard());
 			return true;
-		} else if (line.equalsIgnoreCase("printall")) {
+		} else if ("printall".equalsIgnoreCase(line)) {
 			LOGGER.info(controller.printTotalBoard());
 			return true;
-		} else if (line.equalsIgnoreCase("h") || line.equalsIgnoreCase("help")) {
-			LOGGER.info(help);
+		} else if ("h".equalsIgnoreCase(line)) {
+			LOGGER.info(HELP);
 			return true;
-		} else if (line.matches("[a-zA-Z][0-9]-[a-zA-Z][0-9]")) {
+		} else if ("[a-zA-Z][0-9]-[a-zA-Z][0-9]".matches(line)) {
 			char startX = Character.toUpperCase(line.charAt(0));
 			int startY = Integer.parseInt(line.substring(1, 2));
 			char targetX = Character.toUpperCase(line.charAt(3));
