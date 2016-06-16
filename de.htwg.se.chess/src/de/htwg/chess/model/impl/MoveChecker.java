@@ -370,12 +370,12 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		IField right1 = chessboard.getField(x + 1, y);
 		IField right2 = chessboard.getField(x + 2, y);
 		IField rightRookPos = chessboard.getField(x + 3, y);
-		if (!chessboard.getField(x, y).getChesspiece().wasMoved()) {
-			if (!leftRookPos.getChesspiece().wasMoved() && !left1.isFieldOccupied() && !left2.isFieldOccupied()
+		if (!chessboard.getField(x, y).getChesspiece().getWasMoved()) {
+			if (!leftRookPos.getChesspiece().getWasMoved() && !left1.isFieldOccupied() && !left2.isFieldOccupied()
 					&& !left3.isFieldOccupied()) {
 				posList.add(left2);
 			}
-			if (!rightRookPos.getChesspiece().wasMoved() && !right1.isFieldOccupied() && !right2.isFieldOccupied()) {
+			if (!rightRookPos.getChesspiece().getWasMoved() && !right1.isFieldOccupied() && !right2.isFieldOccupied()) {
 				posList.add(right2);
 			}
 		}

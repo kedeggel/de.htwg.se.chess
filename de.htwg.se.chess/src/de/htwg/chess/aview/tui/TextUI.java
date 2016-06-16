@@ -23,19 +23,22 @@ public class TextUI implements IObserver {
 	}
 
 	public boolean processInputLine(String line) {
-		if (line.equalsIgnoreCase("q")) {
+
+		if (line.equalsIgnoreCase("q") || line.equalsIgnoreCase("quit")) {
+			LOGGER.info("Exit...");
 			return false;
-		} else if (line.equalsIgnoreCase("r")) {
+		} else if (line.equalsIgnoreCase("r") || line.equalsIgnoreCase("restart")) {
+			LOGGER.info("New Game");
 			controller.restart();
 			return true;
 		} else if (line.equalsIgnoreCase("print")) {
-			LOGGER.entry(controller.printBoard());
+			LOGGER.info(controller.printBoard());
 			return true;
 		} else if (line.equalsIgnoreCase("printall")) {
-			LOGGER.entry(controller.printTotalBoard());
+			LOGGER.info(controller.printTotalBoard());
 			return true;
-		} else if (line.equalsIgnoreCase("h")) {
-			LOGGER.entry(help);
+		} else if (line.equalsIgnoreCase("h") || line.equalsIgnoreCase("help")) {
+			LOGGER.info(help);
 			return true;
 		} else if (line.matches("[a-zA-Z][0-9]-[a-zA-Z][0-9]")) {
 			char startX = Character.toUpperCase(line.charAt(0));
@@ -44,13 +47,16 @@ public class TextUI implements IObserver {
 			int targetY = Integer.parseInt(line.substring(4, 5));
 			controller.move(startX, startY, targetX, targetY);
 			LOGGER.info(controller.getStatusMessage());
+			if (controller.isCheckmate()) {
+				LOGGER.info(controller.whoIsOnTurn().opponent().toString() + " won :) !\n"
+						+ controller.whoIsOnTurn().toString() + " lost :( !");
+				return false;
+			}
 			return true;
-		} else if (controller.isCheckmate()) {
-			LOGGER.entry(controller.whoIsOnTurn().toString() + " won :) !\n"
-					+ controller.whoIsOnTurn().opponent().toString() + " lost :( !");
-			return false;
+		} else {
+			LOGGER.info("Insert \'h\' for help");
+			return true;
 		}
-		return true;
 	}
 
 	@Override

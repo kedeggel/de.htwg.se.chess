@@ -1,7 +1,6 @@
 package de.htwg.chess.model.impl;
 
 import java.util.List;
-
 import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.MoveCheckerVisitor;
@@ -61,8 +60,13 @@ public abstract class Chesspiece implements IChesspiece {
 	}
 
 	@Override
-	public boolean wasMoved() {
+	public boolean getWasMoved() {
 		return wasMoved;
+	}
+
+	@Override
+	public void setWasMoved(boolean wasMoved) {
+		this.wasMoved = wasMoved;
 	}
 
 	@Override

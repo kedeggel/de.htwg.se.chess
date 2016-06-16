@@ -20,6 +20,7 @@ public class ChessController extends Observable implements IChessController {
 	private boolean checkmate;
 	private String statusMessage;
 	private boolean moveAccepted;
+	private boolean raedyToTransform;
 
 	public ChessController() {
 		board = new Chessboard();
@@ -27,7 +28,7 @@ public class ChessController extends Observable implements IChessController {
 		black = board.getTeam(BLACK);
 		isOnTurn = white;
 		isInCheck = new boolean[2];
-		setCheckmate(false);
+		checkmate = false;
 	}
 
 	@Override
@@ -38,6 +39,7 @@ public class ChessController extends Observable implements IChessController {
 
 	@Override
 	public void move(char startX, int startY, char targetX, int targetY) {
+		boolean wasMoved = false;
 		IField start = board.getField(startX - 'A', startY - 1);
 		if (start == null) {
 			statusMessage = startX + "" + startY + " is not a valid position.\n";
@@ -53,6 +55,9 @@ public class ChessController extends Observable implements IChessController {
 			return;
 		}
 		IChesspiece cp = start.getChesspiece();
+		if (cp != null) {
+			wasMoved = cp.getWasMoved();
+		}
 		IChesspiece pieceOnTarget = target.getChesspiece();
 		if (isOnTurn == white) {
 			if (!white.getPieceList().contains(cp)) {
@@ -98,12 +103,17 @@ public class ChessController extends Observable implements IChessController {
 				pieceOnTarget.setField(target);
 				board.getTeam(isOnTurn.opponent()).addChesspiece(pieceOnTarget);
 			}
+			cp.setWasMoved(wasMoved);
 			moveAccepted = false;
 			isInCheck[teamToInt(isOnTurn)] = false;
+			statusMessage = new String(
+					start.toString() + "-" + target.toString() + " is not a valid draw (King were still in chess).");
 			return;
 		}
-
 		checkCheck(board.getTeam(isOnTurn.opponent()));
+		if (getIsInCheck(board.getTeam(isOnTurn.opponent()))) {
+			checkForMate();
+		}
 		moveAccepted = true;
 		nextRound();
 		notifyObservers();
@@ -111,16 +121,17 @@ public class ChessController extends Observable implements IChessController {
 
 	private void checkCheck(ITeam toTest) {
 		boolean wasInCheck = getIsInCheck(toTest);
+		boolean check = false;
 		for (IChesspiece cp : board.getTeam(toTest.opponent()).getPieceList()) {
-			boolean check = cp.getPossibleMoves().contains(toTest.getKing().getField());
+			check = cp.getPossibleMoves().contains(toTest.getKing().getField());
 			setCheck(toTest, check);
 			if (check) {
 				statusMessage = new String(statusMessage + "Check!");
 				break;
 			}
-			if (!check && wasInCheck) {
-				statusMessage = new String(statusMessage + "Broke check ;) !");
-			}
+		}
+		if (!check && wasInCheck) {
+			statusMessage = new String(statusMessage + "Broke check ;) !");
 		}
 	}
 
@@ -136,9 +147,39 @@ public class ChessController extends Observable implements IChessController {
 		white = board.getTeam(WHITE);
 		black = board.getTeam(BLACK);
 		isOnTurn = white;
-		setCheckmate(false);
+		checkmate = false;
 		isInCheck = new boolean[2];
 		notifyObservers();
+	}
+
+	private void checkForMate() {
+		ITeam toTest = board.getTeam(isOnTurn.opponent());
+		for (IChesspiece cp : toTest.getPieceList()) {
+			for (IField field : cp.getPossibleMoves()) {
+				IField startfield = cp.getField();
+				IChesspiece pieceOnTarget = field.getChesspiece();
+				cp.setField(field);
+				isOnTurn.removeChesspiece(pieceOnTarget);
+				isOnTurn.updatePosMoves();
+				for (IChesspiece enemy : isOnTurn.getPieceList()) {
+					if (enemy.getPossibleMoves().contains(toTest.getKing().getField())) {
+						checkmate = true;
+						cp.setField(startfield);
+						if (pieceOnTarget != null) {
+							pieceOnTarget.setField(field);
+							isOnTurn.addChesspiece(pieceOnTarget);
+						}
+						break;
+					}
+					checkmate = false;
+				}
+				cp.setField(startfield);
+				if (pieceOnTarget != null) {
+					pieceOnTarget.setField(field);
+					isOnTurn.addChesspiece(pieceOnTarget);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -169,10 +210,6 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public ITeam whoIsOnTurn() {
 		return isOnTurn;
-	}
-
-	public void setCheckmate(boolean checkmate) {
-		this.checkmate = checkmate;
 	}
 
 	@Override
