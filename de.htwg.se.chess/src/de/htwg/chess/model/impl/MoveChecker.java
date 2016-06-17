@@ -294,22 +294,24 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		IField up = chessboard.getField(x, y + 1);
-		if (x > 0) {
-			IField upleft = chessboard.getField(x - 1, y + 1);
-			if (isFieldOccupiedByEnemy(field.getChesspiece(), upleft))
-				posList.add(upleft);
-		}
-		if (x < 7) {
-			IField upright = chessboard.getField(x + 1, y + 1);
-			if (isFieldOccupiedByEnemy(field.getChesspiece(), upright))
-				posList.add(upright);
-		}
-		IField upup = chessboard.getField(x, y + 2);
-		if (!up.isFieldOccupied()) {
-			posList.add(up);
-			if (y == 1 && !upup.isFieldOccupied())
-				posList.add(upup);
+		if (y < 7) {
+			if (x > 0) {
+				IField upleft = chessboard.getField(x - 1, y + 1);
+				if (isFieldOccupiedByEnemy(field.getChesspiece(), upleft))
+					posList.add(upleft);
+			}
+			if (x < 7) {
+				IField upright = chessboard.getField(x + 1, y + 1);
+				if (isFieldOccupiedByEnemy(field.getChesspiece(), upright))
+					posList.add(upright);
+			}
+			IField upup = chessboard.getField(x, y + 2);
+			if (!up.isFieldOccupied()) {
+				posList.add(up);
+				if (y == 1 && !upup.isFieldOccupied())
+					posList.add(upup);
 
+			}
 		}
 		return posList;
 	}
@@ -319,22 +321,23 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		int x = field.getX() - 'A';
 		int y = field.getY() - 1;
 		IField down = chessboard.getField(x, y - 1);
-		if (x > 0) {
-			IField downleft = chessboard.getField(x - 1, y - 1);
-			if (isFieldOccupiedByEnemy(field.getChesspiece(), downleft))
-				posList.add(downleft);
-		}
-		if (x < 7) {
-			IField downright = chessboard.getField(x + 1, y - 1);
-			if (isFieldOccupiedByEnemy(field.getChesspiece(), downright))
-				posList.add(downright);
-		}
-		IField downdown = chessboard.getField(x, y - 2);
-		if (!down.isFieldOccupied()) {
-			posList.add(down);
-			if (y == 6 && !downdown.isFieldOccupied())
-				posList.add(downdown);
-
+		if (y > 0) {
+			if (x > 0) {
+				IField downleft = chessboard.getField(x - 1, y - 1);
+				if (isFieldOccupiedByEnemy(field.getChesspiece(), downleft))
+					posList.add(downleft);
+			}
+			if (x < 7) {
+				IField downright = chessboard.getField(x + 1, y - 1);
+				if (isFieldOccupiedByEnemy(field.getChesspiece(), downright))
+					posList.add(downright);
+			}
+			IField downdown = chessboard.getField(x, y - 2);
+			if (!down.isFieldOccupied()) {
+				posList.add(down);
+				if (y == 6 && !downdown.isFieldOccupied())
+					posList.add(downdown);
+			}
 		}
 		return posList;
 	}
