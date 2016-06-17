@@ -7,7 +7,7 @@ import de.htwg.chess.model.impl.Chessboard;
 import de.htwg.chess.model.impl.Team.Color;
 import junit.framework.TestCase;
 
-public final class ChessBoardTest extends TestCase {
+public final class ChessboardTest extends TestCase {
 	Chessboard chessboard;
 
 	@Before
