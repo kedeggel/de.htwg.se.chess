@@ -1,6 +1,7 @@
 package de.htwg.chess.aview.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,8 @@ public class BoardPanel extends JPanel {
 					button.setBackground(DARK);
 				else
 					button.setBackground(BRIGHT);
-
+				button.setText("\u265A");
+				button.setFont(new Font("Dialog", 0, 50));
 				this.add(button);
 			}
 		}

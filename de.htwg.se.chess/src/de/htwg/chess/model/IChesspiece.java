@@ -22,4 +22,6 @@ public interface IChesspiece {
 
 	void setWasMoved(boolean wasMoved);
 
+	String toSymbole();
+
 }

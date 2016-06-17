@@ -74,4 +74,10 @@ public abstract class Chesspiece implements IChesspiece {
 	public String toString() {
 		return getClass().getSimpleName() + " " + getColor();
 	}
+
+	@Override
+	public String toSymbole() {
+		return null;
+
+	}
 }
