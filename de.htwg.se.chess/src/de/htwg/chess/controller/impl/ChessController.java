@@ -4,7 +4,11 @@ import de.htwg.chess.model.IChessboard;
 import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.ITeam;
+import de.htwg.chess.model.impl.Bishop;
 import de.htwg.chess.model.impl.Chessboard;
+import de.htwg.chess.model.impl.Knight;
+import de.htwg.chess.model.impl.Queen;
+import de.htwg.chess.model.impl.Rook;
 import de.htwg.util.observer.Observable;
 
 import static de.htwg.chess.model.impl.Team.Color.*;
@@ -19,8 +23,8 @@ public class ChessController extends Observable implements IChessController {
 	private boolean[] isInCheck;
 	private boolean checkmate;
 	private String statusMessage;
-	private boolean moveAccepted;
-	private boolean raedyToTransform;
+	private boolean readyToTransform;
+	private IChesspiece cpToTranform;
 
 	public ChessController() {
 		board = new Chessboard();
@@ -43,14 +47,12 @@ public class ChessController extends Observable implements IChessController {
 		IField start = board.getField(startX - 'A', startY - 1);
 		if (start == null) {
 			statusMessage = startX + "" + startY + " is not a valid position.\n";
-			moveAccepted = false;
 			notifyObservers();
 			return;
 		}
 		IField target = board.getField(targetX - 'A', targetY - 1);
 		if (target == null) {
 			statusMessage = targetX + "" + targetY + " is not a valid position.\n";
-			moveAccepted = false;
 			notifyObservers();
 			return;
 		}
@@ -59,34 +61,33 @@ public class ChessController extends Observable implements IChessController {
 			wasMoved = cp.getWasMoved();
 		}
 		IChesspiece pieceOnTarget = target.getChesspiece();
-		if (isOnTurn == white) {
-			if (!white.getPieceList().contains(cp)) {
-				if (cp == null)
-					statusMessage = "No chesspiece on " + start.toString() + ".\n";
-				else
-					statusMessage = cp.toString() + " is not one of white's chesspieces.\n";
-				moveAccepted = false;
-				notifyObservers();
-				return;
-			}
-			white.move(cp, target);
 
-		} else if (isOnTurn == black) {
-			if (!black.getPieceList().contains(cp)) {
-				if (cp == null)
-					statusMessage = "No chesspiece on " + start.toString() + ".\n";
-				else
-					statusMessage = cp.toString() + " is not one of black's chesspieces.\n";
-				moveAccepted = false;
-				notifyObservers();
-				return;
-			}
-			black.move(cp, target);
+		if (!isOnTurn.getPieceList().contains(cp)) {
+			if (cp == null)
+				statusMessage = "No chesspiece on " + start.toString() + ".\n";
+			else
+				statusMessage = cp.toString() + " is not one of " + isOnTurn.getColor() + "'s chesspieces.\n";
+			notifyObservers();
+			return;
 		}
+		isOnTurn.move(cp, target);
+
+		/*
+		 * if (isOnTurn == white) { if (!white.getPieceList().contains(cp)) { if
+		 * (cp == null) statusMessage = "No chesspiece on " + start.toString() +
+		 * ".\n"; else statusMessage = cp.toString() +
+		 * " is not one of white's chesspieces.\n"; notifyObservers(); return; }
+		 * white.move(cp, target);
+		 * 
+		 * } else if (isOnTurn == black) { if
+		 * (!black.getPieceList().contains(cp)) { if (cp == null) statusMessage
+		 * = "No chesspiece on " + start.toString() + ".\n"; else statusMessage
+		 * = cp.toString() + " is not one of black's chesspieces.\n";
+		 * notifyObservers(); return; } black.move(cp, target); }
+		 */
 
 		if (target.getChesspiece() == pieceOnTarget) {
 			statusMessage = start.toString() + "-" + target.toString() + " is not a valid draw.\n";
-			moveAccepted = false;
 			notifyObservers();
 			return;
 		} else if (pieceOnTarget != null && pieceOnTarget.getField() == null) {
@@ -104,19 +105,30 @@ public class ChessController extends Observable implements IChessController {
 				board.getTeam(isOnTurn.opponent()).addChesspiece(pieceOnTarget);
 			}
 			cp.setWasMoved(wasMoved);
-			moveAccepted = false;
 			isInCheck[teamToInt(isOnTurn)] = false;
 			statusMessage = new String(
-					start.toString() + "-" + target.toString() + " is not a valid draw (King were still in chess).");
+					start.toString() + "-" + target.toString() + " is not a valid draw (King were still in chess).\n");
 			return;
 		}
 		checkCheck(board.getTeam(isOnTurn.opponent()));
 		if (getIsInCheck(board.getTeam(isOnTurn.opponent()))) {
 			checkForMate();
 		}
-		moveAccepted = true;
+		checkForTranform(cp, target);
 		nextRound();
 		notifyObservers();
+	}
+
+	private void checkForTranform(IChesspiece cp, IField target) {
+		if ("Pawn".equals(cp.getClass().getSimpleName()))
+			if (target.getY() == 8 || target.getY() == 1) {
+				readyToTransform = true;
+				cpToTranform = cp;
+				statusMessage = new String(statusMessage
+						+ "Insert: QUEEN, ROOK, BISHOP or KNIGHT to tranform pawn into this.\n");
+				return;
+			}
+		readyToTransform = false;
 	}
 
 	private void checkCheck(ITeam toTest) {
@@ -183,22 +195,38 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	@Override
-	public void tranformToQueen() {
+	public void transformToQueen() {
+		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+		board.getTeam(cpToTranform.getColor())
+				.addChesspiece(new Queen(cpToTranform.getColor(), cpToTranform.getField()));
+		readyToTransform = false;
 		notifyObservers();
 	}
 
 	@Override
-	public void tranformToBishop() {
+	public void transformToBishop() {
+		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+		board.getTeam(cpToTranform.getColor())
+				.addChesspiece(new Bishop(cpToTranform.getColor(), cpToTranform.getField()));
+		readyToTransform = false;
 		notifyObservers();
 	}
 
 	@Override
-	public void tranformToRook() {
+	public void transformToRook() {
+		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+		board.getTeam(cpToTranform.getColor())
+				.addChesspiece(new Rook(cpToTranform.getColor(), cpToTranform.getField()));
+		readyToTransform = false;
 		notifyObservers();
 	}
 
 	@Override
-	public void tranformToKnight() {
+	public void transformToKnight() {
+		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+		board.getTeam(cpToTranform.getColor())
+				.addChesspiece(new Knight(cpToTranform.getColor(), cpToTranform.getField()));
+		readyToTransform = false;
 		notifyObservers();
 	}
 
@@ -233,6 +261,11 @@ public class ChessController extends Observable implements IChessController {
 
 	private boolean getIsInCheck(ITeam team) {
 		return isInCheck[team.getColor().ordinal()];
+	}
+
+	@Override
+	public boolean isReadyToTransform() {
+		return readyToTransform;
 	}
 
 }

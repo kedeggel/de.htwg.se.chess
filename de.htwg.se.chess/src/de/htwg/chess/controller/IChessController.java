@@ -13,13 +13,13 @@ public interface IChessController extends IObservable {
 
 	void restart();
 
-	void tranformToQueen();
+	void transformToQueen();
 
-	void tranformToRook();
+	void transformToRook();
 
-	void tranformToBishop();
+	void transformToBishop();
 
-	void tranformToKnight();
+	void transformToKnight();
 
 	String printBoard();
 
@@ -30,5 +30,7 @@ public interface IChessController extends IObservable {
 	String printTotalBoard();
 
 	String getStatusMessage();
+
+	boolean isReadyToTransform();
 
 }
