@@ -1,7 +1,6 @@
 package de.htwg.chess;
 
 import com.google.inject.AbstractModule;
-
 import de.htwg.chess.controller.IChessController;
 
 public class ChessModule extends AbstractModule {
