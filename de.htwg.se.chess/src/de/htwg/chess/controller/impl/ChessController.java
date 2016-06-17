@@ -17,8 +17,6 @@ import de.htwg.chess.controller.IChessController;
 
 public class ChessController extends Observable implements IChessController {
 	private IChessboard board;
-	private ITeam white;
-	private ITeam black;
 	private ITeam isOnTurn;
 	private boolean[] isInCheck;
 	private boolean checkmate;
@@ -28,9 +26,7 @@ public class ChessController extends Observable implements IChessController {
 
 	public ChessController() {
 		board = new Chessboard();
-		white = board.getTeam(WHITE);
-		black = board.getTeam(BLACK);
-		isOnTurn = white;
+		isOnTurn = board.getTeam(WHITE);
 		isInCheck = new boolean[2];
 		checkmate = false;
 	}
@@ -71,20 +67,6 @@ public class ChessController extends Observable implements IChessController {
 			return;
 		}
 		isOnTurn.move(cp, target);
-
-		/*
-		 * if (isOnTurn == white) { if (!white.getPieceList().contains(cp)) { if
-		 * (cp == null) statusMessage = "No chesspiece on " + start.toString() +
-		 * ".\n"; else statusMessage = cp.toString() +
-		 * " is not one of white's chesspieces.\n"; notifyObservers(); return; }
-		 * white.move(cp, target);
-		 * 
-		 * } else if (isOnTurn == black) { if
-		 * (!black.getPieceList().contains(cp)) { if (cp == null) statusMessage
-		 * = "No chesspiece on " + start.toString() + ".\n"; else statusMessage
-		 * = cp.toString() + " is not one of black's chesspieces.\n";
-		 * notifyObservers(); return; } black.move(cp, target); }
-		 */
 
 		if (target.getChesspiece() == pieceOnTarget) {
 			statusMessage = start.toString() + "-" + target.toString() + " is not a valid draw.\n";
@@ -156,9 +138,7 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public void restart() {
 		board = new Chessboard();
-		white = board.getTeam(WHITE);
-		black = board.getTeam(BLACK);
-		isOnTurn = white;
+		isOnTurn = board.getTeam(WHITE);
 		checkmate = false;
 		isInCheck = new boolean[2];
 		notifyObservers();

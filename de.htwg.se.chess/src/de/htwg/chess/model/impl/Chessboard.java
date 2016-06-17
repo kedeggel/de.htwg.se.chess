@@ -4,7 +4,6 @@ import static de.htwg.chess.model.impl.Team.Color.*;
 
 import de.htwg.chess.model.IChessboard;
 import de.htwg.chess.model.IField;
-import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.ITeam;
 import de.htwg.chess.model.MoveCheckerVisitor;
 
@@ -18,11 +17,9 @@ public class Chessboard implements IChessboard {
 	private IField[][] board;
 	private ITeam[] teamlist;
 	private MoveCheckerVisitor moveChecker;
-	private IFieldFactory fieldFactory;
 
 	public Chessboard() {
 		moveChecker = new MoveChecker(this);
-		fieldFactory = new FieldFactory();
 		initChessboard();
 		initTeamlist();
 
@@ -32,7 +29,7 @@ public class Chessboard implements IChessboard {
 		board = new Field[8][8];
 		for (char x = 'A'; x <= 'H'; x++) {
 			for (int y = 1; y <= 8; y++) {
-				board[x - 'A'][y - 1] = fieldFactory.createField(x, y);
+				board[x - 'A'][y - 1] = new Field(x, y);
 			}
 		}
 	}
