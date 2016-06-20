@@ -23,11 +23,11 @@ public class ChessFrame extends JFrame implements IObserver {
 		setSize(DEFAULT_X + 5, DEFAULT_Y);
 		setJMenuBar(new ChessMenuBar(controller, this));
 		pane = getContentPane();
-		constructChessPane(controller);
+		constructChessPane();
 		setResizable(false);
 	}
 
-	public final void constructChessPane(IChessController controller) {
+	public final void constructChessPane() {
 		boardPanel = new BoardPanel(controller);
 		boardPanel.setSize(DEFAULT_X, DEFAULT_X);
 		pane.add(boardPanel);
@@ -42,6 +42,9 @@ public class ChessFrame extends JFrame implements IObserver {
 	@Override
 	public void update(Event e) {
 		infoPanel.setText(controller.whoIsOnTurn().toString());
+		for(ChessButton cb : boardPanel.getButtonList()) {
+			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
+		}
 	}
 
 }

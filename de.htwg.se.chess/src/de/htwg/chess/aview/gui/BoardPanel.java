@@ -18,7 +18,8 @@ import de.htwg.chess.controller.IChessController;
 public class BoardPanel extends JPanel {
 	private static final long serialVersionUID = 8813550997072332166L;
 	private static final int FIELDSIZE = 8;
-	private List<JButton> buttonList;
+	private List<ChessButton> buttonList;
+
 	private IChessController controller;
 	private char fromX;
 	private int fromY;
@@ -35,35 +36,36 @@ public class BoardPanel extends JPanel {
 
 	private void buttonCreator(int size) {
 		buttonList = new ArrayList<>();
-		for (int i = 0; i < FIELDSIZE; i++) {
-			for (int j = 0; j < FIELDSIZE; j++) {
-				ChessButton button = new ChessButton((char) (i - 'A'), j - 1);
+		for (int i = FIELDSIZE; i > 0; i--) {
+			for (int j = FIELDSIZE-1; j >= 0; j--) {
+				ChessButton button = new ChessButton((char) (j + 'A'), i);
 				button.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (!selected) {
-							System.out.println("selected");
 							fromX = button.getXCoor();
 							fromY = button.getYCoor();
 							selected = true;
 						} else {
-							System.out.println("Not selected");
 							controller.move(fromX, fromY, button.getXCoor(), button.getYCoor());
 							selected = false;
 						}
 
 					}
 				});
+				button.setText(controller.getSymboleByField(button.getXCoor(), button.getYCoor()));
 				buttonList.add(button);
 				if ((i + j) % 2 == 0)
 					button.setBackground(DARK);
 				else
 					button.setBackground(BRIGHT);
-				button.setText("\u265A");
 				button.setFont(new Font("Dialog", 0, 50));
 				this.add(button);
 			}
 		}
 	}
 
+	public List<ChessButton> getButtonList() {
+		return buttonList;
+	}
 }

@@ -106,8 +106,8 @@ public class ChessController extends Observable implements IChessController {
 			if (target.getY() == 8 || target.getY() == 1) {
 				readyToTransform = true;
 				cpToTranform = cp;
-				statusMessage = new String(statusMessage
-						+ "Insert: QUEEN, ROOK, BISHOP or KNIGHT to tranform pawn into this.\n");
+				statusMessage = new String(
+						statusMessage + "Insert: QUEEN, ROOK, BISHOP or KNIGHT to tranform pawn into this.\n");
 				return;
 			}
 		readyToTransform = false;
@@ -246,6 +246,14 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public boolean isReadyToTransform() {
 		return readyToTransform;
+	}
+
+	@Override
+	public String getSymboleByField(char x, int y) {
+		IChesspiece cp = board.getField(x - 'A', y - 1).getChesspiece();
+		if (cp != null)
+			return cp.toSymbole();
+		return "";
 	}
 
 }

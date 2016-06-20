@@ -33,4 +33,6 @@ public interface IChessController extends IObservable {
 
 	boolean isReadyToTransform();
 
+	String getSymboleByField(char x, int y);
+
 }
