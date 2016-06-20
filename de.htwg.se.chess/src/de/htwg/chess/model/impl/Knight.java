@@ -13,5 +13,11 @@ public class Knight extends Chesspiece {
 	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkKnight(field);
 	}
+	@Override
+	public String toSymbole() {
+		if (color == Color.WHITE)
+			return "\u2658";
+		return "\u265E";
 
+	}
 }

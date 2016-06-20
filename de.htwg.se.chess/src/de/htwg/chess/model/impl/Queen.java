@@ -14,5 +14,11 @@ public final class Queen extends Chesspiece {
 	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkQueen(field);
 	}
+	@Override
+	public String toSymbole() {
+		if (color == Color.WHITE)
+			return "\u2655";
+		return "\u265B";
 
+	}
 }

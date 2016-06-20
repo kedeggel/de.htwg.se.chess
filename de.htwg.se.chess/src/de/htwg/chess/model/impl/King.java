@@ -14,5 +14,13 @@ public class King extends Chesspiece {
 	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkKing(field);
 	}
+	
+	@Override
+	public String toSymbole() {
+		if (color == Color.WHITE)
+			return "\u2654";
+		return "\u265A";
+
+	}
 
 }

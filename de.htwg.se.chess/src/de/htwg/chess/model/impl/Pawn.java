@@ -15,4 +15,11 @@ public final class Pawn extends Chesspiece {
 		possibleMoves = mc.checkPawn(field);
 	}
 
+	@Override
+	public String toSymbole() {
+		if (color == Color.WHITE)
+			return "\u2659";
+		return "\u265F";
+
+	}
 }

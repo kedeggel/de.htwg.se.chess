@@ -14,5 +14,13 @@ public final class Bishop extends Chesspiece {
 	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkBishop(field);
 	}
+	
+	@Override
+	public String toSymbole() {
+		if (color == Color.WHITE)
+			return "\u2657";
+		return "\u265D";
+
+	}
 
 }

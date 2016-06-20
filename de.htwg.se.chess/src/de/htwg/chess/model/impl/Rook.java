@@ -14,4 +14,12 @@ public final class Rook extends Chesspiece {
 		possibleMoves = mc.checkRook(field);
 	}
 
+	@Override
+	public String toSymbole() {
+		if (color == Color.WHITE)
+			return "\u2656";
+		return "\u265C";
+
+	}
+
 }
