@@ -1,7 +1,6 @@
 package de.htwg.chess;
 
 import java.util.Scanner;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.htwg.chess.aview.gui.ChessFrame;
