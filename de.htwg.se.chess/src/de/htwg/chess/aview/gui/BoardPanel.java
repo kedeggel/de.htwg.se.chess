@@ -37,12 +37,13 @@ public class BoardPanel extends JPanel {
 	private void buttonCreator(int size) {
 		buttonList = new ArrayList<>();
 		for (int i = FIELDSIZE; i > 0; i--) {
-			for (int j = 0; j < FIELDSIZE; j--) {
+			for (int j = 0; j < FIELDSIZE; j++) {
 				ChessButton button = new ChessButton((char) (j + 'A'), i);
 				button.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if (!selected) {
+						if (!selected
+								&& !"".equals(controller.getSymboleByField(button.getXCoor(), button.getYCoor()))) {
 							fromX = button.getXCoor();
 							fromY = button.getYCoor();
 							selected = true;
@@ -50,7 +51,6 @@ public class BoardPanel extends JPanel {
 							controller.move(fromX, fromY, button.getXCoor(), button.getYCoor());
 							selected = false;
 						}
-
 					}
 				});
 				button.setText(controller.getSymboleByField(button.getXCoor(), button.getYCoor()));
@@ -63,6 +63,7 @@ public class BoardPanel extends JPanel {
 				this.add(button);
 			}
 		}
+
 	}
 
 	public List<ChessButton> getButtonList() {
