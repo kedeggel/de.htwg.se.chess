@@ -2,6 +2,8 @@ package de.htwg.chess.aview.gui;
 
 import java.awt.Container;
 import javax.swing.JFrame;
+import javax.swing.SpringLayout;
+
 import de.htwg.chess.controller.IChessController;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
@@ -23,8 +25,10 @@ public class ChessFrame extends JFrame implements IObserver {
 		setSize(DEFAULT_X + 5, DEFAULT_Y);
 		setJMenuBar(new ChessMenuBar(controller, this));
 		pane = getContentPane();
+		pane.setLayout(null);
 		constructChessPane();
 		setResizable(false);
+		setVisible(true);
 	}
 
 	public final void constructChessPane() {
@@ -34,17 +38,20 @@ public class ChessFrame extends JFrame implements IObserver {
 
 		infoPanel = new InfoPanel(controller);
 		infoPanel.setSize(DEFAULT_X, DEFAULT_Y - DEFAULT_X);
+		infoPanel.setLocation(0,DEFAULT_X);
 		pane.add(infoPanel);
 
-		setVisible(true);
+		
 	}
 
 	@Override
 	public void update(Event e) {
-		infoPanel.setText(controller.whoIsOnTurn().toString());
+		infoPanel.setTurn(controller.whoIsOnTurn().toString());
 		for(ChessButton cb : boardPanel.getButtonList()) {
 			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
+			
 		}
+		infoPanel.setStatus(controller.getStatusMessage());
 	}
 
 }
