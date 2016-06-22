@@ -90,11 +90,16 @@ public class ChessController extends Observable implements IChessController {
 			isInCheck[teamToInt(isOnTurn)] = false;
 			statusMessage = new String(
 					start.toString() + "-" + target.toString() + " is not a valid draw (King were still in chess).\n");
+			notifyObservers();
 			return;
 		}
 		checkCheck(board.getTeam(isOnTurn.opponent()));
 		if (getIsInCheck(board.getTeam(isOnTurn.opponent()))) {
 			checkForMate();
+		}
+		if (checkmate) {
+			statusMessage = whoIsOnTurn().opponent().toString() + " won :) ! " + whoIsOnTurn().toString()
+					+ " lost :( !";
 		}
 		checkForTranform(cp, target);
 		nextRound();
@@ -120,12 +125,12 @@ public class ChessController extends Observable implements IChessController {
 			check = cp.getPossibleMoves().contains(toTest.getKing().getField());
 			setCheck(toTest, check);
 			if (check) {
-				statusMessage = new String(statusMessage + "Check!");
+				statusMessage = new String(statusMessage + " Check!");
 				break;
 			}
 		}
 		if (!check && wasInCheck) {
-			statusMessage = new String(statusMessage + "Broke check ;) !");
+			statusMessage = new String(statusMessage + " Broke check ;) !");
 		}
 	}
 
@@ -141,6 +146,7 @@ public class ChessController extends Observable implements IChessController {
 		isOnTurn = board.getTeam(WHITE);
 		checkmate = false;
 		isInCheck = new boolean[2];
+		statusMessage = "";
 		notifyObservers();
 	}
 
@@ -152,7 +158,6 @@ public class ChessController extends Observable implements IChessController {
 				IChesspiece pieceOnTarget = field.getChesspiece();
 				cp.setField(field);
 				isOnTurn.removeChesspiece(pieceOnTarget);
-				isOnTurn.updatePosMoves();
 				for (IChesspiece enemy : isOnTurn.getPieceList()) {
 					if (enemy.getPossibleMoves().contains(toTest.getKing().getField())) {
 						checkmate = true;
@@ -180,6 +185,7 @@ public class ChessController extends Observable implements IChessController {
 		board.getTeam(cpToTranform.getColor())
 				.addChesspiece(new Queen(cpToTranform.getColor(), cpToTranform.getField()));
 		readyToTransform = false;
+		statusMessage = "Pawn transformed to Queen";
 		notifyObservers();
 	}
 
@@ -189,6 +195,7 @@ public class ChessController extends Observable implements IChessController {
 		board.getTeam(cpToTranform.getColor())
 				.addChesspiece(new Bishop(cpToTranform.getColor(), cpToTranform.getField()));
 		readyToTransform = false;
+		statusMessage = "Pawn transformed to Bishop";
 		notifyObservers();
 	}
 
@@ -198,6 +205,7 @@ public class ChessController extends Observable implements IChessController {
 		board.getTeam(cpToTranform.getColor())
 				.addChesspiece(new Rook(cpToTranform.getColor(), cpToTranform.getField()));
 		readyToTransform = false;
+		statusMessage = "Pawn transformed to Rook";
 		notifyObservers();
 	}
 
@@ -207,6 +215,7 @@ public class ChessController extends Observable implements IChessController {
 		board.getTeam(cpToTranform.getColor())
 				.addChesspiece(new Knight(cpToTranform.getColor(), cpToTranform.getField()));
 		readyToTransform = false;
+		statusMessage = "Pawn transformed to Knight";
 		notifyObservers();
 	}
 

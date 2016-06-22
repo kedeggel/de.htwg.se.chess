@@ -39,7 +39,6 @@ public class Chess {
 		while (continu) {
 			continu = game.getTui().processInputLine(scanner.next());
 		}
-		System.exit(0);
 	}
 
 }

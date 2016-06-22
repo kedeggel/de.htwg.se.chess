@@ -2,6 +2,7 @@ package de.htwg.chess.aview.tui;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.jmx.StatusLoggerAdminMBean;
 
 import de.htwg.chess.controller.IChessController;
 import de.htwg.util.observer.Event;
@@ -24,13 +25,12 @@ public class TextUI implements IObserver {
 
 	public boolean processInputLine(String line) {
 		if (controller.isReadyToTransform()) {
-			if (transformTo(line))
-				LOGGER.info("Pawn transformed to " + line.toUpperCase());
-			else
+			if (!transformTo(line))
 				LOGGER.info(line + " is not a valid chesspiece");
 			return true;
 		} else if ("q".equalsIgnoreCase(line)) {
 			LOGGER.info("Exit...");
+			System.exit(0);
 			return false;
 		} else if ("r".equalsIgnoreCase(line)) {
 			LOGGER.info("New Game");
@@ -51,10 +51,7 @@ public class TextUI implements IObserver {
 			char targetX = Character.toUpperCase(line.charAt(3));
 			int targetY = Integer.parseInt(line.substring(4, 5));
 			controller.move(startX, startY, targetX, targetY);
-			LOGGER.info(controller.getStatusMessage());
 			if (controller.isCheckmate()) {
-				LOGGER.info(controller.whoIsOnTurn().opponent().toString() + " won :) !\n"
-						+ controller.whoIsOnTurn().toString() + " lost :( !");
 				return false;
 			}
 			return true;
@@ -83,5 +80,6 @@ public class TextUI implements IObserver {
 
 	@Override
 	public void update(Event e) {
+		LOGGER.info(controller.getStatusMessage());
 	}
 }

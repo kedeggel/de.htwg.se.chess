@@ -2,6 +2,7 @@ package de.htwg.chess.aview.gui;
 
 import java.awt.Container;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SpringLayout;
 
 import de.htwg.chess.controller.IChessController;
@@ -38,20 +39,41 @@ public class ChessFrame extends JFrame implements IObserver {
 
 		infoPanel = new InfoPanel(controller);
 		infoPanel.setSize(DEFAULT_X, DEFAULT_Y - DEFAULT_X);
-		infoPanel.setLocation(0,DEFAULT_X);
+		infoPanel.setLocation(0, DEFAULT_X);
 		pane.add(infoPanel);
 
-		
 	}
 
 	@Override
 	public void update(Event e) {
 		infoPanel.setTurn(controller.whoIsOnTurn().toString());
-		for(ChessButton cb : boardPanel.getButtonList()) {
+		for (ChessButton cb : boardPanel.getButtonList()) {
 			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
-			
+		}
+		if (controller.isReadyToTransform()) {
+			transformBox();
 		}
 		infoPanel.setStatus(controller.getStatusMessage());
+	}
+
+	private void transformBox() {
+		Object[] options = { "Queen", "Rook", "Knight", "Bishop" };
+		int n = JOptionPane.showOptionDialog(pane, "Which kind of chesspiece do you want to transform into?",
+				"Transform", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		switch (n) {
+		case 0:
+			controller.transformToQueen();
+			break;
+		case 1:
+			controller.transformToRook();
+			break;
+		case 2:
+			controller.transformToKnight();
+			break;
+		case 3:
+			controller.transformToBishop();
+			break;
+		}
 	}
 
 }

@@ -50,6 +50,7 @@ public class BoardPanel extends JPanel {
 						} else {
 							controller.move(fromX, fromY, button.getXCoor(), button.getYCoor());
 							selected = false;
+
 						}
 					}
 				});
@@ -59,7 +60,7 @@ public class BoardPanel extends JPanel {
 					button.setBackground(DARK);
 				else
 					button.setBackground(BRIGHT);
-				button.setFont(new Font("Dialog", 0, 50));
+				button.setFont(new Font("Dialog", 0, 60));
 				this.add(button);
 			}
 		}
