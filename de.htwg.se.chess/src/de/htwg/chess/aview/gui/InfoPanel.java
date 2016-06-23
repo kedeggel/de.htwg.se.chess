@@ -6,14 +6,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-import de.htwg.chess.controller.IChessController;
 
 public class InfoPanel extends JPanel {
 	private static final long serialVersionUID = 7984280983097395322L;
 	private final JLabel turnLabel = new JLabel("WHITE");
 	private final JLabel statusLabel = new JLabel("");
 
-	public InfoPanel(IChessController controller) {
+	public InfoPanel() {
 		setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		add(turnLabel);
 		add(statusLabel);

@@ -35,4 +35,8 @@ public interface IChessController extends IObservable {
 
 	String getSymboleByField(char x, int y);
 
+	boolean isQuit();
+
+	void setQuit(boolean quit);
+
 }

@@ -7,9 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
@@ -31,10 +29,10 @@ public class BoardPanel extends JPanel {
 		this.controller = controller;
 		setLayout(new GridLayout(FIELDSIZE, FIELDSIZE));
 		setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-		buttonCreator(FIELDSIZE);
+		buttonCreator();
 	}
 
-	private void buttonCreator(int size) {
+	private void buttonCreator() {
 		buttonList = new ArrayList<>();
 		for (int i = FIELDSIZE; i > 0; i--) {
 			for (int j = 0; j < FIELDSIZE; j++) {

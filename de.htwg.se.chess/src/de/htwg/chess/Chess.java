@@ -13,13 +13,12 @@ public class Chess {
 	private static TextUI tui;
 	private static Scanner scanner;
 	private static Chess instance = null;
-	private static ChessFrame gui;
 
 	private Chess() {
 		Injector injector = Guice.createInjector(new ChessModule());
 		controller = injector.getInstance(IChessController.class);
 		tui = new TextUI(controller);
-		gui = new ChessFrame(controller);
+		new ChessFrame(controller);
 	}
 
 	public static Chess getInstance() {

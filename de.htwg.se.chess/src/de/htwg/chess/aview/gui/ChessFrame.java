@@ -37,7 +37,7 @@ public class ChessFrame extends JFrame implements IObserver {
 		boardPanel.setSize(DEFAULT_X, DEFAULT_X);
 		pane.add(boardPanel);
 
-		infoPanel = new InfoPanel(controller);
+		infoPanel = new InfoPanel();
 		infoPanel.setSize(DEFAULT_X, DEFAULT_Y - DEFAULT_X);
 		infoPanel.setLocation(0, DEFAULT_X);
 		pane.add(infoPanel);
@@ -60,6 +60,8 @@ public class ChessFrame extends JFrame implements IObserver {
 			break;
 		case 3:
 			controller.transformToBishop();
+			break;
+		default:
 			break;
 		}
 	}
@@ -84,6 +86,8 @@ public class ChessFrame extends JFrame implements IObserver {
 				break;
 			case 1:
 				System.exit(0);
+				break;
+			default:
 				break;
 			}
 		}

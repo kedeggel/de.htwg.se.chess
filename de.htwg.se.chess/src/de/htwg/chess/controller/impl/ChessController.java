@@ -7,6 +7,7 @@ import de.htwg.chess.model.ITeam;
 import de.htwg.chess.model.impl.Bishop;
 import de.htwg.chess.model.impl.Chessboard;
 import de.htwg.chess.model.impl.Knight;
+import de.htwg.chess.model.impl.Pawn;
 import de.htwg.chess.model.impl.Queen;
 import de.htwg.chess.model.impl.Rook;
 import de.htwg.util.observer.Observable;
@@ -23,6 +24,7 @@ public class ChessController extends Observable implements IChessController {
 	private String statusMessage;
 	private boolean readyToTransform;
 	private IChesspiece cpToTranform;
+	private boolean quit;
 
 	public ChessController() {
 		board = new Chessboard();
@@ -107,14 +109,13 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	private void checkForTranform(IChesspiece cp, IField target) {
-		if ("Pawn".equals(cp.getClass().getSimpleName()))
-			if (target.getY() == 8 || target.getY() == 1) {
-				readyToTransform = true;
-				cpToTranform = cp;
-				statusMessage = new String(
-						statusMessage + "Insert: QUEEN, ROOK, BISHOP or KNIGHT to tranform pawn into this.\n");
-				return;
-			}
+		if (cp instanceof Pawn && (target.getY() == 8 || target.getY() == 1)) {
+			readyToTransform = true;
+			cpToTranform = cp;
+			statusMessage = new String(
+					statusMessage + "Insert: QUEEN, ROOK, BISHOP or KNIGHT to tranform pawn into this.\n");
+			return;
+		}
 		readyToTransform = false;
 	}
 
@@ -264,6 +265,16 @@ public class ChessController extends Observable implements IChessController {
 		if (cp != null)
 			return cp.toSymbole();
 		return "";
+	}
+
+	@Override
+	public void setQuit(boolean quit) {
+		this.quit = quit;
+	}
+
+	@Override
+	public boolean isQuit() {
+		return false;
 	}
 
 }
