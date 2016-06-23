@@ -166,10 +166,6 @@ public class ChessController extends Observable implements IChessController {
 					if (enemy.getPossibleMoves().contains(toTest.getKing().getField())) {
 						checkmate = true;
 						cp.setField(startfield);
-						if (pieceOnTarget != null) {
-							pieceOnTarget.setField(field);
-							isOnTurn.addChesspiece(pieceOnTarget);
-						}
 						break;
 					}
 					checkmate = false;
