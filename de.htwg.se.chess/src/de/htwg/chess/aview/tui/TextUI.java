@@ -2,8 +2,6 @@ package de.htwg.chess.aview.tui;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.jmx.StatusLoggerAdminMBean;
-
 import de.htwg.chess.controller.IChessController;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;

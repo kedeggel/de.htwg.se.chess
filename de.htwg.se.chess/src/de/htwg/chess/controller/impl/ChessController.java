@@ -34,7 +34,6 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public void nextRound() {
 		isOnTurn = board.getTeam(isOnTurn.opponent());
-		notifyObservers();
 	}
 
 	@Override
@@ -93,12 +92,13 @@ public class ChessController extends Observable implements IChessController {
 			notifyObservers();
 			return;
 		}
+		isOnTurn.updatePosMoves();
 		checkCheck(board.getTeam(isOnTurn.opponent()));
 		if (getIsInCheck(board.getTeam(isOnTurn.opponent()))) {
 			checkForMate();
 		}
 		if (checkmate) {
-			statusMessage = whoIsOnTurn().opponent().toString() + " won :) ! " + whoIsOnTurn().toString()
+			statusMessage = whoIsOnTurn().toString() + " won :) ! " + whoIsOnTurn().opponent().toString()
 					+ " lost :( !";
 		}
 		checkForTranform(cp, target);
@@ -137,7 +137,6 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public void setCheck(ITeam team, boolean isCheck) {
 		isInCheck[teamToInt(team)] = isCheck;
-		notifyObservers();
 	}
 
 	@Override
@@ -175,6 +174,8 @@ public class ChessController extends Observable implements IChessController {
 					pieceOnTarget.setField(field);
 					isOnTurn.addChesspiece(pieceOnTarget);
 				}
+				if (!checkmate)
+					return;
 			}
 		}
 	}

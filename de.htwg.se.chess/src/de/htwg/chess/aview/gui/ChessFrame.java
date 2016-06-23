@@ -44,18 +44,6 @@ public class ChessFrame extends JFrame implements IObserver {
 
 	}
 
-	@Override
-	public void update(Event e) {
-		infoPanel.setTurn(controller.whoIsOnTurn().toString());
-		for (ChessButton cb : boardPanel.getButtonList()) {
-			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
-		}
-		if (controller.isReadyToTransform()) {
-			transformBox();
-		}
-		infoPanel.setStatus(controller.getStatusMessage());
-	}
-
 	private void transformBox() {
 		Object[] options = { "Queen", "Rook", "Knight", "Bishop" };
 		int n = JOptionPane.showOptionDialog(pane, "Which kind of chesspiece do you want to transform into?",
@@ -73,6 +61,31 @@ public class ChessFrame extends JFrame implements IObserver {
 		case 3:
 			controller.transformToBishop();
 			break;
+		}
+	}
+
+	@Override
+	public void update(Event e) {
+		infoPanel.setTurn(controller.whoIsOnTurn().toString());
+		for (ChessButton cb : boardPanel.getButtonList()) {
+			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
+		}
+		if (controller.isReadyToTransform()) {
+			transformBox();
+		}
+		infoPanel.setStatus(controller.getStatusMessage());
+		if (controller.isCheckmate()) {
+			Object[] options = { "New Game", "Quit" };
+			int n = JOptionPane.showOptionDialog(pane, controller.getStatusMessage(), "Gameover",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			switch (n) {
+			case 0:
+				controller.restart();
+				break;
+			case 1:
+				System.exit(0);
+				break;
+			}
 		}
 	}
 
