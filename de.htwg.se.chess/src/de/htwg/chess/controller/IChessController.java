@@ -1,5 +1,8 @@
 package de.htwg.chess.controller;
 
+import java.util.List;
+
+import de.htwg.chess.model.IField;
 import de.htwg.chess.model.ITeam;
 import de.htwg.util.observer.IObservable;
 
@@ -38,5 +41,7 @@ public interface IChessController extends IObservable {
 	boolean isQuit();
 
 	void setQuit(boolean quit);
+
+	List<IField> getFields();
 
 }

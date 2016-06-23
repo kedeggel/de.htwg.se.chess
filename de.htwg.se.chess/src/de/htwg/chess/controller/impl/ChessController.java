@@ -10,9 +10,13 @@ import de.htwg.chess.model.impl.Knight;
 import de.htwg.chess.model.impl.Pawn;
 import de.htwg.chess.model.impl.Queen;
 import de.htwg.chess.model.impl.Rook;
+import de.htwg.chess.model.impl.Team.Color;
 import de.htwg.util.observer.Observable;
 
 import static de.htwg.chess.model.impl.Team.Color.*;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import de.htwg.chess.controller.IChessController;
 
@@ -275,6 +279,15 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public boolean isQuit() {
 		return false;
+	}
+
+	@Override
+	public List<IField> getFields() {
+		List<IField> list = new LinkedList<>();
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++)
+				list.add(board.getField(j, i));
+		return list;
 	}
 
 }
