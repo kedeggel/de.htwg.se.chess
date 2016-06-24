@@ -77,4 +77,11 @@ public final class RookTest extends TestCase {
 		assertTrue(chessboard.getField(A, EIGHT).getChesspiece().getPossibleMoves().isEmpty());
 
 	}
+
+	@Test
+	public void testToSymbole() {
+		assertTrue("\u2656".equals(new Rook(Color.WHITE, chessboard.getField(3, 3)).toSymbole()));
+		assertTrue("\u265C".equals(new Rook(Color.BLACK, chessboard.getField(3, 3)).toSymbole()));
+	}
+
 }

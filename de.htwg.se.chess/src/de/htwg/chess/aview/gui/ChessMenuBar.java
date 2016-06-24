@@ -29,12 +29,12 @@ public class ChessMenuBar extends JMenuBar {
 
 	public ChessMenuBar(IChessController controller, JFrame frame) {
 		this.controller = controller;
-		createGameMenu(controller, frame);
+		createGameMenu(controller);
 		createHelpMenu(frame);
 
 	}
 
-	private void createGameMenu(IChessController controller, JFrame frame) {
+	private void createGameMenu(IChessController controller) {
 		gameMenu = new JMenu("Game");
 		restartMenuItem = new JMenuItem("Restart");
 		restartMenuItem.addActionListener(new ActionListener() {

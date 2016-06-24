@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.chess.model.impl.Chessboard;
+import de.htwg.chess.model.impl.Rook;
+import de.htwg.chess.model.impl.Team.Color;
 
 public final class TeamTest extends TestCase {
 	IChessboard chessboard;
@@ -51,18 +53,19 @@ public final class TeamTest extends TestCase {
 		white.move(testpiece, chessboard.getField(A, TWO));
 		assertTrue(testpiece.getField() == chessboard.getField(A, THREE));
 		assertNull(chessboard.getField(A, TWO).getChesspiece());
-		
+
 		testpiece = chessboard.getField(A, SEVEN).getChesspiece();
 		white.move(testpiece, chessboard.getField(A, SIX));
 		assertTrue(testpiece.getField() == chessboard.getField(A, SEVEN));
 		assertNull(chessboard.getField(A, SIX).getChesspiece());
-		
+
 		black.move(testpiece, chessboard.getField(A, SIX));
 		assertTrue(testpiece.getField() == chessboard.getField(A, SIX));
 		assertNull(chessboard.getField(A, SEVEN).getChesspiece());
-		
+
 		assertTrue(testpiece.getColor() == BLACK);
-		
+
 	}
 
+	
 }
