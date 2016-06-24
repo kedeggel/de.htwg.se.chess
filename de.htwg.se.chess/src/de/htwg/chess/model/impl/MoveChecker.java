@@ -361,28 +361,4 @@ public final class MoveChecker implements MoveCheckerVisitor {
 		}
 		return posList;
 	}
-
-//	private List<IField> checkRochade(IField field) {
-//		List<IField> posList = new LinkedList<>();
-//		int x = field.getX() - 'A';
-//		int y = field.getY() - 1;
-//		IField left1 = chessboard.getField(x - 1, y);
-//		IField left2 = chessboard.getField(x - 2, y);
-//		IField left3 = chessboard.getField(x - 3, y);
-//		IField leftRookPos = chessboard.getField(x - 4, y);
-//		IField right1 = chessboard.getField(x + 1, y);
-//		IField right2 = chessboard.getField(x + 2, y);
-//		IField rightRookPos = chessboard.getField(x + 3, y);
-//		if (!chessboard.getField(x, y).getChesspiece().getWasMoved()) {
-//			if (!leftRookPos.getChesspiece().getWasMoved() && !left1.isFieldOccupied() && !left2.isFieldOccupied()
-//					&& !left3.isFieldOccupied()) {
-//				posList.add(left2);
-//			}
-//			if (!rightRookPos.getChesspiece().getWasMoved() && !right1.isFieldOccupied() && !right2.isFieldOccupied()) {
-//				posList.add(right2);
-//			}
-//		}
-//		return posList;
-//	}
-
 }

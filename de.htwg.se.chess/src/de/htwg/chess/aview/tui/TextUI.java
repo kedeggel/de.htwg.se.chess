@@ -16,6 +16,7 @@ public class TextUI implements IObserver {
 			+ "[A-H][1-8]-[A-H][1-8]\tMove from ... to ...";
 	protected IChessController controller;
 	private boolean quit;
+	private boolean continu;
 
 	public TextUI(IChessController controller) {
 		this.controller = controller;
@@ -25,20 +26,32 @@ public class TextUI implements IObserver {
 	}
 
 	public boolean processInputLine(String line) {
-		if (quit)
-			return false;
-		else if (controller.isReadyToTransform()) {
+		if (quit) {
+			continu = false;
+		} else if (controller.isReadyToTransform()) {
 			if (!transformTo(line))
 				LOGGER.info(line + " is not a valid chesspiece");
-			return true;
+			continu = true;
 		} else if ("q".equalsIgnoreCase(line)) {
 			controller.quit();
-			return false;
+			continu = false;
 		} else if ("r".equalsIgnoreCase(line)) {
 			LOGGER.info("New Game");
 			controller.restart();
-			return true;
-		} else if ("print".equalsIgnoreCase(line)) {
+			continu = true;
+		} else if (prints(line)) {
+			continu = true;
+		} else if (line.matches("[a-zA-Z][0-9]-[a-zA-Z][0-9]")) {
+			continu = checkMove(line);
+		} else {
+			LOGGER.info("Insert \'h\' for help");
+			continu = true;
+		}
+		return continu;
+	}
+
+	private boolean prints(String line) {
+		if ("print".equalsIgnoreCase(line)) {
 			LOGGER.info(controller.printBoard());
 			return true;
 		} else if ("printall".equalsIgnoreCase(line)) {
@@ -47,20 +60,20 @@ public class TextUI implements IObserver {
 		} else if ("h".equalsIgnoreCase(line)) {
 			LOGGER.info(HELP);
 			return true;
-		} else if (line.matches("[a-hA-H][0-9]-[a-hA-H][0-9]")) {
-			char startX = Character.toUpperCase(line.charAt(0));
-			int startY = Integer.parseInt(line.substring(1, 2));
-			char targetX = Character.toUpperCase(line.charAt(3));
-			int targetY = Integer.parseInt(line.substring(4, 5));
-			controller.move(startX, startY, targetX, targetY);
-			if (controller.isCheckmate()) {
-				return false;
-			}
-			return true;
-		} else {
-			LOGGER.info("Insert \'h\' for help");
-			return true;
 		}
+		return false;
+	}
+
+	private boolean checkMove(String line) {
+		char startX = Character.toUpperCase(line.charAt(0));
+		int startY = Integer.parseInt(line.substring(1, 2));
+		char targetX = Character.toUpperCase(line.charAt(3));
+		int targetY = Integer.parseInt(line.substring(4, 5));
+		controller.move(startX, startY, targetX, targetY);
+		if (controller.isCheckmate()) {
+			return false;
+		}
+		return true;
 	}
 
 	private boolean transformTo(String type) {
@@ -85,6 +98,10 @@ public class TextUI implements IObserver {
 		if (e instanceof ExitEvent) {
 			this.quit = true;
 		}
+		printTUI();
+	}
+
+	private void printTUI() {
 		LOGGER.info(controller.getStatusMessage());
 	}
 }

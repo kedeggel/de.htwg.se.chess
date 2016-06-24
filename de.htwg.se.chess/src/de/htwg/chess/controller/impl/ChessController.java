@@ -23,6 +23,7 @@ public class ChessController extends Observable implements IChessController {
 	private String statusMessage;
 	private boolean readyToTransform;
 	private IChesspiece cpToTranform;
+	private boolean wasMoved;
 
 	public ChessController() {
 		board = new Chessboard();
@@ -38,31 +39,18 @@ public class ChessController extends Observable implements IChessController {
 
 	@Override
 	public void move(char startX, int startY, char targetX, int targetY) {
-		boolean wasMoved = false;
+		wasMoved = false;
 		IField start = board.getField(startX - 'A', startY - 1);
-		if (start == null) {
-			statusMessage = startX + "" + startY + " is not a valid position.\n";
-			notifyObservers();
-			return;
-		}
 		IField target = board.getField(targetX - 'A', targetY - 1);
-		if (target == null) {
-			statusMessage = targetX + "" + targetY + " is not a valid position.\n";
-			notifyObservers();
+		if (!existsFields(start, target, startX, startY, targetX, targetY)) {
 			return;
 		}
 		IChesspiece cp = start.getChesspiece();
-		if (cp != null) {
-			wasMoved = cp.getWasMoved();
-		}
+		saveWasMoved(cp);
 		IChesspiece pieceOnTarget = target.getChesspiece();
 
 		if (!isOnTurn.getPieceList().contains(cp)) {
-			if (cp == null)
-				statusMessage = "No chesspiece on " + start.toString() + ".\n";
-			else
-				statusMessage = cp.toString() + " is not one of " + isOnTurn.getColor() + "'s chesspieces.\n";
-			notifyObservers();
+			fieldNotInPosMoves(cp, start);
 			return;
 		}
 		isOnTurn.move(cp, target);
@@ -71,39 +59,58 @@ public class ChessController extends Observable implements IChessController {
 			statusMessage = start.toString() + "-" + target.toString() + " is not a valid draw.\n";
 			notifyObservers();
 			return;
-		} else if (pieceOnTarget != null && pieceOnTarget.getField() == null) {
-			board.getTeam(isOnTurn.opponent()).removeChesspiece(pieceOnTarget);
-			statusMessage = cp.toString() + " hit " + pieceOnTarget.toString() + " on " + target.toString() + ".\n";
-		} else
-			statusMessage = cp.toString() + " moved to " + target.toString() + ".\n";
+		}
+		moveOrHit(cp, pieceOnTarget, target);
 
 		board.getTeam(isOnTurn.opponent()).updatePosMoves();
 		checkCheck(isOnTurn);
 		if (getIsInCheck(isOnTurn)) {
-			cp.setField(start);
-			if (pieceOnTarget != null) {
-				pieceOnTarget.setField(target);
-				board.getTeam(isOnTurn.opponent()).addChesspiece(pieceOnTarget);
-			}
-			cp.setWasMoved(wasMoved);
-			isInCheck[teamToInt(isOnTurn)] = false;
-			statusMessage = new String(
-					start.toString() + "-" + target.toString() + " is not a valid draw (King were still in chess).\n");
-			notifyObservers();
+			reactionOnUnvalidMove(cp, start, pieceOnTarget, target);
 			return;
 		}
 		isOnTurn.updatePosMoves();
 		checkCheck(board.getTeam(isOnTurn.opponent()));
-		if (getIsInCheck(board.getTeam(isOnTurn.opponent()))) {
-			checkForMate();
+		checkForMate();
+		reactionOnMate();
+
+		checkForTranform(cp, target);
+		nextRound();
+		notifyObservers();
+	}
+
+	private boolean existsFields(IField start, IField target, char startX, int startY, char targetX, int targetY) {
+		if (start == null) {
+			statusMessage = startX + "" + startY + " is not a valid position.\n";
+			notifyObservers();
+			return false;
 		}
+		if (target == null) {
+			statusMessage = targetX + "" + targetY + " is not a valid position.\n";
+			notifyObservers();
+			return false;
+		}
+		return true;
+	}
+
+	private void reactionOnMate() {
 		if (checkmate) {
 			statusMessage = whoIsOnTurn().toString() + " won :) ! " + whoIsOnTurn().opponent().toString()
 					+ " lost :( !";
 		}
-		checkForTranform(cp, target);
-		nextRound();
-		notifyObservers();
+	}
+
+	private void saveWasMoved(IChesspiece cp) {
+		if (cp != null) {
+			wasMoved = cp.getWasMoved();
+		}
+	}
+
+	private void moveOrHit(IChesspiece cp, IChesspiece pieceOnTarget, IField target) {
+		if (pieceOnTarget != null && pieceOnTarget.getField() == null) {
+			board.getTeam(isOnTurn.opponent()).removeChesspiece(pieceOnTarget);
+			statusMessage = cp.toString() + " hit " + pieceOnTarget.toString() + " on " + target.toString() + ".\n";
+		} else
+			statusMessage = cp.toString() + " moved to " + target.toString() + ".\n";
 	}
 
 	private void checkForTranform(IChesspiece cp, IField target) {
@@ -133,6 +140,27 @@ public class ChessController extends Observable implements IChessController {
 		}
 	}
 
+	private void fieldNotInPosMoves(IChesspiece cp, IField start) {
+		if (cp == null)
+			statusMessage = "No chesspiece on " + start.toString() + ".\n";
+		else
+			statusMessage = cp.toString() + " is not one of " + isOnTurn.getColor() + "'s chesspieces.\n";
+		notifyObservers();
+	}
+
+	private void reactionOnUnvalidMove(IChesspiece cp, IField start, IChesspiece pieceOnTarget, IField target) {
+		cp.setField(start);
+		if (pieceOnTarget != null) {
+			pieceOnTarget.setField(target);
+			board.getTeam(isOnTurn.opponent()).addChesspiece(pieceOnTarget);
+		}
+		cp.setWasMoved(wasMoved);
+		isInCheck[teamToInt(isOnTurn)] = false;
+		statusMessage = new String(
+				start.toString() + "-" + target.toString() + " is not a valid draw (King were still in chess).\n");
+		notifyObservers();
+	}
+
 	@Override
 	public void setCheck(ITeam team, boolean isCheck) {
 		isInCheck[teamToInt(team)] = isCheck;
@@ -149,6 +177,8 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	private void checkForMate() {
+		if (!getIsInCheck(board.getTeam(isOnTurn.opponent())))
+			return;
 		ITeam toTest = board.getTeam(isOnTurn.opponent());
 		for (IChesspiece cp : toTest.getPieceList()) {
 			for (IField field : cp.getPossibleMoves()) {
@@ -156,14 +186,7 @@ public class ChessController extends Observable implements IChessController {
 				IChesspiece pieceOnTarget = field.getChesspiece();
 				cp.setField(field);
 				isOnTurn.removeChesspiece(pieceOnTarget);
-				for (IChesspiece enemy : isOnTurn.getPieceList()) {
-					if (enemy.getPossibleMoves().contains(toTest.getKing().getField())) {
-						checkmate = true;
-						cp.setField(startfield);
-						break;
-					}
-					checkmate = false;
-				}
+				checkForThreat(toTest, cp, startfield);
 				cp.setField(startfield);
 				if (pieceOnTarget != null) {
 					pieceOnTarget.setField(field);
@@ -172,6 +195,17 @@ public class ChessController extends Observable implements IChessController {
 				if (!checkmate)
 					return;
 			}
+		}
+	}
+
+	private void checkForThreat(ITeam toTest, IChesspiece cp, IField startfield) {
+		for (IChesspiece enemy : isOnTurn.getPieceList()) {
+			if (enemy.getPossibleMoves().contains(toTest.getKing().getField())) {
+				checkmate = true;
+				cp.setField(startfield);
+				break;
+			}
+			checkmate = false;
 		}
 	}
 
