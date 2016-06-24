@@ -2,7 +2,7 @@ package de.htwg.chess.model.impl;
 
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.MoveCheckerVisitor;
-import de.htwg.chess.model.impl.Team.Color;
+import de.htwg.chess.model.Color;
 
 public final class Queen extends Chesspiece {
 
@@ -14,6 +14,7 @@ public final class Queen extends Chesspiece {
 	public void checkPossibleMoves(MoveCheckerVisitor mc) {
 		possibleMoves = mc.checkQueen(field);
 	}
+
 	@Override
 	public String toSymbole() {
 		if (color == Color.WHITE)

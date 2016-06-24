@@ -1,46 +1,22 @@
 package de.htwg.chess;
 
-import java.util.Scanner;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import de.htwg.chess.aview.gui.ChessFrame;
-import de.htwg.chess.aview.tui.TextUI;
-import de.htwg.chess.controller.IChessController;
+import org.junit.Test;
 import junit.framework.TestCase;
 
 public class ChessTest extends TestCase {
-	private static IChessController controller;
-	private static TextUI tui;
-	private static Scanner scanner;
-	private static Chess instance = null;
-	@SuppressWarnings("unused")
-	private static ChessFrame gui;
-
-	private Chess() {
-		Injector injector = Guice.createInjector(new ChessModule());
-		controller = injector.getInstance(IChessController.class);
-		tui = new TextUI(controller);
-		gui = new ChessFrame(controller);
+	@Test
+	public void testMain() {
+		Chess.main(new String[] { "a2-a3", "a7-a5", "b2-b4", "print", "printall", "ahsfl", "h" });
+		assertEquals("\u2659", Chess.getInstance().getController().getSymboleByField('A', 3));
+		assertEquals("\u2659", Chess.getInstance().getController().getSymboleByField('B', 4));
+		assertEquals("\u265F", Chess.getInstance().getController().getSymboleByField('A', 5));
+		Chess.main(new String[] { "r", "q" });
 	}
 
-	public static Chess getInstance() {
-		if (instance == null)
-			instance = new Chess();
-		return instance;
-	}
-
-	public TextUI getTui() {
-		return tui;
-	}
-
-	public static void main(String[] args) {
+	@Test
+	public void testGetInstance() {
 		Chess game = Chess.getInstance();
-		boolean continu = true;
-		scanner = new Scanner(System.in);
-		while (continu) {
-			continu = game.getTui().processInputLine(scanner.next());
-		}
+		assertNotNull(game);
+		assertNotNull(game.getGui());
 	}
-
 }

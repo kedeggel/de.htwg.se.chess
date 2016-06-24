@@ -9,12 +9,12 @@ import de.htwg.chess.aview.tui.TextUI;
 import de.htwg.chess.controller.IChessController;
 
 public class Chess {
-	private static IChessController controller;
-	private static TextUI tui;
+	private IChessController controller;
+	private TextUI tui;
 	private static Scanner scanner;
 	private static Chess instance = null;
 	@SuppressWarnings("unused")
-	private static ChessFrame gui;
+	private ChessFrame gui;
 
 	private Chess() {
 		Injector injector = Guice.createInjector(new ChessModule());
@@ -32,13 +32,28 @@ public class Chess {
 	public TextUI getTui() {
 		return tui;
 	}
+	
+	public ChessFrame getGui() {
+		return gui;
+	}
+    
+    public IChessController getController() {
+    	return controller;
+    }
 
 	public static void main(String[] args) {
 		Chess game = Chess.getInstance();
-		boolean continu = true;
-		scanner = new Scanner(System.in);
-		while (continu) {
-			continu = game.getTui().processInputLine(scanner.next());
+		if (args.length == 0) {
+			boolean continu = true;
+			scanner = new Scanner(System.in);
+			while (continu) {
+				continu = game.getTui().processInputLine(scanner.next());
+			}
+		} else {
+			for (String input : args) {
+				game.getTui().processInputLine(input);
+			}
+
 		}
 	}
 

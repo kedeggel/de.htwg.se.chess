@@ -10,7 +10,6 @@ import org.junit.Test;
 import de.htwg.chess.model.impl.Chessboard;
 import de.htwg.chess.model.impl.Pawn;
 import de.htwg.chess.model.impl.Bishop;
-import de.htwg.chess.model.impl.Team.Color;
 import junit.framework.TestCase;
 
 public class BishopTest extends TestCase {

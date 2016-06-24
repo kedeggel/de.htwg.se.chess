@@ -1,10 +1,11 @@
 package de.htwg.chess.model.impl;
 
 import java.util.List;
+
+import de.htwg.chess.model.Color;
 import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.MoveCheckerVisitor;
-import de.htwg.chess.model.impl.Team.Color;
 
 public abstract class Chesspiece implements IChesspiece {
 

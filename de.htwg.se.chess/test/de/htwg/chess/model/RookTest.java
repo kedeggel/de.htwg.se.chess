@@ -6,11 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import org.junit.*;
 import org.junit.Test;
-
 import de.htwg.chess.model.impl.Chessboard;
 import de.htwg.chess.model.impl.Pawn;
 import de.htwg.chess.model.impl.Rook;
-import de.htwg.chess.model.impl.Team.Color;
 import junit.framework.TestCase;
 
 public final class RookTest extends TestCase {

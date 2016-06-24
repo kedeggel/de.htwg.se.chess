@@ -1,7 +1,7 @@
 package de.htwg.chess.model.impl;
 
-import static de.htwg.chess.model.impl.Team.Color.*;
-
+import static de.htwg.chess.model.Color.*;
+import de.htwg.chess.model.Color;
 import de.htwg.chess.model.IChessboard;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.ITeam;
@@ -48,7 +48,7 @@ public class Chessboard implements IChessboard {
 	}
 
 	@Override
-	public ITeam getTeam(Team.Color color) {
+	public ITeam getTeam(Color color) {
 		return teamlist[color.ordinal()];
 	}
 

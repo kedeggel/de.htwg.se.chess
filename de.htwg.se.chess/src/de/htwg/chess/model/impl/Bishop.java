@@ -2,7 +2,7 @@ package de.htwg.chess.model.impl;
 
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.MoveCheckerVisitor;
-import de.htwg.chess.model.impl.Team.Color;
+import de.htwg.chess.model.Color;
 
 public final class Bishop extends Chesspiece {
 

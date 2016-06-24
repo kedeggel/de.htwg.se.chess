@@ -6,7 +6,7 @@ import de.htwg.chess.model.IChessboard;
 import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.MoveCheckerVisitor;
-import de.htwg.chess.model.impl.Team.Color;
+import de.htwg.chess.model.Color;
 
 public final class MoveChecker implements MoveCheckerVisitor {
 	private IChessboard chessboard;

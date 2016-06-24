@@ -3,14 +3,10 @@ package de.htwg.chess.model;
 import junit.framework.TestCase;
 
 import static de.htwg.chess.model.impl.FieldConstants.*;
-import static de.htwg.chess.model.impl.Team.Color.*;
-
+import static de.htwg.chess.model.Color.*;
 import org.junit.Before;
 import org.junit.Test;
-
 import de.htwg.chess.model.impl.Chessboard;
-import de.htwg.chess.model.impl.Rook;
-import de.htwg.chess.model.impl.Team.Color;
 
 public final class TeamTest extends TestCase {
 	IChessboard chessboard;
@@ -67,5 +63,4 @@ public final class TeamTest extends TestCase {
 
 	}
 
-	
 }

@@ -11,9 +11,9 @@ import de.htwg.chess.model.impl.Pawn;
 import de.htwg.chess.model.impl.Queen;
 import de.htwg.chess.model.impl.Rook;
 import de.htwg.util.observer.Observable;
-import static de.htwg.chess.model.impl.Team.Color.*;
 import de.htwg.chess.controller.ExitEvent;
 import de.htwg.chess.controller.IChessController;
+import static de.htwg.chess.model.Color.*;
 
 public class ChessController extends Observable implements IChessController {
 	private IChessboard board;

@@ -2,8 +2,6 @@ package de.htwg.chess.model;
 
 import java.util.List;
 
-import de.htwg.chess.model.impl.Team.Color;
-
 public interface IChesspiece {
 
 	void checkPossibleMoves(MoveCheckerVisitor mc);

@@ -5,6 +5,7 @@ import static de.htwg.chess.model.impl.FieldConstants.*;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.htwg.chess.model.Color;
 import de.htwg.chess.model.IChessboard;
 import de.htwg.chess.model.IChesspiece;
 import de.htwg.chess.model.IField;
@@ -12,10 +13,6 @@ import de.htwg.chess.model.ITeam;
 import de.htwg.chess.model.MoveCheckerVisitor;
 
 public class Team implements ITeam {
-	public enum Color {
-		WHITE, BLACK
-	}
-
 	private Color color;
 	private List<IChesspiece> pieceList;
 	private IChessboard chessboard;
@@ -32,12 +29,10 @@ public class Team implements ITeam {
 			backRowInit(ONE);
 			pawnRowInit(TWO);
 			break;
-
 		case BLACK:
 			backRowInit(EIGHT);
 			pawnRowInit(SEVEN);
 			break;
-
 		default:
 			throw new IllegalArgumentException(color.toString() + " must be WHITE or BLACK");
 		}
