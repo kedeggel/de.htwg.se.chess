@@ -14,7 +14,7 @@ public final class Field implements IField {
 		cp = null;
 	}
 
-	public boolean setPosition(char x, int y) {
+	private boolean setPosition(char x, int y) {
 		if (x < 'A' || x > 'H' || y < 1 || y > 8) {
 			return false;
 		}
@@ -50,7 +50,7 @@ public final class Field implements IField {
 	public void setChesspiece(IChesspiece cp) {
 		IChesspiece oldCp = this.cp;
 		this.cp = cp;
-		if (cp != null && this == cp.getField()) // figur ist bereits her
+		if (cp != null && this == cp.getField()) // figur ist bereits hier
 			return;
 		if (oldCp != null) // altem cp bescheid, dass keine pos mehr hat
 			oldCp.setField(null);
