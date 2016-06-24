@@ -1,7 +1,6 @@
 package de.htwg.chess.model;
 
 import org.junit.Test;
-
 import de.htwg.chess.model.impl.Field;
 
 public class FieldExceptionTest {
