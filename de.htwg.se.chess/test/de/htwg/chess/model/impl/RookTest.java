@@ -1,4 +1,4 @@
-package de.htwg.chess.model;
+package de.htwg.chess.model.impl;
 
 import static de.htwg.chess.model.impl.FieldConstants.*;
 
@@ -6,6 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import org.junit.*;
 import org.junit.Test;
+
+import de.htwg.chess.model.Color;
+import de.htwg.chess.model.IChessboard;
+import de.htwg.chess.model.IChesspiece;
+import de.htwg.chess.model.IField;
 import de.htwg.chess.model.impl.Chessboard;
 import de.htwg.chess.model.impl.Pawn;
 import de.htwg.chess.model.impl.Rook;

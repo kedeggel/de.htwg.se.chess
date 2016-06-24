@@ -1,4 +1,4 @@
-package de.htwg.chess.model;
+package de.htwg.chess.model.impl;
 
 import junit.framework.TestCase;
 
@@ -6,6 +6,10 @@ import static de.htwg.chess.model.impl.FieldConstants.*;
 import static de.htwg.chess.model.Color.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import de.htwg.chess.model.IChessboard;
+import de.htwg.chess.model.IChesspiece;
+import de.htwg.chess.model.ITeam;
 import de.htwg.chess.model.impl.Chessboard;
 
 public final class TeamTest extends TestCase {

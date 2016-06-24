@@ -14,7 +14,7 @@ public final class Field implements IField {
 		cp = null;
 	}
 
-	private boolean setPosition(char x, int y) {
+	boolean setPosition(char x, int y) {
 		if (x < 'A' || x > 'H' || y < 1 || y > 8) {
 			return false;
 		}
