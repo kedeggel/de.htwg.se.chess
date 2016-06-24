@@ -91,12 +91,7 @@ public class Team implements ITeam {
 	@Override
 	public void updatePosMoves() {
 		for (IChesspiece piece : pieceList)
-			if (piece.getField() != null)
-				piece.checkPossibleMoves(mc);
-			else {
-				System.out.println("error");
-				System.out.println(piece);
-			}
+			piece.checkPossibleMoves(mc);
 	}
 
 	@Override

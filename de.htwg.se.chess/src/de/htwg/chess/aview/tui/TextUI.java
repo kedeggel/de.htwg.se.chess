@@ -2,6 +2,8 @@ package de.htwg.chess.aview.tui;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import de.htwg.chess.controller.ExitEvent;
 import de.htwg.chess.controller.IChessController;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
@@ -13,6 +15,7 @@ public class TextUI implements IObserver {
 			+ "printall\t\tprint current chessboard with empty fields\n"
 			+ "[A-H][1-8]-[A-H][1-8]\tMove from ... to ...";
 	protected IChessController controller;
+	private boolean quit;
 
 	public TextUI(IChessController controller) {
 		this.controller = controller;
@@ -22,13 +25,14 @@ public class TextUI implements IObserver {
 	}
 
 	public boolean processInputLine(String line) {
-		if (controller.isReadyToTransform()) {
+		if (quit)
+			return false;
+		else if (controller.isReadyToTransform()) {
 			if (!transformTo(line))
 				LOGGER.info(line + " is not a valid chesspiece");
 			return true;
 		} else if ("q".equalsIgnoreCase(line)) {
-			LOGGER.info("Exit...");
-			System.exit(0);
+			controller.quit();
 			return false;
 		} else if ("r".equalsIgnoreCase(line)) {
 			LOGGER.info("New Game");
@@ -78,6 +82,9 @@ public class TextUI implements IObserver {
 
 	@Override
 	public void update(Event e) {
+		if (e instanceof ExitEvent) {
+			this.quit = true;
+		}
 		LOGGER.info(controller.getStatusMessage());
 	}
 }

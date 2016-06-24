@@ -50,9 +50,7 @@ public class ChessMenuBar extends JMenuBar {
 		quitMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				frame.dispose();
-				System.exit(0);
+				controller.quit();
 			}
 		});
 		quitMenuItem.setMnemonic(KeyEvent.VK_Q);

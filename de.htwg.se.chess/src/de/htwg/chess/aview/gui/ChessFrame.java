@@ -3,8 +3,8 @@ package de.htwg.chess.aview.gui;
 import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SpringLayout;
 
+import de.htwg.chess.controller.ExitEvent;
 import de.htwg.chess.controller.IChessController;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
@@ -66,16 +66,7 @@ public class ChessFrame extends JFrame implements IObserver {
 		}
 	}
 
-	@Override
-	public void update(Event e) {
-		infoPanel.setTurn(controller.whoIsOnTurn().toString());
-		for (ChessButton cb : boardPanel.getButtonList()) {
-			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
-		}
-		if (controller.isReadyToTransform()) {
-			transformBox();
-		}
-		infoPanel.setStatus(controller.getStatusMessage());
+	private void gameoverReaction() {
 		if (controller.isCheckmate()) {
 			Object[] options = { "New Game", "Quit" };
 			int n = JOptionPane.showOptionDialog(pane, controller.getStatusMessage(), "Gameover",
@@ -85,12 +76,30 @@ public class ChessFrame extends JFrame implements IObserver {
 				controller.restart();
 				break;
 			case 1:
-				System.exit(0);
+				controller.quit();
 				break;
 			default:
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void update(Event e) {
+		if (e instanceof ExitEvent) {
+			this.setVisible(false);
+			this.dispose();
+		}
+		infoPanel.setTurn(controller.whoIsOnTurn().toString());
+		for (ChessButton cb : boardPanel.getButtonList()) {
+			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
+		}
+		if (controller.isReadyToTransform()) {
+			transformBox();
+		}
+		infoPanel.setStatus(controller.getStatusMessage());
+		gameoverReaction();
+
 	}
 
 }

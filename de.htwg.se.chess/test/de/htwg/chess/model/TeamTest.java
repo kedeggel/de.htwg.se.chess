@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.chess.model.impl.Chessboard;
-import de.htwg.chess.model.impl.Chesspiece;
-import de.htwg.chess.model.impl.Team;
 
 public final class TeamTest extends TestCase {
 	IChessboard chessboard;
