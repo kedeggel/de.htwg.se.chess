@@ -13,7 +13,6 @@ public class Chess {
 	private TextUI tui;
 	private static Scanner scanner;
 	private static Chess instance = null;
-	@SuppressWarnings("unused")
 	private ChessFrame gui;
 
 	private Chess() {
