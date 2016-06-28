@@ -89,16 +89,17 @@ public class ChessFrame extends JFrame implements IObserver {
 		if (e instanceof ExitEvent) {
 			this.setVisible(false);
 			this.dispose();
+		} else {
+			infoPanel.setTurn(controller.whoIsOnTurn().toString());
+			for (ChessButton cb : boardPanel.getButtonList()) {
+				cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
+			}
+			if (controller.isReadyToTransform()) {
+				transformBox();
+			}
+			infoPanel.setStatus(controller.getStatusMessage());
+			gameoverReaction();
 		}
-		infoPanel.setTurn(controller.whoIsOnTurn().toString());
-		for (ChessButton cb : boardPanel.getButtonList()) {
-			cb.setText(controller.getSymboleByField(cb.getXCoor(), cb.getYCoor()));
-		}
-		if (controller.isReadyToTransform()) {
-			transformBox();
-		}
-		infoPanel.setStatus(controller.getStatusMessage());
-		gameoverReaction();
 
 	}
 
