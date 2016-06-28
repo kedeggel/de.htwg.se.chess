@@ -58,7 +58,7 @@ public class BoardPanel extends JPanel {
 					button.setBackground(DARK);
 				else
 					button.setBackground(BRIGHT);
-				button.setFont(new Font("Dialog", 0, 60));
+				button.setFont(new Font("Dialog", 0, 65));
 				this.add(button);
 			}
 		}
