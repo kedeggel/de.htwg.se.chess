@@ -43,15 +43,15 @@ public class BishopTest extends TestCase {
 		chessboard.getTeam(Color.WHITE).addChesspiece(bishop_test);
 		chessboard.getTeam(Color.WHITE).addChesspiece(piece_friendly);
 		chessboard.getTeam(Color.BLACK).addChesspiece(piece_enemy);
-		assertTrue(checklist.containsAll(bishop_test.getPossibleMoves())
-				&& bishop_test.getPossibleMoves().containsAll(checklist));
+		assertTrue(checklist.containsAll(bishop_test.getPossibleMoves()));
+		assertTrue(bishop_test.getPossibleMoves().containsAll(checklist));
 
 		bishop_test.setField(chessboard.getField(B, EIGHT));
 		checklist = new LinkedList<>();
 		checklist.add(chessboard.getField(A, SEVEN));
 		checklist.add(chessboard.getField(C, SEVEN));
 		chessboard.getTeam(Color.WHITE).updatePosMoves();
-		assertTrue(checklist.containsAll(bishop_test.getPossibleMoves())
-				&& bishop_test.getPossibleMoves().containsAll(checklist));
+		assertTrue(checklist.containsAll(bishop_test.getPossibleMoves()));
+		assertTrue(bishop_test.getPossibleMoves().containsAll(checklist));
 	}
 }
