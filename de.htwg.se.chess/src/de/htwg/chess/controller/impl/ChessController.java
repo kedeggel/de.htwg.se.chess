@@ -119,9 +119,8 @@ public class ChessController extends Observable implements IChessController {
 			cpToTranform = cp;
 			statusMessage = new String(
 					statusMessage + "Insert: QUEEN, ROOK, BISHOP or KNIGHT to tranform pawn into this.\n");
-			return;
-		}
-		readyToTransform = false;
+		} else
+			readyToTransform = false;
 	}
 
 	private void checkCheck(ITeam toTest) {
