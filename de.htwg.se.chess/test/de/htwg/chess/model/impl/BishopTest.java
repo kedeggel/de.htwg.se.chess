@@ -54,4 +54,11 @@ public class BishopTest extends TestCase {
 		assertTrue(checklist.containsAll(bishop_test.getPossibleMoves()));
 		assertTrue(bishop_test.getPossibleMoves().containsAll(checklist));
 	}
+	
+	@Test
+	public void testToSymbole() {
+		assertTrue("\u2657".equals(new Bishop(Color.WHITE, chessboard.getField(3, 3)).toSymbole()));
+		assertTrue("\u265D".equals(new Bishop(Color.BLACK, chessboard.getField(3, 3)).toSymbole()));
+	}
+	
 }
