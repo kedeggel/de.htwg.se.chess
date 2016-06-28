@@ -78,7 +78,6 @@ public final class RookTest extends TestCase {
 		assertTrue(rook_test.getPossibleMoves().containsAll(checklist));
 		assertTrue(chessboard.getField(A, ONE).getChesspiece().getPossibleMoves().isEmpty());
 		assertTrue(chessboard.getField(A, EIGHT).getChesspiece().getPossibleMoves().isEmpty());
-
 	}
 
 	@Test
