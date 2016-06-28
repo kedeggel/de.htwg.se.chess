@@ -56,6 +56,7 @@ public class QueenTest extends TestCase {
 		chessboard.getTeam(Color.BLACK).addChesspiece(piece_enemy);
 
 		assertTrue(checklist.containsAll(queen_test.getPossibleMoves()));
+		assertTrue(queen_test.getPossibleMoves().containsAll(checklist));
 
 		/**
 		 * left friendly, right enemy
@@ -66,7 +67,8 @@ public class QueenTest extends TestCase {
 		checklist.remove(chessboard.getField(B, FIVE));
 		chessboard.updateTeams();
 		assertTrue(checklist.containsAll(queen_test.getPossibleMoves()));
-
+		assertTrue(queen_test.getPossibleMoves().containsAll(checklist));
+		
 		/**
 		 * down enemy, up friendly
 		 */
@@ -79,6 +81,7 @@ public class QueenTest extends TestCase {
 		checklist.remove(chessboard.getField(D, SEVEN));
 		chessboard.updateTeams();
 		assertTrue(checklist.containsAll(queen_test.getPossibleMoves()));
+		assertTrue(queen_test.getPossibleMoves().containsAll(checklist));
 		assertTrue(chessboard.getField(A, ONE).getChesspiece().getPossibleMoves().isEmpty());
 		assertTrue(chessboard.getField(A, EIGHT).getChesspiece().getPossibleMoves().isEmpty());
 
