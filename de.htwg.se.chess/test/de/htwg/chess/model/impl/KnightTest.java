@@ -48,7 +48,8 @@ public class KnightTest extends TestCase{
 		chessboard.getTeam(Color.BLACK).addChesspiece(piece_enemy);
 
 		assertTrue(checklist.containsAll(knight_test.getPossibleMoves()));
-
+		assertTrue(knight_test.getPossibleMoves().containsAll(checklist));
+		
 		/**
 		 * down right enemy, down left friendly
 		 */
@@ -58,7 +59,8 @@ public class KnightTest extends TestCase{
 		checklist.remove(chessboard.getField(C, THREE));
 		chessboard.updateTeams();
 		assertTrue(checklist.containsAll(knight_test.getPossibleMoves()));
-
+		assertTrue(knight_test.getPossibleMoves().containsAll(checklist));
+		
 		/**
 		 * down double row of friendly, left board-border
 		 */
@@ -68,7 +70,8 @@ public class KnightTest extends TestCase{
 		checklist.add(chessboard.getField(C, FOUR));
 		chessboard.updateTeams();
 		assertTrue(checklist.containsAll(knight_test.getPossibleMoves()));
-
+		assertTrue(knight_test.getPossibleMoves().containsAll(checklist));
+		
 		/**
 		 * up double row of enemy (jump-over), right board-border
 		 */
@@ -82,6 +85,7 @@ public class KnightTest extends TestCase{
 		checklist.add(chessboard.getField(H, FOUR));
 		chessboard.updateTeams();
 		assertTrue(checklist.containsAll(knight_test.getPossibleMoves()));
+		assertTrue(knight_test.getPossibleMoves().containsAll(checklist));
 	}
 	
 }
