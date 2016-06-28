@@ -88,4 +88,10 @@ public class KnightTest extends TestCase{
 		assertTrue(knight_test.getPossibleMoves().containsAll(checklist));
 	}
 	
+	@Test
+	public void testToSymbole() {
+		assertTrue("\u2658".equals(new Knight(Color.WHITE, chessboard.getField(3, 3)).toSymbole()));
+		assertTrue("\u265E".equals(new Knight(Color.BLACK, chessboard.getField(3, 3)).toSymbole()));
+	}
+	
 }
