@@ -1,20 +1,6 @@
 package de.htwg.chess.model.impl;
 
-import static de.htwg.chess.model.impl.FieldConstants.A;
-import static de.htwg.chess.model.impl.FieldConstants.B;
-import static de.htwg.chess.model.impl.FieldConstants.C;
-import static de.htwg.chess.model.impl.FieldConstants.D;
-import static de.htwg.chess.model.impl.FieldConstants.E;
-import static de.htwg.chess.model.impl.FieldConstants.EIGHT;
-import static de.htwg.chess.model.impl.FieldConstants.F;
-import static de.htwg.chess.model.impl.FieldConstants.FIVE;
-import static de.htwg.chess.model.impl.FieldConstants.FOUR;
-import static de.htwg.chess.model.impl.FieldConstants.G;
-import static de.htwg.chess.model.impl.FieldConstants.H;
-import static de.htwg.chess.model.impl.FieldConstants.ONE;
-import static de.htwg.chess.model.impl.FieldConstants.SEVEN;
-import static de.htwg.chess.model.impl.FieldConstants.SIX;
-import static de.htwg.chess.model.impl.FieldConstants.THREE;
+import static de.htwg.chess.model.impl.FieldConstants.*;
 
 import java.util.LinkedList;
 import java.util.List;
