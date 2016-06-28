@@ -102,5 +102,9 @@ public class ChessFrame extends JFrame implements IObserver {
 		}
 
 	}
+	
+	public void disableGUI() {
+		controller.removeObserver(this);
+	}
 
 }
