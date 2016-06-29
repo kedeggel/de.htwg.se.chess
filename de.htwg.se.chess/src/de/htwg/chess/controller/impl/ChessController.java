@@ -210,42 +210,50 @@ public class ChessController extends Observable implements IChessController {
 
 	@Override
 	public void transformToQueen() {
-		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
-		board.getTeam(cpToTranform.getColor())
-				.addChesspiece(new Queen(cpToTranform.getColor(), cpToTranform.getField()));
-		readyToTransform = false;
-		statusMessage = "Pawn transformed to Queen";
-		notifyObservers();
+		if (readyToTransform) {
+			board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+			board.getTeam(cpToTranform.getColor())
+					.addChesspiece(new Queen(cpToTranform.getColor(), cpToTranform.getField()));
+			readyToTransform = false;
+			statusMessage = "Pawn transformed to Queen";
+			notifyObservers();
+		}
 	}
 
 	@Override
 	public void transformToBishop() {
-		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
-		board.getTeam(cpToTranform.getColor())
-				.addChesspiece(new Bishop(cpToTranform.getColor(), cpToTranform.getField()));
-		readyToTransform = false;
-		statusMessage = "Pawn transformed to Bishop";
-		notifyObservers();
+		if (readyToTransform) {
+			board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+			board.getTeam(cpToTranform.getColor())
+					.addChesspiece(new Bishop(cpToTranform.getColor(), cpToTranform.getField()));
+			readyToTransform = false;
+			statusMessage = "Pawn transformed to Bishop";
+			notifyObservers();
+		}
 	}
 
 	@Override
 	public void transformToRook() {
-		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
-		board.getTeam(cpToTranform.getColor())
-				.addChesspiece(new Rook(cpToTranform.getColor(), cpToTranform.getField()));
-		readyToTransform = false;
-		statusMessage = "Pawn transformed to Rook";
-		notifyObservers();
+		if (readyToTransform) {
+			board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+			board.getTeam(cpToTranform.getColor())
+					.addChesspiece(new Rook(cpToTranform.getColor(), cpToTranform.getField()));
+			readyToTransform = false;
+			statusMessage = "Pawn transformed to Rook";
+			notifyObservers();
+		}
 	}
 
 	@Override
 	public void transformToKnight() {
-		board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
-		board.getTeam(cpToTranform.getColor())
-				.addChesspiece(new Knight(cpToTranform.getColor(), cpToTranform.getField()));
-		readyToTransform = false;
-		statusMessage = "Pawn transformed to Knight";
-		notifyObservers();
+		if (readyToTransform) {
+			board.getTeam(cpToTranform.getColor()).removeChesspiece(cpToTranform);
+			board.getTeam(cpToTranform.getColor())
+					.addChesspiece(new Knight(cpToTranform.getColor(), cpToTranform.getField()));
+			readyToTransform = false;
+			statusMessage = "Pawn transformed to Knight";
+			notifyObservers();
+		}
 	}
 
 	@Override
