@@ -1,7 +1,7 @@
 package de.htwg.chess.aview.tui;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import de.htwg.chess.controller.ExitEvent;
 import de.htwg.chess.controller.IChessController;
 import de.htwg.util.observer.Event;
