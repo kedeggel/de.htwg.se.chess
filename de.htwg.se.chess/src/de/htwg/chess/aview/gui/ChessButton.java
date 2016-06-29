@@ -13,11 +13,11 @@ public class ChessButton extends JButton {
 		this.y = y;
 	}
 
-	public char getXCoor() {
+	char getXCoor() {
 		return x;
 	}
 
-	public int getYCoor() {
+	int getYCoor() {
 		return y;
 	}
 
