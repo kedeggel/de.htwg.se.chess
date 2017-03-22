@@ -2,6 +2,8 @@ package de.htwg.chess;
 
 import java.util.Scanner;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.htwg.chess.aview.gui.ChessFrame;
@@ -16,6 +18,7 @@ public class Chess {
 	private ChessFrame gui;
 
 	private Chess() {
+		PropertyConfigurator.configure("log4j.properties");
 		Injector injector = Guice.createInjector(new ChessModule());
 		controller = injector.getInstance(IChessController.class);
 		tui = new TextUI(controller);

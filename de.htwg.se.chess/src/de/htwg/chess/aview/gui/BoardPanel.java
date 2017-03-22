@@ -18,7 +18,7 @@ public class BoardPanel extends JPanel {
 	private static final int FIELDSIZE = 8;
 	private List<ChessButton> buttonList;
 
-	private IChessController controller;
+	private final IChessController controller;
 	private char fromX;
 	private int fromY;
 	private boolean selected;
@@ -36,7 +36,7 @@ public class BoardPanel extends JPanel {
 		buttonList = new ArrayList<>();
 		for (int i = FIELDSIZE; i > 0; i--) {
 			for (int j = 0; j < FIELDSIZE; j++) {
-				ChessButton button = new ChessButton((char) (j + 'A'), i);
+				final ChessButton button = new ChessButton((char) (j + 'A'), i);
 				button.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

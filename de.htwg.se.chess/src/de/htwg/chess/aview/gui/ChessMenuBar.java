@@ -33,7 +33,7 @@ public class ChessMenuBar extends JMenuBar {
 
 	}
 
-	private void createGameMenu(IChessController controller) {
+	private void createGameMenu(final IChessController controller) {
 		gameMenu = new JMenu("Game");
 		restartMenuItem = new JMenuItem("Restart");
 		restartMenuItem.addActionListener(new ActionListener() {
@@ -57,7 +57,7 @@ public class ChessMenuBar extends JMenuBar {
 		this.add(gameMenu);
 	}
 
-	private void createHelpMenu(JFrame frame) {
+	private void createHelpMenu(final JFrame frame) {
 		helpMenu = new JMenu("?");
 		helpMenuItem = new JMenuItem("Chess rules");
 		helpMenuItem.addActionListener(new ActionListener() {
