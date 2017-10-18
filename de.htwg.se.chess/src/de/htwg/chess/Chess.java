@@ -18,7 +18,7 @@ public class Chess {
 	private ChessFrame gui;
 
 	private Chess() {
-		PropertyConfigurator.configure("log4j.properties");
+		PropertyConfigurator.configure(getClass().getProtectionDomain().getCodeSource().getLocation().getPath() + "log4j.properties");
 		Injector injector = Guice.createInjector(new ChessModule());
 		controller = injector.getInstance(IChessController.class);
 		tui = new TextUI(controller);
